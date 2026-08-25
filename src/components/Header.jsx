@@ -19,7 +19,7 @@ const serviceLinks = [
 ]
 
 const aboutLinks = [
-  { title: 'Career', href: '/career' },
+  { title: 'Career', href: '/about#career' },
   { title: 'CSR', href: '/csr' },
 ]
 
@@ -182,16 +182,16 @@ function Header() {
               ))}
             </div>
           </div>
-          <a href="#" className="px-4 py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
+          <NavLink to="/process" className={linkClass}>
             Process
-          </a>
-          <a href="#" className="px-4 py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
+          </NavLink>
+          <NavLink to="/contact-us" className={linkClass}>
             Contact Us
-          </a>
+          </NavLink>
         </div>
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
           <a
-            href="#"
+            href="/contact-us"
             id="glow"
             className="hidden rounded-full bg-primary px-8 py-3 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary md:inline-flex"
           >
@@ -269,20 +269,28 @@ function Header() {
             onToggle={() => toggleSection('services')}
             onLinkClick={closeMobileMenu}
           />
-          <a
-            href="#"
+          <NavLink
+            to="/process"
             onClick={closeMobileMenu}
-            className="block border-b border-border/30 py-3 text-[16px] font-semibold text-nav transition hover:text-primary"
+            className={({ isActive }) =>
+              `block border-b border-border/30 py-3 text-[16px] font-semibold transition ${
+                isActive ? 'text-primary' : 'text-nav hover:text-primary'
+              }`
+            }
           >
             Process
-          </a>
-          <a
-            href="#"
+          </NavLink>
+          <NavLink
+            to="/contact-us"
             onClick={closeMobileMenu}
-            className="block py-3 text-[16px] font-semibold text-nav transition hover:text-primary"
+            className={({ isActive }) =>
+              `block py-3 text-[16px] font-semibold transition ${
+                isActive ? 'text-primary' : 'text-nav hover:text-primary'
+              }`
+            }
           >
             Contact Us
-          </a>
+          </NavLink>
 
         </nav>
       </aside>
