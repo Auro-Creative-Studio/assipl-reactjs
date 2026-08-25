@@ -1,7 +1,16 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/products/video-surveillance-6.png'
 
 function Footer() {
-  const quickLinks = ['Home', 'About Us', 'Services', 'Blogs', 'Contact Us', 'Privacy Policy', 'Terms and Conditions']
+  const quickLinks = [
+    { label: 'Home', to: '/' },
+    { label: 'About Us' },
+    { label: 'Services', to: '/services' },
+    { label: 'Blogs' },
+    { label: 'Contact Us' },
+    { label: 'Privacy Policy', to: '/privacy-policy' },
+    { label: 'Terms and Conditions', to: '/terms-and-conditions' },
+  ]
   const products = [
     'Video Surveillance',
     'Access Control',
@@ -25,10 +34,16 @@ function Footer() {
           <h3 className="mb-5 text-xl font-semibold text-white">Quick Links</h3>
           <ul className="space-y-3 text-[15px] text-white/75">
             {quickLinks.map((link) => (
-              <li key={link}>
-                <a href="#" className="transition hover:text-white">
-                  {link}
-                </a>
+              <li key={link.label}>
+                {link.to ? (
+                  <Link to={link.to} className="transition hover:text-white">
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a href="#" className="transition hover:text-white">
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

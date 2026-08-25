@@ -7,9 +7,11 @@ import Csr from './pages/Csr'
 import Contact from './pages/Contact'
 import Home from './pages/Home'
 import Process from './pages/Process'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 import Services from './pages/Services'
 import SingleProduct from './pages/SingleProduct'
 import SingleService from './pages/SingleService'
+import TermsConditions from './pages/TermsConditions'
 import './App.css'
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/career" element={<Career />} />
         <Route path="/csr" element={<Csr />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsConditions />} />
         <Route path="/products/video-surveillance" element={<SingleProduct />} />
         <Route path="/services/operational-continuity-maintenance" element={<SingleService />} />
       </Routes>
