@@ -275,7 +275,7 @@ function About() {
             backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBg})`,
           }}
         >
-          <div className="mx-auto flex min-h-64 max-w-7xl flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
+          <div className="mx-auto flex min-h-64 max-w-360 flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
             <div className="max-w-180 text-left">
               <h3 className="text-[32px] font-semibold leading-[1.125] md:text-[45px] text-white">
                 Ready to Standardize Your Enterprise Infrastructure?
