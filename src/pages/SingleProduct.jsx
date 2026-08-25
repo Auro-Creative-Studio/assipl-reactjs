@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronRight, Mail, Phone } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import Reveal from '../components/Reveal'
 import heroBackground from '../assets/products/video-surveillance-bg-2.webp'
 import contactBackground from '../assets/products/video-surveillance-bg-3.webp'
@@ -33,7 +33,7 @@ const capabilities = [
     points: [
       'Distinguishes objects and patterns within a frame to significantly reduce false alarms.',
       'Detects the slightest physical movements using precision motion tracking and geofencing.',
-      'Implements Internet of Things integrations to improve overall operational efficiency.',
+      'Implements Internet of Things (IoT) integrations to improve overall operational efficiency.',
     ],
   },
   {
@@ -86,10 +86,10 @@ function ProductSidebar() {
                 <li key={link}>
                   <a
                     href={isActive ? '/products/video-surveillance' : '#'}
-                    className={`block rounded-xl px-5 py-3 text-[15px] font-medium transition ${
+                    className={`block rounded-xl px-2 py-3 text-lg transition ${
                       isActive
-                        ? 'bg-primary text-white'
-                        : 'text-secondary hover:bg-background hover:text-primary'
+                        ? 'bg-secondary text-white'
+                        : 'text-secondary hover:bg-secondary hover:text-white'
                     }`}
                   >
                     {link}
@@ -101,30 +101,32 @@ function ProductSidebar() {
         </nav>
       </div>
 
-      <div
-        className="overflow-hidden rounded-[10px] bg-cover bg-center px-6 pb-5 pt-36 text-white"
-        style={{
-          backgroundImage: `linear-gradient(rgba(18, 28, 69, 0.35), rgba(18, 28, 69, 0.62)), url(${contactBackground})`,
-        }}
-      >
-        <h3 className="text-[28px] font-semibold leading-tight text-white">Get in Touch</h3>
-        <div className="my-5 h-px w-full bg-white/50" />
-        <div className="space-y-3 text-[15px] leading-7 text-white">
-          <a href="mailto:assipl@automationsystems.co.in" className="flex items-start gap-3">
-            <Mail className="mt-1 h-4 w-4 flex-none" aria-hidden="true" />
-            assipl@automationsystems.co.in
-          </a>
-          <a href="tel:08041692300" className="flex items-start gap-3">
-            <Phone className="mt-1 h-4 w-4 flex-none" aria-hidden="true" />
-            080 - 41692300 / 080 - 43751024
+      <div className="relative isolate flex h-125 flex-col items-center overflow-hidden rounded-2xl px-6 pb-8 pt-10 text-center text-white">
+        <img
+          src={contactBackground}
+          alt=""
+          className="absolute inset-0 -z-20 h-full w-full object-cover grayscale"
+        />
+        <div className="absolute inset-0 -z-10 bg-linear-to-t from-black via-black/50 to-black/0" />
+
+        <div className="mt-auto">
+          <h3 className="text-[28px] font-semibold leading-tight text-white">Get in Touch</h3>
+          <div className="mx-auto my-4 h-px w-12 bg-white/50" />
+          <div className="space-y-1 text-[15px] leading-7 text-white">
+            <a href="mailto:assipl@automationsystems.co.in" className="block">
+              assipl@automationsystems.co.in
+            </a>
+            <a href="tel:08041692300" className="block">
+              080 – 41692300 / 080 – 43751024
+            </a>
+          </div>
+          <a
+            href="#"
+            className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
+          >
+            Enquiry Now
           </a>
         </div>
-        <a
-          href="#"
-          className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
-        >
-          Enquiry Now
-        </a>
       </div>
     </aside>
   )
@@ -133,14 +135,12 @@ function ProductSidebar() {
 function CapabilityCard({ item }) {
   return (
     <article
-      className={`group rounded-[10px] border border-border px-8 py-12 transition duration-300 hover:scale-[1.02] ${
-        item.tone === 'white' ? 'bg-white hover:bg-primary' : 'bg-background hover:bg-white'
+      className={`flex h-full flex-col rounded-[10px] border border-[#D9E1E8] px-8 py-12 transition-[background-color,transform] duration-300 hover:scale-[1.02] ${
+        item.tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
-      <h3 className="text-[24px] font-semibold leading-tight text-secondary group-hover:text-white">
-        {item.title}
-      </h3>
-      <ul className="mt-5 list-disc space-y-3 pl-5 text-[16px] leading-7 text-text group-hover:text-white">
+      <h3 className="text-[24px] font-semibold leading-tight text-secondary">{item.title}</h3>
+      <ul className="mt-5 list-disc space-y-3 pl-5 text-[16px] leading-7 text-text">
         {item.points.map((point) => (
           <li key={point}>{point}</li>
         ))}
@@ -153,13 +153,13 @@ function SingleProduct() {
   return (
     <main className="bg-white">
       <section
-        className="relative flex min-h-125 items-end bg-cover bg-center px-5 pb-16 pt-40"
+        className="relative flex min-h-125 items-start bg-cover bg-center px-60 pt-52 max-md:min-h-125"
         style={{
           backgroundImage: `linear-gradient(rgba(18, 28, 69, 0.3), rgba(18, 28, 69, 0.3)), url(${heroBackground})`,
         }}
       >
         <div className="mx-auto w-full max-w-350">
-          <div className="mb-4 flex items-center gap-3 text-[15px] font-medium text-white">
+          <div className="mb-4 flex items-center gap-3 text-xl font-medium text-white">
             <a href="/" className="transition hover:text-primary">
               Home
             </a>
@@ -170,7 +170,7 @@ function SingleProduct() {
           </div>
           <Reveal
             as="h1"
-            className="-ml-1 font-heading text-[70px] font-bold leading-none text-white max-md:text-[45px]"
+            className="-ml-1 font-heading text-[70px] font-semibold leading-none text-white max-md:text-[45px]"
           >
             Video Surveillance
           </Reveal>
@@ -186,13 +186,13 @@ function SingleProduct() {
           <Reveal as="img"
             src={productImage}
             alt="CCTV camera monitoring a commercial building"
-            className="h-125 w-full object-cover max-md:h-75"
+            className="h-125 w-full object-cover max-md:h-75 rounded-2xl"
           />
 
           <Reveal as="h2" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
             Enterprise IP Video Surveillance Solutions
           </Reveal>
-          <Reveal as="h3" className="py-2 text-[18px] font-semibold leading-[1.4] text-secondary/80">
+          <Reveal as="h3" className="py-2 text-[18px] font-semibold leading-[1.4] text-black">
             High-definition visual monitoring paired with intelligent analytics to secure your most
             critical environments.
           </Reveal>
@@ -210,9 +210,9 @@ function SingleProduct() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-5 grid gap-5 md:grid-cols-2 md:[direction:rtl]">
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
             {capabilities.slice(2).map((item, index) => (
-              <Reveal key={item.title} className="[direction:ltr]" delay={index * 100}>
+              <Reveal key={item.title} delay={index * 100}>
                 <CapabilityCard item={item} />
               </Reveal>
             ))}
@@ -231,25 +231,16 @@ function SingleProduct() {
                 key={useCase.title}
                 delay={index * 100}
                 className={`px-2 first:pl-0 last:pr-0 ${
-                  index < useCases.length - 1 ? 'border-r border-border' : ''
+                  index < useCases.length - 1 ? 'border-r border-[#D9E1E8]' : ''
                 } max-md:border-r-0 max-md:border-b max-md:py-4`}
               >
-                <img src={useCase.image} alt="" className="h-38 w-full object-cover" />
+                <img src={useCase.image} alt="" className="h-38 w-full object-cover rounded-xl" />
                 <h3 className="pt-4 text-center text-[18px] font-semibold leading-snug text-secondary">
                   {useCase.title}
                 </h3>
               </Reveal>
             ))}
           </div>
-
-          <Reveal
-            as="a"
-            href="#"
-            className="mt-12 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
-          >
-            Enquiry Now
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Reveal>
         </article>
       </section>
     </main>
