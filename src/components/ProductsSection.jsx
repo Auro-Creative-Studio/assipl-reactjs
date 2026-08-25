@@ -1,0 +1,7 @@
+import { products } from '../data'
+import SectionHeading from './SectionHeading'
+
+function ProductsSection() {
+  return <section id="products" className="bg-white py-20 sm:py-24 lg:py-32"><div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12"><SectionHeading eyebrow="Integrated Security Products" title="Purpose-built systems for secure, resilient operations." description="A complete portfolio of electronic security and safety solutions designed for enterprise and critical infrastructure environments." /><div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">{products.map((product) => <article key={product.title} className="group overflow-hidden rounded-[28px] border border-black/5 bg-background transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(18,28,69,0.10)]"><div className="overflow-hidden"><img src={product.image} alt={product.title} className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105" /></div><div className="p-7"><h3 className="text-2xl font-bold leading-tight">{product.title}</h3><p className="mt-4 text-sm leading-7 text-text">{product.description}</p><a href="/products/video-surveillance" className="mt-6 inline-flex items-center text-sm font-semibold text-primary">Read More <span className="ml-2 transition group-hover:translate-x-1">→</span></a></div></article>)}</div></div></section>
+}
+export default ProductsSection
