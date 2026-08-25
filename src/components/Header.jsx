@@ -64,12 +64,12 @@ function Header() {
               <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
             </span>
           </NavLink>
-          <a href="#" className="px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
+          <NavLink to="/process" className={linkClass}>
             Process
-          </a>
-          <a href="#" className="px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
+          </NavLink>
+          <NavLink to="/contact-us" className={linkClass}>
             Contact Us
-          </a>
+          </NavLink>
         </div>
         <a
           href="#"
