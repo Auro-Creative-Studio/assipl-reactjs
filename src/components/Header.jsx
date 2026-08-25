@@ -1,5 +1,5 @@
 import { ChevronDown, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo-dark.png'
 
@@ -45,7 +45,7 @@ function DropdownLink({ href, className, activeClassName, children, onClick }) {
 
 function MobileNavItem({ title, to, links, isOpen, onToggle, onLinkClick }) {
   return (
-    <div className="border-b border-border/30 py-1">
+    <div className="py-1">
       <div className="flex items-center justify-between">
         <NavLink
           to={to}
@@ -63,7 +63,7 @@ function MobileNavItem({ title, to, links, isOpen, onToggle, onLinkClick }) {
           onClick={onToggle}
           aria-expanded={isOpen}
           aria-label={`Toggle ${title} submenu`}
-          className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-primary text-primary transition"
+          className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-text text-text transition"
         >
           <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
         </button>
@@ -93,6 +93,11 @@ function MobileNavItem({ title, to, links, isOpen, onToggle, onLinkClick }) {
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openSection, setOpenSection] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
 
   const linkClass = ({ isActive }) =>
     `px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] transition ${
@@ -110,7 +115,11 @@ function Header() {
 
   return (
     <header className="absolute left-0 right-0 top-8 z-20 px-5">
-      <nav className="mx-auto flex min-h-16 max-w-282 items-center gap-6 rounded-full bg-white/75 px-5 py-3 shadow-sm backdrop-blur">
+      <nav
+        className={`mx-auto flex min-h-16 max-w-282 items-center gap-6 rounded-full bg-white/75 px-5 py-3 shadow-sm backdrop-blur transition-all duration-700 ease-out ${
+          isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'
+        }`}
+      >
         <NavLink
           to="/"
           className="flex w-[20%] min-w-40 items-center"
@@ -227,7 +236,7 @@ function Header() {
             type="button"
             onClick={closeMobileMenu}
             aria-label="Close menu"
-            className="flex h-9 w-9 flex-none items-center justify-center rounded-md bg-secondary text-white"
+            className="flex h-9 w-9 flex-none items-center justify-center rounded-md bg-black text-white"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -238,7 +247,7 @@ function Header() {
             to="/"
             onClick={closeMobileMenu}
             className={({ isActive }) =>
-              `block border-b border-border/30 py-3 text-[16px] font-semibold transition ${
+              `block py-3 text-[16px] font-semibold transition ${
                 isActive ? 'text-primary' : 'text-nav hover:text-primary'
               }`
             }
@@ -273,7 +282,7 @@ function Header() {
             to="/process"
             onClick={closeMobileMenu}
             className={({ isActive }) =>
-              `block border-b border-border/30 py-3 text-[16px] font-semibold transition ${
+              `block py-3 text-[16px] font-semibold transition ${
                 isActive ? 'text-primary' : 'text-nav hover:text-primary'
               }`
             }
