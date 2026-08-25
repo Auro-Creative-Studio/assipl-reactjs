@@ -4,19 +4,19 @@ import logo from '../assets/products/video-surveillance-6.png'
 
 function Header() {
   const linkClass = ({ isActive }) =>
-    `px-[15px] py-2 text-[15px] font-medium transition ${
-      isActive ? 'text-primary' : 'text-secondary hover:text-primary'
+    `px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] transition ${
+      isActive ? 'text-primary' : 'text-nav hover:text-primary'
     }`
 
   return (
-    <header className="absolute left-0 right-0 top-4 z-20 px-5">
-      <nav className="mx-auto flex max-w-[1126px] items-center gap-6 rounded-full bg-white/90 px-5 py-[15px] shadow-sm backdrop-blur">
+    <header className="absolute left-0 right-0 top-[29px] z-20 px-5">
+      <nav className="mx-auto flex min-h-[71px] max-w-[1126px] items-center gap-6 rounded-full bg-white/75 px-5 py-[11px] shadow-sm backdrop-blur">
         <NavLink
           to="/"
           className="flex w-[20%] min-w-[160px] items-center"
           aria-label="ASSIPL home"
         >
-          <img src={logo} alt="ASSIPL" className="h-10 w-auto object-contain" />
+          <img src={logo} alt="ASSIPL" className="h-[50px] w-auto object-contain" />
         </NavLink>
         <div className="hidden flex-1 items-center justify-center lg:flex">
           <NavLink to="/" className={linkClass}>
@@ -31,23 +31,23 @@ function Header() {
               <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
             </span>
           </NavLink>
-          <NavLink to="/about" className={linkClass}>
+          <NavLink to="/service" className={linkClass}>
             <span className="inline-flex items-center gap-1">
               Services
               <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
             </span>
           </NavLink>
-          <a href="#" className="px-[15px] py-2 text-[15px] font-medium text-secondary transition hover:text-primary">
-            Blogs
+          <a href="#" className="px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
+            Process
           </a>
-          <a href="#" className="px-[15px] py-2 text-[15px] font-medium text-secondary transition hover:text-primary">
+          <a href="#" className="px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
             Contact Us
           </a>
         </div>
         <a
           href="#"
           id="glow"
-          className="ml-auto hidden rounded-full bg-primary px-[30px] py-[10px] text-sm font-semibold text-white transition hover:bg-secondary md:inline-flex"
+          className="ml-auto hidden rounded-full bg-primary px-[30px] py-[10px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary md:inline-flex"
         >
           Enquire Now
         </a>
