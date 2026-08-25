@@ -7,6 +7,7 @@ import Csr from './pages/Csr'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import SingleProduct from './pages/SingleProduct'
+import SingleService from './pages/SingleService'
 import './App.css'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/career" element={<Career />} />
         <Route path="/csr" element={<Csr />} />
         <Route path="/products/video-surveillance" element={<SingleProduct />} />
+        <Route path="/services/operational-continuity-maintenance" element={<SingleService />} />
       </Routes>
       <Footer />
     </div>

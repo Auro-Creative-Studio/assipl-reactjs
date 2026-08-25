@@ -73,10 +73,10 @@ const useCases = [
   },
 ]
 
-function ProductSidebar() {
+function ProductSidebar({ className = '' }) {
   return (
-    <aside className="grid gap-12 lg:sticky lg:top-12 lg:self-start">
-      <div className="overflow-hidden rounded-3xl border border-border bg-white px-5 py-8">
+    <aside className={`grid gap-12 lg:sticky lg:top-12 lg:self-start ${className}`}>
+      <Reveal className="overflow-hidden rounded-3xl border border-border bg-white px-5 py-8">
         <nav aria-label="Products">
           <ul className="space-y-2">
             {productLinks.map((link) => {
@@ -99,9 +99,12 @@ function ProductSidebar() {
             })}
           </ul>
         </nav>
-      </div>
+      </Reveal>
 
-      <div className="relative isolate flex h-125 flex-col items-center overflow-hidden rounded-2xl px-6 pb-8 pt-10 text-center text-white">
+      <Reveal
+        delay={100}
+        className="relative isolate flex h-125 flex-col items-center overflow-hidden rounded-2xl px-6 pb-8 pt-10 text-center text-white"
+      >
         <img
           src={contactBackground}
           alt=""
@@ -127,7 +130,7 @@ function ProductSidebar() {
             Enquiry Now
           </a>
         </div>
-      </div>
+      </Reveal>
     </aside>
   )
 }
@@ -135,7 +138,7 @@ function ProductSidebar() {
 function CapabilityCard({ item }) {
   return (
     <article
-      className={`flex h-full flex-col rounded-[10px] border border-[#D9E1E8] px-8 py-12 transition-[background-color,transform] duration-300 hover:scale-[1.02] ${
+      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 transition-[background-color,transform] duration-300 hover:scale-[1.02] ${
         item.tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
@@ -153,13 +156,13 @@ function SingleProduct() {
   return (
     <main className="bg-white">
       <section
-        className="relative flex min-h-125 items-start bg-cover bg-center px-60 pt-52 max-md:min-h-125"
+        className="relative flex min-h-100 items-start bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52"
         style={{
           backgroundImage: `linear-gradient(rgba(18, 28, 69, 0.3), rgba(18, 28, 69, 0.3)), url(${heroBackground})`,
         }}
       >
         <div className="mx-auto w-full max-w-350">
-          <div className="mb-4 flex items-center gap-3 text-xl font-medium text-white">
+          <div className="mb-4 flex items-center gap-3 text-base font-medium text-white md:text-xl">
             <a href="/" className="transition hover:text-primary">
               Home
             </a>
@@ -170,7 +173,7 @@ function SingleProduct() {
           </div>
           <Reveal
             as="h1"
-            className="-ml-1 font-heading text-[70px] font-semibold leading-none text-white max-md:text-[45px]"
+            className="-ml-1 font-heading text-[36px] font-semibold leading-none text-white sm:text-[45px] md:text-[56px] xl:text-[70px]"
           >
             Video Surveillance
           </Reveal>
@@ -178,11 +181,9 @@ function SingleProduct() {
       </section>
 
       <section className="mx-auto grid max-w-350 gap-8 px-5 py-20 lg:grid-cols-[25%_1fr]">
-        <Reveal>
-          <ProductSidebar />
-        </Reveal>
+        <ProductSidebar className="order-2 lg:order-1" />
 
-        <article>
+        <article className="order-1 lg:order-2">
           <Reveal as="img"
             src={productImage}
             alt="CCTV camera monitoring a commercial building"
@@ -231,7 +232,7 @@ function SingleProduct() {
                 key={useCase.title}
                 delay={index * 100}
                 className={`px-2 first:pl-0 last:pr-0 ${
-                  index < useCases.length - 1 ? 'border-r border-[#D9E1E8]' : ''
+                  index < useCases.length - 1 ? 'border-r border-accent' : ''
                 } max-md:border-r-0 max-md:border-b max-md:py-4`}
               >
                 <img src={useCase.image} alt="" className="h-38 w-full object-cover rounded-xl" />

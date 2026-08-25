@@ -73,7 +73,7 @@ function BlueButton({ children, href = '#' }) {
   return (
     <a
       href={href}
-      className="inline-flex rounded-full bg-primary px-[40px] py-[14px] text-[18px] font-medium capitalize leading-[1.5] text-white transition hover:bg-background hover:text-primary"
+      className="inline-flex rounded-full bg-primary px-10 py-4 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-background hover:text-primary"
     >
       {children}
     </a>
@@ -85,17 +85,17 @@ function Services() {
     <div className="bg-white font-body">
       <main>
         <section
-          className="relative flex min-h-[482px] items-center bg-cover bg-center px-5 pt-[112px]"
+          className="relative flex min-h-120 items-center bg-cover bg-center px-5 pt-28"
           style={{
             backgroundImage: `linear-gradient(rgba(18,28,69,.3),rgba(18,28,69,.3)), url(${heroBg})`,
           }}
         >
-          <div className="mx-auto w-full max-w-[1200px] pt-[2px]">
-            <a href="/" className="font-kumbh text-[20px] font-semibold capitalize leading-[1.5] text-background transition-colors hover:text-[var(--color-white)]">
+          <div className="mx-auto w-full max-w-300 pt-0.5">
+            <a href="/" className="font-kumbh text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
               Home
             </a>
             <h1
-              className="-ml-1 mt-[10px] text-[45px] font-semibold leading-[1.05] md:text-[70px]"
+              className="-ml-1 mt-2 text-[45px] font-semibold leading-[1.05] md:text-[70px]"
               style={{ color: 'var(--color-white)' }}
             >
               Services
@@ -103,12 +103,12 @@ function Services() {
           </div>
         </section>
 
-        <section className="px-5 py-[80px]">
-          <div className="mx-auto max-w-[1200px] text-center">
-            <h2 className="mx-auto max-w-[980px] text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+        <section className="px-5 py-20">
+          <div className="mx-auto max-w-300 text-center">
+            <h2 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
               End-to-End Enterprise Integration Services
             </h2>
-            <p className="mx-auto mt-[20px] max-w-[1180px] text-[18px] font-normal leading-[1.5] text-text">
+            <p className="mx-auto mt-5 max-w-295 text-[18px] font-normal leading-normal text-text">
               We deliver complete operational readiness. We operate within a disciplined,
               sequential execution framework that bridges the gap between raw blueprints and active
               field deployment. From the first structural audit to ongoing preventative maintenance,
@@ -117,30 +117,30 @@ function Services() {
             </p>
           </div>
 
-          <div className="mx-auto mt-[60px] grid max-w-[1400px] gap-10 lg:grid-cols-[680px_1fr]">
+          <div className="mx-auto mt-15 grid max-w-350 gap-10 lg:grid-cols-[680px_1fr]">
             <div
-              className="min-h-[420px] rounded-[16px] bg-cover bg-center md:min-h-[550px]"
+              className="min-h-105 rounded-2xl bg-cover bg-center md:min-h-138"
               style={{ backgroundImage: `url(${strategicBg})` }}
             />
             <div className="flex flex-col justify-center lg:pl-0">
               <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                 Strategic Planning & Design
               </h2>
-              <div className="mt-[30px] space-y-[30px]">
+              <div className="mt-8 space-y-8">
                 {planItems.map((item, index) => (
                   <article key={item.title} className="flex gap-6">
-                    <div className="flex h-[84px] min-w-[84px] items-center justify-center rounded-full border border-accent">
-                      <img src={item.icon} alt="" className="h-[56px] w-[56px] object-contain" />
+                    <div className="flex h-21 min-w-21 items-center justify-center rounded-full border border-accent">
+                      <img src={item.icon} alt="" className="h-14 w-14 object-contain" />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-[22px] font-semibold leading-[1.45] text-secondary">
                         {item.title}
                       </h3>
-                      <p className="mt-[10px] max-w-[620px] text-[18px] font-normal leading-[1.5] text-text">{item.text}</p>
+                      <p className="mt-2 max-w-155 text-[18px] font-normal leading-normal text-text">{item.text}</p>
                       {index === 1 && (
                         <a
                           href="#"
-                          className="mt-[26px] inline-flex rounded-full bg-primary px-[30px] py-[10px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                          className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
                         >
                           Learn More
                         </a>
@@ -153,41 +153,41 @@ function Services() {
           </div>
         </section>
 
-        <section className="bg-background px-5 py-[80px]">
-          <div className="mx-auto max-w-[1400px]">
-            <div className="mx-auto max-w-[1180px] text-center">
+        <section className="bg-background px-5 py-20">
+          <div className="mx-auto max-w-350">
+            <div className="mx-auto max-w-295 text-center">
               <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                 Core Project Execution (SITC)
               </h2>
-              <p className="mx-auto mt-[22px] max-w-[1120px] text-[18px] font-normal leading-[1.5] text-text">
+              <p className="mx-auto mt-6 max-w-280 text-[18px] font-normal leading-normal text-text">
                 At the core of our deployment methodology is our comprehensive execution capability.
                 We take absolute accountability for the complete Supply, Installation, Testing &
                 commissioning of your security architecture.
               </p>
             </div>
-            <div className="mt-[60px] grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-15 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {executionItems.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-[12px] border border-accent bg-background px-8 py-8"
+                  className="rounded-xl border border-accent bg-background px-8 py-8"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-[90px] w-[90px] items-center justify-center rounded-full border border-accent bg-background">
-                      <img src={item.icon} alt="" className="h-[44px] w-[44px] object-contain" />
+                    <div className="flex h-22.5 w-22.5 items-center justify-center rounded-full border border-accent bg-background">
+                      <img src={item.icon} alt="" className="h-11 w-11 object-contain" />
                     </div>
                     <span className="text-[58px] font-semibold leading-none text-accent">{item.number}</span>
                   </div>
-                  <h3 className="mt-[36px] text-[32px] font-semibold leading-[1.375] text-secondary">
+                  <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
                     {item.title}
                   </h3>
-                  <p className="mt-[12px] text-[16px] font-normal leading-[1.67] text-text">{item.text}</p>
+                  <p className="mt-3 text-[16px] font-normal leading-[1.67] text-text">{item.text}</p>
                 </article>
               ))}
             </div>
-            <div className="mt-[45px] text-center">
+            <div className="mt-12 text-center">
               <a
                 href="#"
-                className="inline-flex rounded-full bg-primary px-[30px] py-[10px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
               >
                 Know More
               </a>
@@ -195,31 +195,31 @@ function Services() {
           </div>
         </section>
 
-        <section className="bg-white px-5 py-[80px]">
-          <div className="mx-auto max-w-[1400px]">
+        <section className="bg-white px-5 py-20">
+          <div className="mx-auto max-w-350">
             <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-              <h2 className="max-w-[920px] text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+              <h2 className="max-w-230 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                 Operational Continuity & Maintenance
               </h2>
               <a
-                href="#"
-                className="inline-flex rounded-full bg-primary px-[30px] py-[10px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                href="/services/operational-continuity-maintenance"
+                className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
               >
                 Read More
               </a>
             </div>
-            <div className="mt-[48px] grid gap-6 md:grid-cols-3">
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
               {continuityItems.map((item) => (
                 <article key={item.title} className="rounded-[18px] border border-accent bg-white p-5">
                   <img
                     src={item.image}
                     alt=""
-                    className="h-[273px] w-full rounded-[14px] object-cover"
+                    className="h-68 w-full rounded-[14px] object-cover"
                   />
-                  <h3 className="mt-[34px] text-[32px] font-semibold leading-[1.375] text-secondary">
+                  <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
                     {item.title}
                   </h3>
-                  <p className="mt-[12px] text-[16px] font-normal leading-[1.67] text-text">{item.text}</p>
+                  <p className="mt-3 text-[16px] font-normal leading-[1.67] text-text">{item.text}</p>
                 </article>
               ))}
             </div>
@@ -228,13 +228,13 @@ function Services() {
 
         <section className="pb-0">
           <div
-            className="min-h-[415px] bg-cover bg-center px-5 py-[80px] md:px-0"
+            className="min-h-104 bg-cover bg-center px-5 py-20 md:px-0"
             style={{
               backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBg})`,
             }}
           >
-            <div className="mx-auto flex min-h-[255px] max-w-[1680px] flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-[720px] text-left">
+            <div className="mx-auto flex min-h-64 max-w-[1680px] flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-180 text-left">
                 <h2
                   className="text-[32px] font-semibold leading-[1.125] md:text-[45px]"
                   style={{ color: 'var(--color-white)' }}
@@ -242,7 +242,7 @@ function Services() {
                   Ready to Standardize Your Enterprise Infrastructure?
                 </h2>
                 <p
-                  className="mt-[20px] max-w-[720px] text-[16px] font-normal leading-[1.67]"
+                  className="mt-5 max-w-180 text-[16px] font-normal leading-[1.67]"
                   style={{ color: 'var(--color-white)' }}
                 >
                   Connect with our systems integration experts to discuss multi-site rollouts, vault
@@ -251,7 +251,7 @@ function Services() {
               </div>
               <a
                 href="mailto:assipl@automationsystems.co.in"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-[40px] py-[14px] text-[18px] font-medium capitalize leading-[1.5] text-[var(--color-white)] transition hover:bg-secondary hover:text-[var(--color-white)] md:mr-[20px]"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
               >
                 Contact Our Engineering Team
               </a>
