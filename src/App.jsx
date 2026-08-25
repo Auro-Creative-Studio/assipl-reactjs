@@ -4,7 +4,9 @@ import Header from './components/Header'
 import About from './pages/About'
 import Career from './pages/Career'
 import Csr from './pages/Csr'
+import Contact from './pages/Contact'
 import Home from './pages/Home'
+import Process from './pages/Process'
 import Services from './pages/Services'
 import SingleProduct from './pages/SingleProduct'
 import SingleService from './pages/SingleService'
@@ -17,6 +19,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/about-us" element={<About />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/contact-us" element={<Contact />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/service" element={<Services />} />
         <Route path="/services" element={<Services />} />
         <Route path="/career" element={<Career />} />

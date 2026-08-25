@@ -187,7 +187,7 @@ function Header() {
           </a>
           <a href="#" className="px-4 py-2 text-[15px] font-semibold capitalize leading-[1.43] text-nav transition hover:text-primary">
             Contact Us
-          </a>
+          </NavLink>
         </div>
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
           <a
