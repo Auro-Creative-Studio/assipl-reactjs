@@ -69,17 +69,6 @@ const continuityItems = [
   },
 ]
 
-function BlueButton({ children, href = '#' }) {
-  return (
-    <a
-      href={href}
-      className="inline-flex rounded-full bg-primary px-10 py-4 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-background hover:text-primary"
-    >
-      {children}
-    </a>
-  )
-}
-
 function Services() {
   return (
     <div className="bg-white font-body">
