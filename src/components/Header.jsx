@@ -22,9 +22,36 @@ function Header() {
           <NavLink to="/" className={linkClass}>
             Home
           </NavLink>
-          <NavLink to="/about" className={linkClass}>
-            About Us
-          </NavLink>
+          <div className="group relative">
+            <NavLink to="/about" className={linkClass}>
+              <span className="inline-flex items-center gap-1">
+                About Us
+                <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+              </span>
+            </NavLink>
+            <div className="invisible absolute left-0 top-full z-30 min-w-[160px] rounded-2xl bg-white p-3 opacity-0 shadow-lg transition duration-150 group-hover:visible group-hover:opacity-100">
+              <NavLink
+                to="/career"
+                className={({ isActive }) =>
+                  `block rounded-lg px-4 py-2 text-[15px] font-medium transition ${
+                    isActive ? 'text-primary' : 'text-secondary hover:text-primary'
+                  }`
+                }
+              >
+                Career
+              </NavLink>
+              <NavLink
+                to="/csr"
+                className={({ isActive }) =>
+                  `block rounded-lg px-4 py-2 text-[15px] font-medium transition ${
+                    isActive ? 'text-primary' : 'text-secondary hover:text-primary'
+                  }`
+                }
+              >
+                CSR
+              </NavLink>
+            </div>
+          </div>
           <NavLink to="/products/video-surveillance" className={linkClass}>
             <span className="inline-flex items-center gap-1">
               Products
