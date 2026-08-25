@@ -31,7 +31,7 @@ function Header() {
             </NavLink>
             <div className="invisible absolute left-0 top-full z-30 min-w-[160px] rounded-2xl bg-white p-3 opacity-0 shadow-lg transition duration-150 group-hover:visible group-hover:opacity-100">
               <NavLink
-                to="/career"
+                to="/about#career"
                 className={({ isActive }) =>
                   `block rounded-lg px-4 py-2 text-[15px] font-medium transition ${
                     isActive ? 'text-primary' : 'text-secondary hover:text-primary'
