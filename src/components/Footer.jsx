@@ -1,9 +1,73 @@
+import logo from '../assets/products/video-surveillance-6.png'
+
 function Footer() {
+  const quickLinks = ['Home', 'About Us', 'Services', 'Blogs', 'Contact Us', 'Privacy Policy', 'Terms and Conditions']
+  const products = [
+    'Video Surveillance',
+    'Access Control',
+    'Fire Detection System',
+    'Intrusion Detection System',
+    'Gate Automation & Control Barriers',
+    'Gas Suppression System',
+  ]
+
   return (
-    <footer className="mt-auto border-t border-border bg-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-sm text-text sm:flex-row sm:items-center sm:justify-between">
-        <p>ASSIPL React</p>
-        <p>Built with React, Tailwind CSS, and React Router.</p>
+    <footer className="mt-auto bg-secondary text-white">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-14 md:grid-cols-[1.2fr_1fr_1fr_1.25fr]">
+        <div>
+          <img src={logo} alt="ASSIPL" className="h-12 w-auto object-contain" />
+          <p className="mt-6 max-w-xs text-[15px] leading-7 text-white/75">
+            ASSIPL operates at the intersection of advanced technology and rigorous field
+            engineering.
+          </p>
+        </div>
+        <div>
+          <h3 className="mb-5 text-xl font-semibold text-white">Quick Links</h3>
+          <ul className="space-y-3 text-[15px] text-white/75">
+            {quickLinks.map((link) => (
+              <li key={link}>
+                <a href="#" className="transition hover:text-white">
+                  {link}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 className="mb-5 text-xl font-semibold text-white">Products</h3>
+          <ul className="space-y-3 text-[15px] text-white/75">
+            {products.map((product) => (
+              <li key={product}>
+                <a href="#" className="transition hover:text-white">
+                  {product}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 className="mb-5 text-xl font-semibold text-white">Contact Us</h3>
+          <div className="space-y-4 text-[15px] leading-7 text-white/75">
+            <p>House No: 2497, GF, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore - 560008.</p>
+            <p>
+              <a href="tel:08041692300" className="hover:text-white">
+                080 - 41692300
+              </a>{' '}
+              /{' '}
+              <a href="tel:08043751024" className="hover:text-white">
+                080 - 43751024
+              </a>
+            </p>
+            <a href="mailto:assipl@automationsystems.co.in" className="block hover:text-white">
+              assipl@automationsystems.co.in
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-white/15">
+        <div className="mx-auto max-w-[1400px] px-5 py-5 text-center text-sm text-white/70">
+          Copyright (c) 2026 ASSIPL. All Rights Reserved. Developed by Auro Creative Studio.
+        </div>
       </div>
     </footer>
   )
