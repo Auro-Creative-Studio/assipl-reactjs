@@ -75,7 +75,7 @@ function Csr() {
 
       <section className="px-5 py-20 md:py-[78px]">
         <div className="mx-auto grid max-w-[1390px] gap-16 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16 lg:gap-16">
-          <div className="relative min-h-[430px] overflow-hidden rounded-[20px] md:min-h-[530px]">
+          <div className="relative min-h-[430px] overflow-hidden rounded-[20px] md:min-h-[470px]">
             {heroSlides.map((image, index) => (
               <img
                 key={image}
@@ -87,7 +87,7 @@ function Csr() {
             ))}
           </div>
 
-          <div className="flex min-h-[430px] items-center bg-white px-0 py-10 md:min-h-[530px] md:px-0 lg:pr-10">
+          <div className="flex min-h-[430px] items-center bg-white px-0 py-10 md:min-h-[470px] md:px-0 lg:pr-10">
             <div>
               <h2 className="text-[34px] font-bold leading-[1.16] text-secondary md:text-[42px]">
                 Securing the Future. Empowering Communities.
@@ -111,15 +111,19 @@ function Csr() {
             autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             loop
             speed={500}
-            spaceBetween={27}
+            spaceBetween={40}
             slidesPerView={1}
             breakpoints={{ 768: { slidesPerView: 2 } }}
             className="csr-carousel"
           >
             {galleryImages.map((image) => (
               <SwiperSlide key={image.alt}>
-                <figure className="m-0 overflow-hidden bg-white">
-                  <img src={image.src} alt={image.alt} className="h-auto w-full object-cover" />
+                <figure className="m-0 overflow-hidden rounded-[20px] bg-white">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="-mx-[1px] h-[360px] w-[calc(100%+2px)] object-cover md:h-[440px]"
+                  />
                 </figure>
               </SwiperSlide>
             ))}
@@ -127,36 +131,31 @@ function Csr() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:py-20">
-        <div className="mx-auto max-w-[1140px]">
-          <h2 className="max-w-4xl text-[34px] font-bold leading-tight text-secondary md:text-[42px]">
-            Project Sunshine - The Build-Operate-Run (BOR) Methodology
-          </h2>
-          <div className="mt-6 max-w-[1030px] space-y-6 text-[17px] leading-8 text-text">
+      <section className="px-5 py-14 md:py-[72px]">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 className="w-full text-center text-[34px] font-bold leading-[1.15] text-secondary md:text-[45px]">
+  Project Sunshine - The Build-Operate-Run (BOR) Methodology
+</h2>
+          <div className="mt-6 w-full text-[20px] leading-[1.75] text-text">
             <p>
               True social responsibility means creating systems that eventually sustain themselves
               without corporate dependency. To achieve this, ASSIPL applied our enterprise execution
-              framework to philanthropy.
-            </p>
-            <p>
-              Project Sunshine was developed using a sustainable Build-Operate-Run (BOR) model.
-              After fully funding the establishment, setting up the infrastructure, and
-              operationalizing the daily educational routines, ASSIPL successfully handed the
-              day-to-day management over to dedicated local leadership.
-            </p>
-            <p>
+              framework to philanthropy. Project Sunshine was developed using a sustainable
+              Build-Operate-Run (BOR) model. After fully funding the establishment, setting up the
+              infrastructure, and operationalizing the daily educational routines, ASSIPL
+              successfully handed the day-to-day management over to dedicated local leadership.
               This ensures the project remains culturally grounded and locally empowered while
               consistently delivering the following impact:
             </p>
           </div>
 
-          <div className="mt-8 max-w-[1030px] space-y-4 text-[17px] leading-8 text-text">
+          <ul className="mt-4 w-full list-disc space-y-0 pl-5 text-[20px] leading-[1.75] text-text">
             {impactItems.map((item) => (
-              <p key={item.title}>
-                <strong className="font-semibold text-secondary">{item.title}</strong> {item.text}
-              </p>
+              <li key={item.title}>
+                <strong className="font-bold text-text">{item.title}</strong> {item.text}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -174,13 +173,13 @@ function Csr() {
         .csr-carousel .swiper-button-prev,
         .csr-carousel .swiper-button-next {
           color: #121c45;
-          width: 26px;
-          height: 44px;
+          width: 14px;
+          height: 24px;
         }
 
         .csr-carousel .swiper-button-prev::after,
         .csr-carousel .swiper-button-next::after {
-          font-size: 28px;
+          font-size: 14px;
           font-weight: 700;
         }
       `}</style>
