@@ -14,6 +14,15 @@ import logoSbi from './assets/home/testimonial-avatar-39.webp'
 import logoSattva from './assets/home/testimonial-avatar-40.webp'
 import logoAxisBank from './assets/home/testimonial-avatar-41.webp'
 import logoHdfcBank from './assets/home/testimonial-avatar-42.webp'
+import clientLogoBankOfIndia from './assets/home/clients/bank-of-india.webp'
+import clientLogoCanaraBank from './assets/home/clients/canara-bank.webp'
+import clientLogoUnionBank from './assets/home/clients/union-bank-of-india.webp'
+import clientLogoSbi from './assets/home/clients/sbi.webp'
+import clientLogoShell from './assets/home/clients/shell.webp'
+import clientLogoAxisBank from './assets/home/clients/axis-bank.webp'
+import clientLogoVaishnavi from './assets/home/clients/vaishnavi.webp'
+import clientLogoSattva from './assets/home/clients/sattva.webp'
+import clientLogoHdfcBank from './assets/home/clients/hdfc-bank.webp'
 
 export const products = [
   {
@@ -92,6 +101,18 @@ export const testimonials = [
     company: 'HDFC BANK',
     logo: logoHdfcBank,
   },
+]
+
+export const clientLogos = [
+  { name: 'Bank of India', logo: clientLogoBankOfIndia },
+  { name: 'Canara Bank', logo: clientLogoCanaraBank },
+  { name: 'Union Bank of India', logo: clientLogoUnionBank },
+  { name: 'SBI', logo: clientLogoSbi },
+  { name: 'Shell Global', logo: clientLogoShell },
+  { name: 'Axis Bank', logo: clientLogoAxisBank },
+  { name: 'Vaishnavi', logo: clientLogoVaishnavi },
+  { name: 'Sattva', logo: clientLogoSattva },
+  { name: 'HDFC Bank', logo: clientLogoHdfcBank },
 ]
 
 export const locations = [

@@ -19,7 +19,7 @@ function ServicesSection() {
         </Reveal>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start lg:gap-14">
-          <Reveal className="aspect-[4/5] overflow-hidden rounded-2xl">
+          <Reveal className="aspect-4/5 overflow-hidden rounded-2xl">
             <img
               src={serviceImage}
               alt="ASSIPL multi-sensor camera installation"
@@ -38,7 +38,7 @@ function ServicesSection() {
                       type="button"
                       onClick={() => setOpenNumber(isOpen ? null : service.number)}
                       aria-expanded={isOpen}
-                      className={`group flex w-full items-center justify-between gap-4 rounded-[8px] border px-5 py-[18px] text-left transition ${isOpen
+                      className={`group flex w-full items-center justify-between gap-4 rounded-lg border px-5 py-4 text-left transition ${isOpen
                           ? 'border-secondary '
                           : 'border-[#D6DEE8] bg-transparent'
                         }`}
@@ -53,7 +53,7 @@ function ServicesSection() {
                       </span>
                     </button>
                     <div
-                      className={`grid overflow-hidden rounded-[8px] border transition-all duration-300 ${isOpen
+                      className={`grid overflow-hidden rounded-lg border transition-all duration-300 ${isOpen
                           ? 'mt-2 grid-rows-[1fr] border-secondary opacity-100'
                           : 'grid-rows-[0fr] border-transparent opacity-0'
                         }`}

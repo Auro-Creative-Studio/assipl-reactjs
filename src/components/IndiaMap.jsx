@@ -14,7 +14,7 @@ function project({ lon, lat }) {
 
 function IndiaMap({ locations }) {
   return (
-    <div className="relative mx-auto aspect-[667/777] w-full max-w-md">
+    <div className="relative mx-auto aspect-667/777 w-full max-w-md">
       <svg viewBox="0 0 666.66669 777.33331" className="absolute inset-0 h-full w-full" aria-hidden="true">
         <defs>
           <radialGradient id="india-map-fill" cx="35%" cy="30%" r="90%">

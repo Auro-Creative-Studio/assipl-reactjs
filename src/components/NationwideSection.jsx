@@ -5,7 +5,7 @@ import { locations } from '../data'
 function NationwideSection() {
   return (
     <section id="process" className="bg-white py-20 sm:py-20">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-12">
           <Reveal>
             <h2 className="text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[54px]">

@@ -141,7 +141,7 @@ export default function BlogList() {
         const src = getMediaUrl(value || row.featured_image);
 
         return (
-          <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100">
+          <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-slate-100">
             {src ? (
               <img
                 src={src}
@@ -161,7 +161,7 @@ export default function BlogList() {
       key: "title",
       label: "Title",
       render: (value) => (
-        <p className="max-w-[280px] truncate font-black text-slate-950">
+        <p className="max-w-70 truncate font-black text-slate-950">
           {value || "N/A"}
         </p>
       ),
@@ -170,7 +170,7 @@ export default function BlogList() {
       key: "slug",
       label: "Slug",
       render: (value) => (
-        <p className="max-w-[200px] truncate text-sm font-semibold text-slate-600">
+        <p className="max-w-50 truncate text-sm font-semibold text-slate-600">
           {value || "N/A"}
         </p>
       ),

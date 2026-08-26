@@ -1,12 +1,12 @@
 import Reveal from './Reveal'
-import auditBackground from '../assets/services/cta-bg.webp'
+import auditBackground from '../assets/services/audit-cta-bg.webp'
 
 function AuditField({ as = 'input', className = '', ...props }) {
   const Component = as
 
   return (
     <Component
-      className={`w-full rounded-lg border border-[#d9e1e8] bg-white px-5 py-3 text-[15px] leading-[1.5] text-text outline-none transition placeholder:text-text/60 focus:border-primary ${className}`}
+      className={`w-full rounded-lg border border-accent bg-white px-5 py-3 text-[15px] leading-normal text-text outline-none transition placeholder:text-text/60 focus:border-primary ${className}`}
       {...props}
     />
   )
@@ -16,7 +16,7 @@ function InfrastructureAuditSection() {
   return (
     <section id="audit-form" className="bg-white px-5 py-20 sm:py-20">
       <div
-        className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[28px] bg-cover bg-center px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20"
+        className="relative mx-auto max-w-360 overflow-hidden rounded-[28px] bg-cover bg-center px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20"
         style={{
           backgroundImage: `linear-gradient(rgba(18,28,69,.55),rgba(18,28,69,.55)), url(${auditBackground})`,
         }}
