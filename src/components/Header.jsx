@@ -2,6 +2,7 @@ import { ChevronDown, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo-dark.png'
+import { fetchPublishedSingleServices } from '../lib/singleServicesApi'
 
 const productLinks = [
   { title: 'Video Surveillance', href: '/products/video-surveillance' },
@@ -12,7 +13,7 @@ const productLinks = [
   { title: 'Gas Suppression Systems', href: '/products/gas-suppression-system' },
 ]
 
-const serviceLinks = [
+const fallbackServiceLinks = [
   { title: 'Strategic Planning & Design', href: '#' },
   { title: 'Core Project Execution (SITC)', href: '#' },
   { title: 'Operational Continuity & Maintenance', href: '/services/operational-continuity-maintenance' },
@@ -94,9 +95,31 @@ function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openSection, setOpenSection] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [serviceLinks, setServiceLinks] = useState(fallbackServiceLinks)
 
   useEffect(() => {
     setIsLoaded(true)
+  }, [])
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchPublishedSingleServices()
+      .then((items) => {
+        if (!isMounted || items.length === 0) return
+
+        setServiceLinks(
+          items.map((item) => ({
+            title: item.title,
+            href: `/services/${item.slug}`,
+          }))
+        )
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   const linkClass = ({ isActive }) =>

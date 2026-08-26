@@ -10,6 +10,9 @@ import BlogList from './cms/view/blogs/List'
 import ProductCreate from './cms/view/products/Create'
 import ProductEdit from './cms/view/products/Edit'
 import ProductList from './cms/view/products/List'
+import SingleServiceCreate from './cms/view/singleServices/Create'
+import SingleServiceEdit from './cms/view/singleServices/Edit'
+import SingleServiceList from './cms/view/singleServices/List'
 import ContactForm from './cms/view/ContactForm'
 import CookieConsentsList from './cms/view/cookie/List'
 import Dashboard from './cms/view/Dashboard'
@@ -62,7 +65,7 @@ function PublicLayout() {
         <Route path="/terms-and-conditions" element={<TermsConditions />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<SingleProduct />} />
-        <Route path="/services/operational-continuity-maintenance" element={<SingleService />} />
+        <Route path="/services/:slug" element={<SingleService />} />
       </Routes>
       <Footer />
     </div>
@@ -91,6 +94,9 @@ function App() {
           <Route path="products" element={<ProductList />} />
           <Route path="products/create" element={<ProductCreate />} />
           <Route path="products/edit/:id" element={<ProductEdit />} />
+          <Route path="single-services" element={<SingleServiceList />} />
+          <Route path="single-services/create" element={<SingleServiceCreate />} />
+          <Route path="single-services/edit/:id" element={<SingleServiceEdit />} />
           <Route path="cookie-consents" element={<CookieConsentsList />} />
           <Route path="media" element={<Media />} />
           <Route path="profile" element={<Profile />} />
