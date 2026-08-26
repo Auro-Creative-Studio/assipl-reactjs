@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { X } from 'lucide-react'
 import { useState } from 'react'
+import popupBackground from '../assets/download.png'
 import logo from '../assets/logo-light.png'
 
 const API_ROOT = (
@@ -63,7 +64,9 @@ function EnquiryPopup({ isOpen, onClose }) {
         className="relative w-full max-w-105 overflow-hidden rounded-2xl shadow-2xl"
         onClick={(event) => event.stopPropagation()}
         style={{
-          background: 'linear-gradient(180deg, #061427 0%, #032D69 100%)',
+          backgroundImage: `linear-gradient(180deg, rgba(6, 20, 39, 0.88) 0%, rgba(3, 45, 105, 0.88) 100%), url(${popupBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <button
@@ -153,3 +156,4 @@ function EnquiryPopup({ isOpen, onClose }) {
 }
 
 export default EnquiryPopup
+

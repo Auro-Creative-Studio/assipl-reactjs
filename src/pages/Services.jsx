@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import EnquiryPopup from '../components/EnquiryPopup'
 import heroBg from '../assets/services/service-hero-bg.webp'
 import strategicBg from '../assets/services/strategic-bg.webp'
@@ -131,12 +132,12 @@ function Services() {
                       </h3>
                       <p className="mt-2 max-w-155 text-[18px] font-normal leading-normal text-text">{item.text}</p>
                       {index === 1 && (
-                        <a
-                          href="#"
+                        <Link
+                          to="/strategic-planning-design"
                           className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
                         >
                           Learn More
-                        </a>
+                        </Link>
                       )}
                     </div>
                   </article>
@@ -178,12 +179,12 @@ function Services() {
               ))}
             </div>
             <div className="mt-12 text-center">
-              <a
-                href="#"
+              <Link
+                to="/core-project-execution-sitc"
                 className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
               >
                 Know More
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -260,3 +261,4 @@ function Services() {
 }
 
 export default Services
+

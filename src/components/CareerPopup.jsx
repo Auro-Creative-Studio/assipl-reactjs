@@ -1,9 +1,12 @@
 import { X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import popupBackground from '../assets/download.png'
 import logo from '../assets/logo-light.png'
 import { fetchActiveCareerPositions, submitCareerApplication, uploadResume } from '../lib/careerApi'
 
 const initialForm = { full_name: '', email: '', phone_number: '', position_id: '', message: '' }
+const MAX_RESUME_SIZE_BYTES = 5 * 1024 * 1024
+const RESUME_SIZE_ERROR = 'Resume size max 5 MB.'
 
 const fieldClass =
   'w-full rounded-lg border border-white/20 bg-white/8 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none transition focus:border-primary focus:bg-white/12'
@@ -33,7 +36,17 @@ function CareerPopup({ isOpen, onClose }) {
   }
 
   const handleFileChange = (event) => {
-    setResume(event.target.files?.[0] || null)
+    const selectedFile = event.target.files?.[0] || null
+
+    if (selectedFile && selectedFile.size > MAX_RESUME_SIZE_BYTES) {
+      setResume(null)
+      setError(RESUME_SIZE_ERROR)
+      event.target.value = ''
+      return
+    }
+
+    setError('')
+    setResume(selectedFile)
   }
 
   const handleClose = () => {
@@ -50,6 +63,11 @@ function CareerPopup({ isOpen, onClose }) {
 
     if (!resume) {
       setError('Please attach your resume.')
+      return
+    }
+
+    if (resume.size > MAX_RESUME_SIZE_BYTES) {
+      setError(RESUME_SIZE_ERROR)
       return
     }
 
@@ -85,7 +103,11 @@ function CareerPopup({ isOpen, onClose }) {
       <div
         className="relative w-full max-w-105 overflow-hidden rounded-2xl shadow-2xl"
         onClick={(event) => event.stopPropagation()}
-        style={{ background: 'linear-gradient(180deg, #061427 0%, #032D69 100%)' }}
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(6, 20, 39, 0.88) 0%, rgba(3, 45, 105, 0.88) 100%), url(${popupBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
         <button
           type="button"
@@ -203,3 +225,4 @@ function CareerPopup({ isOpen, onClose }) {
 }
 
 export default CareerPopup
+

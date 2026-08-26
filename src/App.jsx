@@ -69,6 +69,8 @@ function PublicLayout() {
         <Route path="/terms-and-conditions" element={<TermsConditions />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<SingleProduct />} />
+        <Route path="/strategic-planning-design" element={<SingleService routeSlug="strategic-planning-design" />} />
+        <Route path="/core-project-execution-sitc" element={<SingleService routeSlug="core-project-execution-sitc" />} />
         <Route path="/services/:slug" element={<SingleService />} />
       </Routes>
       <Footer />
@@ -121,3 +123,4 @@ function App() {
 }
 
 export default App
+

@@ -106,8 +106,9 @@ function ModelCard({ model, fallbackImage }) {
   )
 }
 
-function SingleService() {
-  const { slug } = useParams()
+function SingleService({ routeSlug = null }) {
+  const { slug: paramSlug } = useParams()
+  const slug = routeSlug || paramSlug
   const [service, setService] = useState(null)
   const [serviceLinks, setServiceLinks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -310,3 +311,4 @@ function SingleService() {
 }
 
 export default SingleService
+
