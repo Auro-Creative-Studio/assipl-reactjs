@@ -9,7 +9,7 @@ function HeroSection() {
       id="home"
       className="relative flex min-h-screen items-center overflow-hidden bg-white pt-40 pb-16 sm:pt-44 lg:pt-48"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(27,26,23,0.7) 68%, rgba(255,255,255,1) 100%), url(${heroImage})`,
+        backgroundImage: `linear-gradient(180deg, rgba(27, 26, 23,0.4) 68%, rgba(255,255,255,1) 100%), url(${heroImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

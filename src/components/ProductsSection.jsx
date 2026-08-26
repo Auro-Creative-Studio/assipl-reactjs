@@ -50,7 +50,7 @@ function ProductsSection() {
                 className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2 scale-75 rounded-xl object-cover opacity-0 transition-all duration-500 ease-out group-hover:h-full group-hover:w-full group-hover:scale-100 group-hover:rounded-2xl group-hover:opacity-100"
                 aria-hidden="true"
               />
-              {/* <div className="absolute inset-0 bg-secondary/40 transition-colors duration-300 group-hover:bg-secondary/80" /> */}
+              <div className="absolute inset-0 bg-[#121C454F] transition-colors duration-300 group-hover:bg-[#121C4595]" />
               <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
                 <h3 className="text-xl font-bold leading-snug text-white drop-shadow-lg sm:text-2xl">
                   {product.title}
