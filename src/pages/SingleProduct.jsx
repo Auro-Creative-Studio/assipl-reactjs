@@ -75,7 +75,7 @@ const useCases = [
 
 function ProductSidebar({ className = '' }) {
   return (
-    <aside className={`grid gap-12 lg:sticky lg:top-12 lg:self-start ${className}`}>
+    <aside className={`grid gap-12 md:grid-cols-2 lg:grid-cols-1 lg:sticky lg:top-12 lg:self-start ${className}`}>
       <Reveal className="overflow-hidden rounded-3xl border border-border bg-white px-5 py-8">
         <nav aria-label="Products">
           <ul className="space-y-2">

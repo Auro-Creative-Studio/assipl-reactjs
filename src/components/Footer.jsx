@@ -8,7 +8,7 @@ function Footer() {
     { label: 'Home', to: '/' },
     { label: 'About Us', to: '/about' },
     { label: 'Services', to: '/service' },
-    { label: 'Blogs' },
+    { label: 'Blogs', to: '/blogs' },
     { label: 'Contact Us', to: '/contact-us' },
     { label: 'Privacy Policy', to: '/privacy-policy' },
     { label: 'Terms and Conditions', to: '/terms-and-conditions' },
