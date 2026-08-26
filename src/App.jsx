@@ -13,6 +13,10 @@ import ProductList from './cms/view/products/List'
 import SingleServiceCreate from './cms/view/singleServices/Create'
 import SingleServiceEdit from './cms/view/singleServices/Edit'
 import SingleServiceList from './cms/view/singleServices/List'
+import CareerPositionCreate from './cms/view/careerPositions/Create'
+import CareerPositionEdit from './cms/view/careerPositions/Edit'
+import CareerPositionList from './cms/view/careerPositions/List'
+import CareerApplicationList from './cms/view/careerApplications/List'
 import ContactForm from './cms/view/ContactForm'
 import CookieConsentsList from './cms/view/cookie/List'
 import Dashboard from './cms/view/Dashboard'
@@ -97,6 +101,10 @@ function App() {
           <Route path="single-services" element={<SingleServiceList />} />
           <Route path="single-services/create" element={<SingleServiceCreate />} />
           <Route path="single-services/edit/:id" element={<SingleServiceEdit />} />
+          <Route path="career-positions" element={<CareerPositionList />} />
+          <Route path="career-positions/create" element={<CareerPositionCreate />} />
+          <Route path="career-positions/edit/:id" element={<CareerPositionEdit />} />
+          <Route path="career-applications" element={<CareerApplicationList />} />
           <Route path="cookie-consents" element={<CookieConsentsList />} />
           <Route path="media" element={<Media />} />
           <Route path="profile" element={<Profile />} />

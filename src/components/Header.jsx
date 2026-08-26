@@ -1,6 +1,7 @@
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import EnquiryPopup from './EnquiryPopup'
 import logo from '../assets/logo-dark.png'
 import { fetchPublishedSingleServices } from '../lib/singleServicesApi'
 import { fetchPublishedProducts } from '../lib/productsApi'
@@ -98,6 +99,7 @@ function Header() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [serviceLinks, setServiceLinks] = useState(fallbackServiceLinks)
   const [productLinks, setProductLinks] = useState(fallbackProductLinks)
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
 
   useEffect(() => {
     setIsLoaded(true)
@@ -245,13 +247,14 @@ function Header() {
           </NavLink>
         </div>
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
-          <a
-            href="/contact-us"
+          <button
+            type="button"
+            onClick={() => setIsEnquiryOpen(true)}
             id="glow"
             className="hidden rounded-full bg-primary px-8 py-3 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary md:inline-flex"
           >
             Enquire Now
-          </a>
+          </button>
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
@@ -347,8 +350,20 @@ function Header() {
             Contact Us
           </NavLink>
 
+          <button
+            type="button"
+            onClick={() => {
+              closeMobileMenu()
+              setIsEnquiryOpen(true)
+            }}
+            className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-3 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+          >
+            Enquire Now
+          </button>
         </nav>
       </aside>
+
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </header>
   )
 }

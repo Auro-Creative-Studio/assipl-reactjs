@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+import CareerPopup from '../components/CareerPopup'
 import logoAlba from '../assets/about-page/embedded-0.webp'
 import logoAditya from '../assets/about-page/embedded-1.png'
 import logoTexecom from '../assets/about-page/embedded-2.jpg'
@@ -64,6 +65,7 @@ function ButtonLink({ children, className = '', ...props }) {
 
 function About() {
   const location = useLocation()
+  const [isCareerOpen, setIsCareerOpen] = useState(false)
 
   useEffect(() => {
     if (!location.hash) return
@@ -258,12 +260,13 @@ function About() {
               integration engineers, project managers, and technical specialists who thrive in
               high-stakes environments.
             </p>
-            <Link
-              to="/career"
+            <button
+              type="button"
+              onClick={() => setIsCareerOpen(true)}
               className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-8 py-2 text-[15px] font-semibold leading-[1.43] text-white transition hover:bg-secondary"
             >
               Join Our Team
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -294,6 +297,8 @@ function About() {
           </div>
         </div>
       </section>
+
+      <CareerPopup isOpen={isCareerOpen} onClose={() => setIsCareerOpen(false)} />
     </main>
   )
 }

@@ -1,4 +1,5 @@
 ﻿import {
+  Briefcase,
   ChevronDown,
   Cookie,
   Inbox,
@@ -28,6 +29,15 @@ const navItems = [
   { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
   { label: "Products", href: "/admin/products", icon: Layers },
   { label: "Single Services", href: "/admin/single-services", icon: Wrench },
+  {
+    label: "Careers",
+    basePath: "/admin/career",
+    icon: Briefcase,
+    children: [
+      { label: "Positions", href: "/admin/career-positions" },
+      { label: "Applications", href: "/admin/career-applications" },
+    ],
+  },
   { label: "Cookie Consents", href: "/admin/cookie-consents", icon: Cookie },
   { label: "Media", href: "/admin/media", icon: Image },
   // { label: "Projects", href: "/admin/projects", icon: FolderKanban },
