@@ -4,7 +4,6 @@ import Header from './components/Header'
 import CmsLayout from './cms/components/layout/CmsLayout'
 import ProtectedCmsRoute from './cms/components/layout/ProtectedCmsRoute'
 import SuperAdminRoute from './cms/components/layout/SuperAdminRoute'
-import BlogCategoriesList from './cms/view/blog-categories/List'
 import BlogCreate from './cms/view/blogs/Create'
 import BlogEdit from './cms/view/blogs/Edit'
 import BlogList from './cms/view/blogs/List'
@@ -87,7 +86,6 @@ function App() {
           <Route path="blogs" element={<BlogList />} />
           <Route path="blogs/create" element={<BlogCreate />} />
           <Route path="blogs/edit/:id" element={<BlogEdit />} />
-          <Route path="blog-categories" element={<BlogCategoriesList />} />
           <Route path="cookie-consents" element={<CookieConsentsList />} />
           <Route path="media" element={<Media />} />
           <Route path="profile" element={<Profile />} />

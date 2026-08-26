@@ -12,7 +12,6 @@ const API_ROOT = (
 ).replace(/\/$/, "");
 
 const BLOG_ENDPOINT = `${API_ROOT}/blogs`;
-const BLOG_CATEGORY_ENDPOINT = `${API_ROOT}/blog-categories`;
 
 const getMediaUrl = (path) => {
   if (!path) return null;
@@ -47,22 +46,13 @@ const formatDate = (value) => {
   }).format(new Date(value));
 };
 
-const getCategoryName = (blog, categoriesById = {}) =>
-  blog.category?.name ||
-  blog.BlogCategory?.name ||
-  blog.blog_category?.name ||
-  categoriesById[blog.category_id] ||
-  "Uncategorized";
-
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("all");
-  const [categoryId, setCategoryId] = useState("all");
   const [deleteBlog, setDeleteBlog] = useState(null);
 
   const fetchBlogs = async () => {
@@ -70,17 +60,11 @@ export default function BlogList() {
     setError("");
 
     try {
-      const [blogsResponse, categoriesResponse] = await Promise.all([
-        axios.get(BLOG_ENDPOINT, {
-          headers: getAuthHeaders(),
-        }),
-        axios.get(BLOG_CATEGORY_ENDPOINT, {
-          headers: getAuthHeaders(),
-        }),
-      ]);
+      const blogsResponse = await axios.get(BLOG_ENDPOINT, {
+        headers: getAuthHeaders(),
+      });
 
       setBlogs(blogsResponse.data?.data || []);
-      setCategories(categoriesResponse.data?.data || []);
     } catch (err) {
       setError(err.response?.data?.message || err.message || "Failed to load blogs.");
     } finally {
@@ -91,15 +75,6 @@ export default function BlogList() {
   useEffect(() => {
     void Promise.resolve().then(fetchBlogs);
   }, []);
-
-  const categoriesById = useMemo(
-    () =>
-      categories.reduce((nextCategoriesById, category) => {
-        nextCategoriesById[category.id] = category.name;
-        return nextCategoriesById;
-      }, {}),
-    [categories]
-  );
 
   const filteredBlogs = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -114,7 +89,6 @@ export default function BlogList() {
           blog.meta_title,
           blog.meta_description,
           blog.meta_keywords,
-          getCategoryName(blog, categoriesById),
         ]
           .filter((value) => value !== null && value !== undefined)
           .some((value) => String(value).toLowerCase().includes(normalizedQuery));
@@ -124,12 +98,9 @@ export default function BlogList() {
         (status === "published" && blog.published) ||
         (status === "draft" && !blog.published);
 
-      const matchesCategory =
-        categoryId === "all" || String(blog.category_id || "") === categoryId;
-
-      return matchesQuery && matchesStatus && matchesCategory;
+      return matchesQuery && matchesStatus;
     });
-  }, [blogs, categoriesById, categoryId, query, status]);
+  }, [blogs, query, status]);
 
   const tableRows = useMemo(
     () => filteredBlogs.map((blog) => ({
@@ -205,15 +176,6 @@ export default function BlogList() {
       ),
     },
     {
-      key: "category_id",
-      label: "Category",
-      render: (_, row) => (
-        <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-black text-slate-600">
-          {getCategoryName(row, categoriesById)}
-        </span>
-      ),
-    },
-    {
       key: "published",
       label: "Status",
       render: (value) => (
@@ -262,14 +224,6 @@ export default function BlogList() {
     },
   ];
 
-  const categoryOptions = [
-    { label: "All categories", value: "all" },
-    ...categories.map((category) => ({
-      label: category.name,
-      value: String(category.id),
-    })),
-  ];
-
   return (
     <div className="space-y-6">
       <section className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm md:flex-row md:items-center md:justify-between">
@@ -279,7 +233,7 @@ export default function BlogList() {
           </p>
           <h1 className="mt-2 text-3xl font-black text-slate-950">Blogs</h1>
           <p className="mt-2 text-sm font-semibold text-slate-500">
-            Manage blog content, categories, publishing state, and SEO metadata.
+            Manage blog content, publishing state, and SEO metadata.
           </p>
         </div>
 
@@ -298,14 +252,14 @@ export default function BlogList() {
         </div>
       </section>
 
-      <section className="grid gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1fr_220px_220px]">
+      <section className="grid gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1fr_220px]">
         <div className="relative">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <Input
             name="blogSearch"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search by title, slug, category, or metadata"
+            placeholder="Search by title, slug, or metadata"
             className="[&_input]:pl-10"
           />
         </div>
@@ -318,12 +272,6 @@ export default function BlogList() {
             { label: "Published only", value: "published" },
             { label: "Draft only", value: "draft" },
           ]}
-        />
-        <Select
-          name="blogCategory"
-          value={categoryId}
-          onChange={(event) => setCategoryId(event.target.value)}
-          options={categoryOptions}
         />
       </section>
 

@@ -19,7 +19,6 @@ const API_ROOT = (
 ).replace(/\/$/, "");
 
 const BLOG_ENDPOINT = `${API_ROOT}/blogs`;
-const BLOG_CATEGORY_ENDPOINT = `${API_ROOT}/blog-categories`;
 
 const toUploadPath = (value = "") => {
   const textValue = String(value || "").trim();
@@ -38,7 +37,6 @@ const toUploadPath = (value = "") => {
 };
 
 const initialForm = {
-  category_id: "",
   title: "",
   description: "",
   featured_image: "",
@@ -89,7 +87,6 @@ const imageFields = [
 ];
 
 const normalizeForm = (blog = {}) => ({
-  category_id: blog.category_id ? String(blog.category_id) : "",
   title: blog.title || "",
   description: blog.description || "",
   featured_image: blog.featured_image || "",
@@ -112,7 +109,6 @@ const normalizeForm = (blog = {}) => ({
 });
 
 const buildPayload = (formData) => ({
-  category_id: formData.category_id ? Number(formData.category_id) : null,
   title: formData.title.trim(),
   description: formData.description.trim() || null,
   featured_image: toUploadPath(formData.featured_image) || null,
@@ -163,7 +159,6 @@ const ImageField = ({ field, value, onChange }) => (
 export default function BlogForm({ blogId = null, mode = "create" }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialForm);
-  const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState({});
   const [loadError, setLoadError] = useState("");
   const [submitError, setSubmitError] = useState("");
@@ -178,25 +173,10 @@ export default function BlogForm({ blogId = null, mode = "create" }) {
       setLoadError("");
 
       try {
-        const requests = [
-          axios.get(BLOG_CATEGORY_ENDPOINT, {
-            headers: getAuthHeaders(),
-          }),
-        ];
-
         if (blogId) {
-          requests.push(
-            axios.get(`${BLOG_ENDPOINT}/${blogId}`, {
-              headers: getAuthHeaders(),
-            })
-          );
-        }
-
-        const [categoryResponse, blogResponse] = await Promise.all(requests);
-
-        setCategories(categoryResponse.data?.data || []);
-
-        if (blogResponse) {
+          const blogResponse = await axios.get(`${BLOG_ENDPOINT}/${blogId}`, {
+            headers: getAuthHeaders(),
+          });
           setFormData(normalizeForm(blogResponse.data?.data || {}));
         }
       } catch (err) {
@@ -263,11 +243,6 @@ export default function BlogForm({ blogId = null, mode = "create" }) {
       setIsSubmitting(false);
     }
   };
-
-  const categoryOptions = categories.map((category) => ({
-    label: category.name,
-    value: String(category.id),
-  }));
 
   return (
     <div className="space-y-6">
@@ -479,15 +454,6 @@ export default function BlogForm({ blogId = null, mode = "create" }) {
             </div>
 
             <aside className="space-y-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm xl:sticky xl:top-24 xl:self-start">
-              <Select
-                label="Category"
-                name="category_id"
-                value={formData.category_id}
-                onChange={handleChange}
-                options={categoryOptions}
-                placeholder="No category"
-              />
-
               <label className="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
                 <span>
                   <span className="block text-sm font-black text-slate-950">
