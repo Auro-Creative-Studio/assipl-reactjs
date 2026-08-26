@@ -1,4 +1,16 @@
+import axios from 'axios'
+import { useState } from 'react'
 import heroBg from '../assets/contact-page/embedded-0.webp'
+
+const API_ROOT = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:5000/api'
+).replace(/\/$/, '')
+
+const CONTACT_ENDPOINT = `${API_ROOT}/contacts`
+
+const initialForm = { full_name: '', phone: '', email: '', subject: '', message: '' }
 
 function PhoneIcon() {
   return (
@@ -90,6 +102,42 @@ function ContactField({ as = 'input', className = '', ...props }) {
 }
 
 function Contact() {
+  const [formData, setFormData] = useState(initialForm)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setFormData((current) => ({ ...current, [name]: value }))
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    setError('')
+
+    const [firstName, ...rest] = formData.full_name.trim().split(/\s+/)
+
+    try {
+      await axios.post(CONTACT_ENDPOINT, {
+        first_name: firstName || formData.full_name.trim(),
+        last_name: rest.join(' '),
+        email: formData.email,
+        mobile_number: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+        terms_accepted: true,
+      })
+      setIsSuccess(true)
+      setFormData(initialForm)
+    } catch (err) {
+      setError(err.response?.data?.message || err.message || 'Failed to send your message.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="bg-white font-body">
       <main>
@@ -167,27 +215,69 @@ function Contact() {
               </div>
             </div>
 
-            <form className="w-full pt-5 md:pt-[5px]" onSubmit={(event) => event.preventDefault()}>
+            <form className="w-full pt-5 md:pt-[5px]" onSubmit={handleSubmit}>
               <div className="space-y-[10px] md:space-y-5">
-                <ContactField type="text" placeholder="Full Name" aria-label="Full Name" required />
+                <ContactField
+                  type="text"
+                  name="full_name"
+                  value={formData.full_name}
+                  onChange={handleChange}
+                  placeholder="Full Name"
+                  aria-label="Full Name"
+                  required
+                />
                 <div className="grid gap-[10px] md:grid-cols-2 md:gap-5">
-                  <ContactField type="tel" placeholder="Phone Number" aria-label="Phone Number" />
-                  <ContactField type="email" placeholder="Email Address" aria-label="Email Address" required />
+                  <ContactField
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone Number"
+                    aria-label="Phone Number"
+                  />
+                  <ContactField
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email Address"
+                    aria-label="Email Address"
+                    required
+                  />
                 </div>
-                <ContactField type="text" placeholder="Subject" aria-label="Subject" />
+                <ContactField
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject"
+                  aria-label="Subject"
+                />
                 <ContactField
                   as="textarea"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={10}
                   placeholder="Message"
                   aria-label="Message"
                   className="min-h-[245px] resize-y md:min-h-[272px]"
                 />
+
+                {isSuccess && (
+                  <p className="text-[15px] font-semibold text-emerald-600">
+                    Thank you! Your message has been sent — we&apos;ll be in touch shortly.
+                  </p>
+                )}
+                {error && <p className="text-[15px] font-semibold text-red-600">{error}</p>}
+
                 <div className="pt-[13px] md:pt-[25px]">
                   <button
                     type="submit"
-                    className="rounded-full bg-primary px-[31px] py-[14px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                    disabled={isSubmitting}
+                    className="rounded-full bg-primary px-[31px] py-[14px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    Submit
+                    {isSubmitting ? 'Sending…' : 'Submit'}
                   </button>
                 </div>
               </div>
