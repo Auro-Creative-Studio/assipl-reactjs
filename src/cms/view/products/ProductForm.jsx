@@ -53,6 +53,7 @@ const createUseCase = () => ({ id: createItemId(), title: "", image: "" });
 const initialForm = {
   title: "",
   excerpt: "",
+  heading: "",
   front_image: "",
   rear_image: "",
   hero_image: "",
@@ -96,6 +97,7 @@ const normalizeUseCases = (items) => {
 const normalizeForm = (product = {}) => ({
   title: product.title || "",
   excerpt: product.excerpt || "",
+  heading: product.heading || "",
   front_image: product.front_image || "",
   rear_image: product.rear_image || "",
   hero_image: product.hero_image || "",
@@ -119,6 +121,7 @@ const normalizeForm = (product = {}) => ({
 const buildPayload = (formData) => ({
   title: formData.title.trim(),
   excerpt: formData.excerpt.trim() || null,
+  heading: formData.heading.trim() || null,
   front_image: toUploadPath(formData.front_image) || null,
   rear_image: toUploadPath(formData.rear_image) || null,
   hero_image: toUploadPath(formData.hero_image) || null,
@@ -482,6 +485,14 @@ export default function ProductForm({ productId = null, mode = "create" }) {
                     onChange={handleChange}
                     placeholder="Short description shown on the hover of the product card."
                     rows={2}
+                  />
+
+                  <Input
+                    label="Heading"
+                    name="heading"
+                    value={formData.heading}
+                    onChange={handleChange}
+                    placeholder="e.g. Enterprise IP Video Surveillance Solutions"
                   />
 
                   <div className="grid gap-5 md:grid-cols-2">

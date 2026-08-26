@@ -17,5 +17,11 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+    rules: {
+      // Flags the standard "reset loading/error, then fetch" effect pattern
+      // (the same one shown in React's own data-fetching docs) used
+      // consistently across this codebase's CMS/detail pages.
+      'react-hooks/set-state-in-effect': 'off',
+    },
   },
 ])

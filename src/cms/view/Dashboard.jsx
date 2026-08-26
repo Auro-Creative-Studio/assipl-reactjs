@@ -1,80 +1,13 @@
 import { useState } from "react";
-import { ArrowUpRight, Eye, FileText, Image, MousePointerClick, Users } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   Button,
   CmsMediaSelect,
   Input,
   Popup,
   Select,
-  Table,
   Textarea,
 } from "../components/ui/uiExports";
-
-const stats = [
-  {
-    label: "Published Pages",
-    value: "18",
-    change: "+4 this month",
-    icon: FileText,
-  },
-  {
-    label: "Media Assets",
-    value: "246",
-    change: "+38 uploaded",
-    icon: Image,
-  },
-  {
-    label: "Visitors",
-    value: "42.8K",
-    change: "+12.4% growth",
-    icon: Users,
-  },
-  {
-    label: "Clicks",
-    value: "9.6K",
-    change: "+8.1% growth",
-    icon: MousePointerClick,
-  },
-];
-
-const recentRows = [
-  { id: 1, title: "Homepage Hero", type: "Page", owner: "Admin", status: "Published", updated: "Today" },
-  { id: 2, title: "Growth Marketing Case Study", type: "Article", owner: "Priya", status: "Review", updated: "Yesterday" },
-  { id: 3, title: "Services Gallery", type: "Media", owner: "Rahul", status: "Draft", updated: "May 7" },
-  { id: 4, title: "Client Testimonials", type: "Section", owner: "Admin", status: "Published", updated: "May 6" },
-];
-
-const recentColumns = [
-  {
-    key: "title",
-    label: "Content",
-    render: (value) => (
-      <span className="font-black text-slate-950">
-        {value}
-      </span>
-    ),
-  },
-  { key: "type", label: "Type" },
-  { key: "owner", label: "Owner" },
-  {
-    key: "status",
-    label: "Status",
-    render: (value) => {
-      const styles = {
-        Published: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-        Review: "bg-blue-50 text-blue-700 ring-blue-200",
-        Draft: "bg-amber-50 text-amber-700 ring-amber-200",
-      };
-
-      return (
-        <span className={`rounded-full px-2.5 py-1 text-xs font-black ring-1 ring-inset ${styles[value]}`}>
-          {value}
-        </span>
-      );
-    },
-  },
-  { key: "updated", label: "Updated" },
-];
 
 export default function Dashboard() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

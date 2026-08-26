@@ -138,7 +138,7 @@ function SingleProduct() {
   const mainImage = getMediaUrl(product.main_image || product.front_image)
   const capabilities = Array.isArray(product.capabilities) ? product.capabilities : []
   const useCases = Array.isArray(product.use_cases) ? product.use_cases : []
-  const capabilityRows = [capabilities.slice(0, 2), capabilities.slice(2)]
+  const isLastOdd = capabilities.length % 2 === 1
 
   return (
     <main className="bg-white">
@@ -179,8 +179,14 @@ function SingleProduct() {
             />
           )}
 
-          {product.subtitle && (
+          {product.heading && (
             <Reveal as="h2" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
+              {product.heading}
+            </Reveal>
+          )}
+
+          {product.subtitle && (
+            <Reveal as="h3" className="py-2 text-[18px] font-semibold leading-[1.4] text-black">
               {product.subtitle}
             </Reveal>
           )}
@@ -191,17 +197,18 @@ function SingleProduct() {
             </Reveal>
           )}
 
-          {capabilityRows.map(
-            (row, rowIndex) =>
-              row.length > 0 && (
-                <div key={rowIndex} className={`grid gap-5 md:grid-cols-2 ${rowIndex === 0 ? 'mt-12' : 'mt-5'}`}>
-                  {row.map((item, index) => (
-                    <Reveal key={item.id || item.title} delay={index * 100}>
-                      <CapabilityCard item={item} index={rowIndex * 2 + index} />
-                    </Reveal>
-                  ))}
-                </div>
-              )
+          {capabilities.length > 0 && (
+            <div className="mt-12 grid gap-5 md:grid-cols-2">
+              {capabilities.map((item, index) => (
+                <Reveal
+                  key={item.id || item.title}
+                  delay={(index % 2) * 100}
+                  className={isLastOdd && index === capabilities.length - 1 ? 'md:col-span-2' : ''}
+                >
+                  <CapabilityCard item={item} index={index} />
+                </Reveal>
+              ))}
+            </div>
           )}
 
           {useCases.length > 0 && (

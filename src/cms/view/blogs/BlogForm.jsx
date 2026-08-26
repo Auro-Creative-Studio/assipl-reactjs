@@ -6,7 +6,6 @@ import {
   FileText,
   Globe,
   Image as ImageIcon,
-  Plus,
   Save,
   Trash2,
   Type,

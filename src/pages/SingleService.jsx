@@ -181,12 +181,12 @@ function SingleService() {
             <Link to="/services" className="transition hover:text-primary">
               Services
             </Link>
-            {service.breadcrumb_title && (
+            {/* {service.breadcrumb_title && (
               <>
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
                 <span className="text-white/70">{service.breadcrumb_title}</span>
               </>
-            )}
+            )} */}
           </div>
           <Reveal
             as="h1"

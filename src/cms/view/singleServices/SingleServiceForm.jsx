@@ -467,7 +467,7 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
               <h2 className="text-sm font-black uppercase tracking-[0.16em] text-slate-500">
                 Banner
               </h2>
-              <div className="grid gap-5 md:grid-cols-2">
+              <div className="grid gap-5">
                 <Input
                   label="Banner Title"
                   name="banner_title"
@@ -475,13 +475,13 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
                   onChange={handleChange}
                   placeholder="Heading shown on the hero background."
                 />
-                <Input
+                {/* <Input
                   label="Breadcrumb Title"
                   name="breadcrumb_title"
                   value={formData.breadcrumb_title}
                   onChange={handleChange}
                   placeholder="Short label shown in the breadcrumb trail."
-                />
+                /> */}
               </div>
               <ImageField
                 label="Banner Image"
