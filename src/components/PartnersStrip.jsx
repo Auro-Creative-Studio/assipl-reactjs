@@ -29,7 +29,7 @@ const manufacturerLogos = [
 ]
 function PartnersStrip() {
   return (
-    <section className="overflow-hidden px-5 py-12 md:pb-12 md:pt-0 lg:px-0 lg:py-20">
+    <section className="overflow-hidden bg-white px-5 py-12 md:pb-12 md:pt-0 lg:px-0 lg:py-20">
       <h2 className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
         Powered by the World&apos;s Leading Manufacturers
       </h2>
