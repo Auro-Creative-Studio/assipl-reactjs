@@ -59,18 +59,18 @@ export const clientLogos = [
 ]
 
 export const locations = [
-  { name: 'Punjab', lon: 76.8, lat: 30.7 },
+  { name: 'Punjab', lon: 75.4, lat: 31.1 },
   { name: 'Haryana', lon: 76.5, lat: 29 },
   { name: 'Delhi', lon: 77.2, lat: 28.6 },
-  { name: 'Rajasthan', lon: 75.8, lat: 26.9 },
+  { name: 'Rajasthan', lon: 72.8, lat: 26.9 },
   { name: 'Uttar Pradesh', lon: 80.9, lat: 26.8 },
   { name: 'Madhya Pradesh', lon: 77.4, lat: 23.3 },
-  { name: 'Pune', lon: 73.9, lat: 18.5 },
+  { name: 'Pune', lon: 75.9, lat: 18.5 },
   { name: 'Mumbai', lon: 72.9, lat: 19.1 },
   { name: 'Goa', lon: 74, lat: 15.3 },
-  { name: 'Kerala', lon: 76.3, lat: 10 },
-  { name: 'Tamil Nadu', lon: 80.3, lat: 13.1 },
+  { name: 'Kerala', lon: 76.2, lat: 10.3 },
+  { name: 'Tamil Nadu', lon: 79.5, lat: 11.5 },
   { name: 'Andhra Pradesh', lon: 80.6, lat: 16.5 },
   { name: 'Hyderabad', lon: 78.5, lat: 17.4 },
-  { name: 'Karnataka', lon: 77.6, lat: 12.97, hq: true },
+  { name: 'Karnataka', lon: 76.6, lat: 12.97, hq: true },
 ]
