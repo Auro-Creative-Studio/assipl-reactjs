@@ -350,7 +350,7 @@ function Header() {
             Contact Us
           </NavLink>
 
-          <button
+          {/* <button
             type="button"
             onClick={() => {
               closeMobileMenu()
@@ -359,7 +359,7 @@ function Header() {
             className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-3 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
           >
             Enquire Now
-          </button>
+          </button> */}
         </nav>
       </aside>
 
