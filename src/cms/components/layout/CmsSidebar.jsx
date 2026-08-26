@@ -28,7 +28,7 @@ const navItems = [
   { label: "SEO Pages", href: "/admin/seo", icon: SearchCode },
   { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
   { label: "Products", href: "/admin/products", icon: Layers },
-  { label: "Single Services", href: "/admin/single-services", icon: Wrench },
+  { label: "Services", href: "/admin/single-services", icon: Wrench },
   {
     label: "Careers",
     basePath: "/admin/career",
