@@ -5,11 +5,11 @@ import logo from '../assets/logo-dark.png'
 
 const productLinks = [
   { title: 'Video Surveillance', href: '/products/video-surveillance' },
-  { title: 'Access Control', href: '#' },
-  { title: 'Fire Detection System', href: '#' },
-  { title: 'Intrusion Detection Systems', href: '#' },
-  { title: 'Gate Automation & Control Barriers', href: '#' },
-  { title: 'Gas Suppression Systems', href: '#' },
+  { title: 'Access Control', href: '/products/access-control' },
+  { title: 'Fire Detection System', href: '/products/fire-detection-system' },
+  { title: 'Intrusion Detection Systems', href: '/products/intrusion-detection-systems' },
+  { title: 'Gate Automation & Control Barriers', href: '/products/gate-automation-control-barriers' },
+  { title: 'Gas Suppression Systems', href: '/products/gas-suppression-system' },
 ]
 
 const serviceLinks = [

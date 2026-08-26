@@ -1,7 +1,34 @@
+import { useEffect, useState } from 'react'
 import Reveal from './Reveal'
-import { products } from '../data'
+import { fetchPublishedProducts, getMediaUrl } from '../lib/productsApi'
 
 function ProductsSection() {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchPublishedProducts()
+      .then((items) => {
+        if (!isMounted) return
+
+        setProducts(
+          items.map((item) => ({
+            title: item.title,
+            description: item.excerpt || '',
+            frontImage: getMediaUrl(item.front_image),
+            rearImage: getMediaUrl(item.rear_image),
+            href: `/products/${item.slug}`,
+          }))
+        )
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <section id="products" className="bg-white py-20 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">

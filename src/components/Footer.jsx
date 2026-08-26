@@ -15,11 +15,11 @@ function Footer() {
   ]
   const products = [
     { label: 'Video Surveillance', to: '/products/video-surveillance' },
-    { label: 'Access Control' },
-    { label: 'Fire Detection System' },
-    { label: 'Intrusion Detection System' },
-    { label: 'Gate Automation & Control Barriers' },
-    { label: 'Gas Suppression System' },
+    { label: 'Access Control', to: '/products/access-control' },
+    { label: 'Fire Detection System', to: '/products/fire-detection-system' },
+    { label: 'Intrusion Detection System', to: '/products/intrusion-detection-systems' },
+    { label: 'Gate Automation & Control Barriers', to: '/products/gate-automation-control-barriers' },
+    { label: 'Gas Suppression System', to: '/products/gas-suppression-system' },
   ]
 
   return (

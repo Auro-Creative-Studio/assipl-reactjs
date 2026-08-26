@@ -28,6 +28,7 @@ const navItems = [
   { label: "Newsletter", href: "/admin/newsletter-subscribers", icon: Mail },
   { label: "SEO Pages", href: "/admin/seo", icon: SearchCode },
   { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
+  { label: "Products", href: "/admin/products", icon: Layers },
   { label: "Cookie Consents", href: "/admin/cookie-consents", icon: Cookie },
   { label: "Media", href: "/admin/media", icon: Image },
   // { label: "Projects", href: "/admin/projects", icon: FolderKanban },

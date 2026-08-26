@@ -1,15 +1,3 @@
-import videoSurveillanceFront from './assets/home/products/video-surveillance-front.webp'
-import videoSurveillanceRear from './assets/home/products/video-surveillance-rear.webp'
-import accessControlFront from './assets/home/products/access-control-front.webp'
-import accessControlRear from './assets/home/products/access-control-rear.webp'
-import fireDetectionFront from './assets/home/products/fire-detection-front.webp'
-import fireDetectionRear from './assets/home/products/fire-detection-rear.webp'
-import intrusionDetectionFront from './assets/home/products/intrusion-detection-front.webp'
-import intrusionDetectionRear from './assets/home/products/intrusion-detection-rear.webp'
-import gateAutomationFront from './assets/home/products/gate-automation-front.webp'
-import gateAutomationRear from './assets/home/products/gate-automation-rear.webp'
-import gasSuppressionFront from './assets/home/products/gas-suppression-front.webp'
-import gasSuppressionRear from './assets/home/products/gas-suppression-rear.webp'
 import logoSbi from './assets/home/testimonial-avatar-39.webp'
 import logoSattva from './assets/home/testimonial-avatar-40.webp'
 import logoAxisBank from './assets/home/testimonial-avatar-41.webp'
@@ -23,51 +11,6 @@ import clientLogoAxisBank from './assets/home/clients/axis-bank.webp'
 import clientLogoVaishnavi from './assets/home/clients/vaishnavi.webp'
 import clientLogoSattva from './assets/home/clients/sattva.webp'
 import clientLogoHdfcBank from './assets/home/clients/hdfc-bank.webp'
-
-export const products = [
-  {
-    title: 'Video Surveillance and Smart Cameras',
-    description: 'AI-powered cameras for intelligent surveillance, automated threat detection, and secure access monitoring.',
-    frontImage: videoSurveillanceFront,
-    rearImage: videoSurveillanceRear,
-    href: '/products/video-surveillance',
-  },
-  {
-    title: 'Access Control Systems',
-    description: 'Smart access control for secure entry, identity verification, and real-time monitoring.',
-    frontImage: accessControlFront,
-    rearImage: accessControlRear,
-    href: '/access-control',
-  },
-  {
-    title: 'Fire Detection Systems',
-    description: 'Smart fire detection for early alerts, rapid response, and enhanced safety.',
-    frontImage: fireDetectionFront,
-    rearImage: fireDetectionRear,
-    href: '/fire-detection-system',
-  },
-  {
-    title: 'Intrusion Detection Systems',
-    description: 'Advanced, multi-tiered networks providing instant perimeter and core boundary breach alerts.',
-    frontImage: intrusionDetectionFront,
-    rearImage: intrusionDetectionRear,
-    href: '/intrusion-detection-systems',
-  },
-  {
-    title: 'Gate Automation Systems',
-    description: 'Heavy-duty physical security solutions managing high-volume pedestrian and vehicular logistics.',
-    frontImage: gateAutomationFront,
-    rearImage: gateAutomationRear,
-    href: '/gate-automation-control-barriers',
-  },
-  {
-    title: 'Gas Suppression Systems',
-    description: 'Clean-agent gas suppression systems engineered to protect data centres and server rooms without damaging critical equipment.',
-    frontImage: gasSuppressionFront,
-    rearImage: gasSuppressionRear,
-    href: '/gas-suppression-system',
-  },
-]
 
 export const services = [
   { number: '01', title: 'Strategic Design & Management', description: 'Comprehensive site surveys, precise system configuration, and dedicated project management.' },

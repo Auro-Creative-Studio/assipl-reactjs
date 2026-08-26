@@ -1,99 +1,32 @@
 import { ChevronRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import heroBackground from '../assets/products/video-surveillance-bg-2.webp'
+import RichText from '../components/RichText'
 import contactBackground from '../assets/products/video-surveillance-bg-3.webp'
-import productImage from '../assets/products/video-surveillance-1.webp'
-import bankImage from '../assets/products/video-surveillance-2.webp'
-import commercialImage from '../assets/products/video-surveillance-3.webp'
-import manufacturingImage from '../assets/products/video-surveillance-4.webp'
-import infrastructureImage from '../assets/products/video-surveillance-5.webp'
+import { fetchProductBySlug, fetchPublishedProducts, getMediaUrl } from '../lib/productsApi'
 
-const productLinks = [
-  'Video Surveillance',
-  'Access Control',
-  'Fire Detection System',
-  'Intrusion Detection Systems',
-  'Gate Automation & Control Barriers',
-  'Gas Suppression Systems',
-]
-
-const capabilities = [
-  {
-    title: 'IP CCTV Surveillance',
-    tone: 'white',
-    points: [
-      'Delivers high-definition video feeds for comprehensive indoor and outdoor oversight.',
-      'Features STQC-certified IP CCTV cameras with robust system control to ensure absolute compliance and network security.',
-      'Secures high-stakes environments, including commercial hubs and restricted banking vaults.',
-    ],
-  },
-  {
-    title: 'Intelligent Video Analytics',
-    tone: 'muted',
-    points: [
-      'Distinguishes objects and patterns within a frame to significantly reduce false alarms.',
-      'Detects the slightest physical movements using precision motion tracking and geofencing.',
-      'Implements Internet of Things (IoT) integrations to improve overall operational efficiency.',
-    ],
-  },
-  {
-    title: 'AI Facial Recognition',
-    tone: 'muted',
-    points: [
-      'Utilizes advanced algorithmic systems for automated target tracking and identification.',
-      'Provides highly secure, touchless access verification at critical corporate entry points.',
-    ],
-  },
-  {
-    title: 'Command & Control Centre Integration',
-    tone: 'white',
-    points: [
-      'Centralizes real-time visual information for complete situational awareness during critical events.',
-      'Streamlines incident management through integrated functionality and video wall management.',
-    ],
-  },
-]
-
-const useCases = [
-  {
-    title: 'Bank Branches & Currency Chests',
-    image: bankImage,
-  },
-  {
-    title: 'Commercial Real Estate',
-    image: commercialImage,
-  },
-  {
-    title: 'Sprawling Manufacturing Facilities',
-    image: manufacturingImage,
-  },
-  {
-    title: 'Critical Infrastructure',
-    image: infrastructureImage,
-  },
-]
-
-function ProductSidebar({ className = '' }) {
+function ProductSidebar({ productLinks, currentSlug, className = '' }) {
   return (
     <aside className={`grid gap-12 md:grid-cols-2 lg:grid-cols-1 lg:sticky lg:top-12 lg:self-start ${className}`}>
       <Reveal className="overflow-hidden rounded-3xl border border-border bg-white px-5 py-8">
         <nav aria-label="Products">
           <ul className="space-y-2">
             {productLinks.map((link) => {
-              const isActive = link === 'Video Surveillance'
+              const isActive = link.slug === currentSlug
 
               return (
-                <li key={link}>
-                  <a
-                    href={isActive ? '/products/video-surveillance' : '#'}
+                <li key={link.slug}>
+                  <Link
+                    to={`/products/${link.slug}`}
                     className={`block rounded-xl px-2 py-3 text-lg transition ${
                       isActive
                         ? 'bg-secondary text-white'
                         : 'text-secondary hover:bg-secondary hover:text-white'
                     }`}
                   >
-                    {link}
-                  </a>
+                    {link.title}
+                  </Link>
                 </li>
               )
             })}
@@ -135,24 +68,78 @@ function ProductSidebar({ className = '' }) {
   )
 }
 
-function CapabilityCard({ item }) {
+function CapabilityCard({ item, index }) {
+  const tone = index % 2 === 0 ? 'white' : 'muted'
+
   return (
     <article
       className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 transition-[background-color,transform] duration-300 hover:scale-[1.02] ${
-        item.tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
+        tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
       <h3 className="text-[24px] font-semibold leading-tight text-secondary">{item.title}</h3>
-      <ul className="mt-5 list-disc space-y-3 pl-5 text-[16px] leading-7 text-text">
-        {item.points.map((point) => (
-          <li key={point}>{point}</li>
-        ))}
-      </ul>
+      <RichText html={item.body} className="mt-5 text-[16px] leading-7 text-text [&_ul]:mt-0" />
     </article>
   )
 }
 
 function SingleProduct() {
+  const { slug } = useParams()
+  const [product, setProduct] = useState(null)
+  const [productLinks, setProductLinks] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let isMounted = true
+
+    setIsLoading(true)
+    setError('')
+
+    Promise.all([fetchProductBySlug(slug), fetchPublishedProducts()])
+      .then(([productData, allProducts]) => {
+        if (!isMounted) return
+
+        setProduct(productData)
+        setProductLinks(allProducts.map((item) => ({ slug: item.slug, title: item.title })))
+      })
+      .catch(() => {
+        if (isMounted) setError('This product could not be found.')
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [slug])
+
+  if (isLoading) {
+    return (
+      <main className="flex min-h-150 items-center justify-center bg-white">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-secondary/20 border-t-secondary" />
+      </main>
+    )
+  }
+
+  if (error || !product) {
+    return (
+      <main className="flex min-h-150 flex-col items-center justify-center gap-4 bg-white px-5 text-center">
+        <p className="text-xl font-semibold text-secondary">{error || 'This product could not be found.'}</p>
+        <Link to="/products" className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:bg-secondary">
+          Back to Products
+        </Link>
+      </main>
+    )
+  }
+
+  const heroBackground = getMediaUrl(product.hero_image || product.front_image)
+  const mainImage = getMediaUrl(product.main_image || product.front_image)
+  const capabilities = Array.isArray(product.capabilities) ? product.capabilities : []
+  const useCases = Array.isArray(product.use_cases) ? product.use_cases : []
+  const capabilityRows = [capabilities.slice(0, 2), capabilities.slice(2)]
+
   return (
     <main className="bg-white">
       <section
@@ -163,85 +150,87 @@ function SingleProduct() {
       >
         <div className="mx-auto w-full max-w-350">
           <div className="mb-4 flex items-center gap-3 text-base font-medium text-white md:text-xl">
-            <a href="/" className="transition hover:text-primary">
+            <Link to="/" className="transition hover:text-primary">
               Home
-            </a>
+            </Link>
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
-            <a href="/products/video-surveillance" className="transition hover:text-primary">
+            <Link to="/products" className="transition hover:text-primary">
               Products
-            </a>
+            </Link>
           </div>
           <Reveal
             as="h1"
             className="-ml-1 font-heading text-[36px] font-semibold leading-none text-white sm:text-[45px] md:text-[56px] xl:text-[70px]"
           >
-            Video Surveillance
+            {product.title}
           </Reveal>
         </div>
       </section>
 
       <section className="mx-auto grid max-w-350 gap-8 px-5 py-20 lg:grid-cols-[25%_1fr]">
-        <ProductSidebar className="order-2 lg:order-1" />
+        <ProductSidebar productLinks={productLinks} currentSlug={slug} className="order-2 lg:order-1" />
 
         <article className="order-1 lg:order-2">
-          <Reveal as="img"
-            src={productImage}
-            alt="CCTV camera monitoring a commercial building"
-            className="h-125 w-full object-cover max-md:h-75 rounded-2xl"
-          />
+          {mainImage && (
+            <Reveal as="img"
+              src={mainImage}
+              alt={product.image_alt_text || product.title}
+              className="h-125 w-full object-cover max-md:h-75 rounded-2xl"
+            />
+          )}
 
-          <Reveal as="h2" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
-            Enterprise IP Video Surveillance Solutions
-          </Reveal>
-          <Reveal as="h3" className="py-2 text-[18px] font-semibold leading-[1.4] text-black">
-            High-definition visual monitoring paired with intelligent analytics to secure your most
-            critical environments.
-          </Reveal>
-          <Reveal as="p" className="text-[16px] leading-8 text-text">
-            Total situational awareness requires more than passive recording. ASSIPL deploys
-            advanced IP camera networks featuring robust system control, reducing false alarms, and
-            enhancing investigation efficiency while ensuring compliance with stringent
-            cybersecurity protocols.
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {capabilities.slice(0, 2).map((item, index) => (
-              <Reveal key={item.title} delay={index * 100}>
-                <CapabilityCard item={item} />
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-5 grid gap-5 md:grid-cols-2">
-            {capabilities.slice(2).map((item, index) => (
-              <Reveal key={item.title} delay={index * 100}>
-                <CapabilityCard item={item} />
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="mt-8">
-            <Reveal as="h2" className="text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
-              Most commonly used in
+          {product.subtitle && (
+            <Reveal as="h2" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
+              {product.subtitle}
             </Reveal>
-          </div>
+          )}
 
-          <div className="mt-8 grid gap-0 md:grid-cols-4">
-            {useCases.map((useCase, index) => (
-              <Reveal
-                as="article"
-                key={useCase.title}
-                delay={index * 100}
-                className={`px-2 first:pl-0 last:pr-0 ${
-                  index < useCases.length - 1 ? 'border-r border-accent' : ''
-                } max-md:border-r-0 max-md:border-b max-md:py-4`}
-              >
-                <img src={useCase.image} alt="" className="h-38 w-full object-cover rounded-xl" />
-                <h3 className="pt-4 text-center text-[18px] font-semibold leading-snug text-secondary">
-                  {useCase.title}
-                </h3>
-              </Reveal>
-            ))}
-          </div>
+          {product.description && (
+            <Reveal as="p" className="text-[16px] leading-8 text-text">
+              {product.description}
+            </Reveal>
+          )}
+
+          {capabilityRows.map(
+            (row, rowIndex) =>
+              row.length > 0 && (
+                <div key={rowIndex} className={`grid gap-5 md:grid-cols-2 ${rowIndex === 0 ? 'mt-12' : 'mt-5'}`}>
+                  {row.map((item, index) => (
+                    <Reveal key={item.id || item.title} delay={index * 100}>
+                      <CapabilityCard item={item} index={rowIndex * 2 + index} />
+                    </Reveal>
+                  ))}
+                </div>
+              )
+          )}
+
+          {useCases.length > 0 && (
+            <>
+              <div className="mt-8">
+                <Reveal as="h2" className="text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
+                  Most commonly used in
+                </Reveal>
+              </div>
+
+              <div className="mt-8 grid gap-0 md:grid-cols-4">
+                {useCases.map((useCase, index) => (
+                  <Reveal
+                    as="article"
+                    key={useCase.id || useCase.title}
+                    delay={index * 100}
+                    className={`px-2 first:pl-0 last:pr-0 ${
+                      index < useCases.length - 1 ? 'border-r border-accent' : ''
+                    } max-md:border-r-0 max-md:border-b max-md:py-4`}
+                  >
+                    <img src={getMediaUrl(useCase.image)} alt="" className="h-38 w-full object-cover rounded-xl" />
+                    <h3 className="pt-4 text-center text-[18px] font-semibold leading-snug text-secondary">
+                      {useCase.title}
+                    </h3>
+                  </Reveal>
+                ))}
+              </div>
+            </>
+          )}
         </article>
       </section>
     </main>

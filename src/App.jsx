@@ -7,6 +7,9 @@ import SuperAdminRoute from './cms/components/layout/SuperAdminRoute'
 import BlogCreate from './cms/view/blogs/Create'
 import BlogEdit from './cms/view/blogs/Edit'
 import BlogList from './cms/view/blogs/List'
+import ProductCreate from './cms/view/products/Create'
+import ProductEdit from './cms/view/products/Edit'
+import ProductList from './cms/view/products/List'
 import ContactForm from './cms/view/ContactForm'
 import CookieConsentsList from './cms/view/cookie/List'
 import Dashboard from './cms/view/Dashboard'
@@ -58,7 +61,7 @@ function PublicLayout() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsConditions />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/video-surveillance" element={<SingleProduct />} />
+        <Route path="/products/:slug" element={<SingleProduct />} />
         <Route path="/services/operational-continuity-maintenance" element={<SingleService />} />
       </Routes>
       <Footer />
@@ -85,6 +88,9 @@ function App() {
           <Route path="blogs" element={<BlogList />} />
           <Route path="blogs/create" element={<BlogCreate />} />
           <Route path="blogs/edit/:id" element={<BlogEdit />} />
+          <Route path="products" element={<ProductList />} />
+          <Route path="products/create" element={<ProductCreate />} />
+          <Route path="products/edit/:id" element={<ProductEdit />} />
           <Route path="cookie-consents" element={<CookieConsentsList />} />
           <Route path="media" element={<Media />} />
           <Route path="profile" element={<Profile />} />
