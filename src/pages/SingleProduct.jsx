@@ -1,12 +1,13 @@
 import { ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import EnquiryPopup from '../components/EnquiryPopup'
 import Reveal from '../components/Reveal'
 import RichText from '../components/RichText'
 import contactBackground from '../assets/products/video-surveillance-bg-3.webp'
 import { fetchProductBySlug, fetchPublishedProducts, getMediaUrl } from '../lib/productsApi'
 
-function ProductSidebar({ productLinks, currentSlug, className = '' }) {
+function ProductSidebar({ productLinks, currentSlug, onEnquiryClick, className = '' }) {
   return (
     <aside className={`grid gap-12 md:grid-cols-2 lg:grid-cols-1 lg:sticky lg:top-12 lg:self-start ${className}`}>
       <Reveal className="overflow-hidden rounded-3xl border border-border bg-white px-5 py-8">
@@ -56,12 +57,13 @@ function ProductSidebar({ productLinks, currentSlug, className = '' }) {
               080 – 41692300 / 080 – 43751024
             </a>
           </div>
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={onEnquiryClick}
             className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
           >
             Enquiry Now
-          </a>
+          </button>
         </div>
       </Reveal>
     </aside>
@@ -89,6 +91,7 @@ function SingleProduct() {
   const [productLinks, setProductLinks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -168,7 +171,12 @@ function SingleProduct() {
       </section>
 
       <section className="mx-auto grid max-w-350 gap-8 px-5 py-20 lg:grid-cols-[25%_1fr]">
-        <ProductSidebar productLinks={productLinks} currentSlug={slug} className="order-2 lg:order-1" />
+        <ProductSidebar
+          productLinks={productLinks}
+          currentSlug={slug}
+          onEnquiryClick={() => setIsEnquiryOpen(true)}
+          className="order-2 lg:order-1"
+        />
 
         <article className="order-1 lg:order-2">
           {mainImage && (
@@ -240,6 +248,8 @@ function SingleProduct() {
           )}
         </article>
       </section>
+
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </main>
   )
 }

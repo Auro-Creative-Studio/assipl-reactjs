@@ -1,6 +1,7 @@
 import { ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import EnquiryPopup from '../components/EnquiryPopup'
 import Reveal from '../components/Reveal'
 import RichText from '../components/RichText'
 import heroFallback from '../assets/services/occm-hero.webp'
@@ -13,7 +14,7 @@ import { fetchPublishedSingleServices, fetchSingleServiceBySlug, getMediaUrl } f
 
 const modelImageFallbacks = [modelImageFallbackA, modelImageFallbackB]
 
-function ServiceSidebar({ links, currentSlug, className = '' }) {
+function ServiceSidebar({ links, currentSlug, onEnquiryClick, className = '' }) {
   return (
     <aside className={`grid gap-12 md:grid-cols-2 lg:grid-cols-1 lg:sticky lg:top-12 lg:self-start ${className}`}>
       {links.length > 0 && (
@@ -65,12 +66,13 @@ function ServiceSidebar({ links, currentSlug, className = '' }) {
               080 – 41692300 / 080 – 43751024
             </a>
           </div>
-          <a
-            href="/contact-us"
+          <button
+            type="button"
+            onClick={onEnquiryClick}
             className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
           >
             Enquiry Now
-          </a>
+          </button>
         </div>
       </Reveal>
     </aside>
@@ -110,6 +112,7 @@ function SingleService() {
   const [serviceLinks, setServiceLinks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -198,7 +201,12 @@ function SingleService() {
       </section>
 
       <section className="mx-auto grid max-w-350 gap-8 px-5 py-20 lg:grid-cols-[25%_1fr]">
-        <ServiceSidebar links={serviceLinks} currentSlug={slug} className="order-2 lg:order-1" />
+        <ServiceSidebar
+          links={serviceLinks}
+          currentSlug={slug}
+          onEnquiryClick={() => setIsEnquiryOpen(true)}
+          className="order-2 lg:order-1"
+        />
 
         <article className="order-1 lg:order-2">
           <Reveal
@@ -284,16 +292,19 @@ function SingleService() {
                   <p className="mt-3 text-[16px] leading-7 text-white/90">{service.cta_description}</p>
                 )}
               </div>
-              <a
-                href="/contact-us"
+              <button
+                type="button"
+                onClick={() => setIsEnquiryOpen(true)}
                 className="inline-flex flex-none items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-semibold text-white transition hover:bg-secondary"
               >
                 Get in Touch
-              </a>
+              </button>
             </Reveal>
           )}
         </article>
       </section>
+
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </main>
   )
 }

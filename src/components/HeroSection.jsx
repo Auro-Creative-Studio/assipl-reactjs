@@ -1,9 +1,13 @@
-import heroImage from '../assets/home/hero-bg.webp'
+import { useState } from 'react'
+import EnquiryPopup from './EnquiryPopup'
 import Reveal from './Reveal'
+import heroImage from '../assets/home/hero-bg.webp'
 
 const stats = ['15+ Years Experience', '3000+ Projects Delivered', 'ISO 9001:2015 Certified', 'Pan-India Operations']
 
 function HeroSection() {
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
+
   return (
     <section
       id="home"
@@ -36,14 +40,17 @@ function HeroSection() {
           </ul>
         </Reveal>
         <Reveal delay={200}>
-          <a
-            href="/contact-us"
+          <button
+            type="button"
+            onClick={() => setIsEnquiryOpen(true)}
             className="mt-9 inline-flex items-center rounded-full bg-primary px-8 py-3.5 text-[16px] font-semibold text-white transition hover:bg-secondary sm:text-[18px]"
           >
             Consult an Integration Expert
-          </a>
+          </button>
         </Reveal>
       </div>
+
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import EnquiryPopup from '../components/EnquiryPopup'
 import heroBg from '../assets/process-page/process-hero-bg.webp'
 import ctaBg from '../assets/process-page/process-cta-bg.webp'
 import blueprintIcon from '../assets/process-page/blueprint-icon.png'
@@ -148,6 +149,7 @@ function Process() {
   const markerRefs = useRef([])
   const [activeStep, setActiveStep] = useState(0)
   const [lineMetrics, setLineMetrics] = useState({ top: 30, height: 0, progress: 0 })
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
 
   useEffect(() => {
     const updateTimeline = () => {
@@ -280,16 +282,19 @@ function Process() {
                   process can secure your next enterprise rollout.
                 </p>
               </div>
-              <a
-                href="mailto:assipl@automationsystems.co.in"
+              <button
+                type="button"
+                onClick={() => setIsEnquiryOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-[40px] py-[14px] text-[18px] font-medium capitalize leading-[1.5] text-[var(--color-white)] transition hover:bg-secondary hover:text-[var(--color-white)] md:mr-[20px]"
               >
                 Consult Our Engineering Team
-              </a>
+              </button>
             </div>
           </div>
         </section>
       </main>
+
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </div>
   )
 }

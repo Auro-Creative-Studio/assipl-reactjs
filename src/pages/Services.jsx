@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import EnquiryPopup from '../components/EnquiryPopup'
 import heroBg from '../assets/services/service-hero-bg.webp'
 import strategicBg from '../assets/services/strategic-bg.webp'
 import ctaBg from '../assets/services/cta-bg.webp'
@@ -70,6 +72,8 @@ const continuityItems = [
 ]
 
 function Services() {
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
+
   return (
     <div className="bg-white font-body">
       <main>
@@ -238,16 +242,19 @@ function Services() {
                   security, and scalable safety architectures.
                 </p>
               </div>
-              <a
-                href="mailto:assipl@automationsystems.co.in"
+              <button
+                type="button"
+                onClick={() => setIsEnquiryOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
               >
                 Contact Our Engineering Team
-              </a>
+              </button>
             </div>
           </div>
         </section>
       </main>
+
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </div>
   )
 }

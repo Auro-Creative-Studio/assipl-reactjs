@@ -4,6 +4,7 @@ import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import CareerPopup from '../components/CareerPopup'
+import EnquiryPopup from '../components/EnquiryPopup'
 import logoAlba from '../assets/about-page/embedded-0.webp'
 import logoAditya from '../assets/about-page/embedded-1.png'
 import logoTexecom from '../assets/about-page/embedded-2.jpg'
@@ -66,6 +67,7 @@ function ButtonLink({ children, className = '', ...props }) {
 function About() {
   const location = useLocation()
   const [isCareerOpen, setIsCareerOpen] = useState(false)
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
 
   useEffect(() => {
     if (!location.hash) return
@@ -288,17 +290,19 @@ function About() {
                 security, and scalable safety architectures.
               </p>
             </div>
-            <Link
-              to="/contact-us"
+            <button
+              type="button"
+              onClick={() => setIsEnquiryOpen(true)}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
             >
               Contact Our Engineering Team
-            </Link>
+            </button>
           </div>
         </div>
       </section>
 
       <CareerPopup isOpen={isCareerOpen} onClose={() => setIsCareerOpen(false)} />
+      <EnquiryPopup isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </main>
   )
 }
