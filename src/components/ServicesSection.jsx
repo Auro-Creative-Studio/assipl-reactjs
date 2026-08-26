@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Reveal from './Reveal'
 import serviceImage from '../assets/home/services-image.webp'
 import { services } from '../data'
 
@@ -8,25 +9,25 @@ function ServicesSection() {
   return (
     <section id="services" className="bg-[#F8FAFC] py-20 sm:py-24 lg:py-24">
       <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-6xl text-center">
+        <Reveal className="mx-auto max-w-6xl text-center">
           <h2 className="text-4xl font-bold leading-tight text-secondary sm:text-5xl">End-to-End Integration Services</h2>
           <p className="mt-5 text-base leading-7 text-text sm:text-lg">
             We do not simply supply security hardware; we deliver absolute operational readiness. By managing the
             complete project lifecycle internally, ASSIPL ensures that complex, multi-site security architectures
             are deployed seamlessly and maintained perfectly.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start lg:gap-14">
-          <div className="aspect-[4/5] overflow-hidden rounded-2xl">
+          <Reveal className="aspect-[4/5] overflow-hidden rounded-2xl">
             <img
               src={serviceImage}
               alt="ASSIPL multi-sensor camera installation"
               className="aspect-4/5 w-full object-cover object-[85%_center]"
             />
-          </div>
+          </Reveal>
 
-          <div className="flex h-full flex-col justify-center">
+          <Reveal delay={150} className="flex h-full flex-col justify-center">
             <div className="grid gap-3">
               {services.map((service) => {
                 const isOpen = openNumber === service.number
@@ -72,7 +73,7 @@ function ServicesSection() {
             >
               Explore Our Services
             </a>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

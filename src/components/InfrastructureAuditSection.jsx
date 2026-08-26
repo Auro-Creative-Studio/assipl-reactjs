@@ -1,3 +1,4 @@
+import Reveal from './Reveal'
 import auditBackground from '../assets/services/cta-bg.webp'
 
 function AuditField({ as = 'input', className = '', ...props }) {
@@ -13,15 +14,15 @@ function AuditField({ as = 'input', className = '', ...props }) {
 
 function InfrastructureAuditSection() {
   return (
-    <section id="audit-form" className="bg-white px-5 py-20 sm:py-24 lg:py-32">
+    <section id="audit-form" className="bg-white px-5 py-20 sm:py-20">
       <div
         className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[28px] bg-cover bg-center px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20"
         style={{
           backgroundImage: `linear-gradient(rgba(18,28,69,.55),rgba(18,28,69,.55)), url(${auditBackground})`,
         }}
       >
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-          <div className="max-w-lg">
+        <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-16">
+          <Reveal className="max-w-lg">
             <h2 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
               Initiate an Infrastructure Audit
             </h2>
@@ -30,11 +31,13 @@ function InfrastructureAuditSection() {
               hubs clearly established across India, ASSIPL guarantees rapid field response times, unified
               engineering standards, and seamless multi-site rollouts nationwide.
             </p>
-          </div>
+          </Reveal>
 
-          <form
+          <Reveal
+            as="form"
+            delay={150}
             onSubmit={(event) => event.preventDefault()}
-            className="rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+            className="w-full max-w-sm justify-self-end rounded-2xl bg-white p-6 shadow-xl sm:p-8"
           >
             <div className="space-y-4">
               <AuditField type="text" placeholder="Name" aria-label="Name" required />
@@ -55,7 +58,7 @@ function InfrastructureAuditSection() {
             >
               Submit
             </button>
-          </form>
+          </Reveal>
         </div>
       </div>
     </section>

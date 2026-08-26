@@ -1,4 +1,5 @@
 
+import Reveal from './Reveal'
 import logoAlba from '../assets/about-page/embedded-0.webp'
 import logoAditya from '../assets/about-page/embedded-1.png'
 import logoTexecom from '../assets/about-page/embedded-2.jpg'
@@ -30,9 +31,9 @@ const manufacturerLogos = [
 function PartnersStrip() {
   return (
     <section className="overflow-hidden bg-white px-5 py-12 md:pb-12 md:pt-0 lg:px-0 lg:py-20">
-      <h2 className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
+      <Reveal as="h2" className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
         Powered by the World&apos;s Leading Manufacturers
-      </h2>
+      </Reveal>
       <div className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
         <Swiper
           modules={[Autoplay]}
