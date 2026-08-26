@@ -1,6 +1,28 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import CmsLayout from './cms/components/layout/CmsLayout'
+import ProtectedCmsRoute from './cms/components/layout/ProtectedCmsRoute'
+import SuperAdminRoute from './cms/components/layout/SuperAdminRoute'
+import BlogCategoriesList from './cms/view/blog-categories/List'
+import BlogCreate from './cms/view/blogs/Create'
+import BlogEdit from './cms/view/blogs/Edit'
+import BlogList from './cms/view/blogs/List'
+import ContactForm from './cms/view/ContactForm'
+import CookieConsentsList from './cms/view/cookie/List'
+import Dashboard from './cms/view/Dashboard'
+import EnquiryForm from './cms/view/EnquiryForm'
+import Login from './cms/view/Login'
+import Media from './cms/view/Media'
+import NewsletterSubscribers from './cms/view/NewsletterSubscribers'
+import CmsContactPage from './cms/view/pages/contact/Contact'
+import Profile from './cms/view/Profile'
+import SeoCreate from './cms/view/seo/Create'
+import SeoEdit from './cms/view/seo/Edit'
+import SeoList from './cms/view/seo/List'
+import UserCreate from './cms/view/users/Create'
+import UserEdit from './cms/view/users/Edit'
+import UserList from './cms/view/users/List'
 import About from './pages/About'
 import Blogs from './pages/Blogs'
 import Career from './pages/Career'
@@ -16,7 +38,7 @@ import SingleService from './pages/SingleService'
 import TermsConditions from './pages/TermsConditions'
 import './App.css'
 
-function App() {
+function PublicLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-background font-body">
       <Header />
@@ -43,6 +65,41 @@ function App() {
       </Routes>
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/admin/login" element={<Login />} />
+      <Route element={<ProtectedCmsRoute />}>
+        <Route path="/admin" element={<CmsLayout />}>
+          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+
+          <Route path="pages/contact" element={<CmsContactPage />} />
+          <Route path="enquiries" element={<EnquiryForm />} />
+          <Route path="contacts" element={<ContactForm />} />
+          <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />
+          <Route path="seo" element={<SeoList />} />
+          <Route path="seo/create" element={<SeoCreate />} />
+          <Route path="seo/edit/:id" element={<SeoEdit />} />
+          <Route path="blogs" element={<BlogList />} />
+          <Route path="blogs/create" element={<BlogCreate />} />
+          <Route path="blogs/edit/:id" element={<BlogEdit />} />
+          <Route path="blog-categories" element={<BlogCategoriesList />} />
+          <Route path="cookie-consents" element={<CookieConsentsList />} />
+          <Route path="media" element={<Media />} />
+          <Route path="profile" element={<Profile />} />
+          <Route element={<SuperAdminRoute />}>
+            <Route path="users" element={<UserList />} />
+            <Route path="users/create" element={<UserCreate />} />
+            <Route path="users/edit/:id" element={<UserEdit />} />
+          </Route>
+        </Route>
+      </Route>
+      <Route path="/*" element={<PublicLayout />} />
+    </Routes>
   )
 }
 
