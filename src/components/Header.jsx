@@ -152,7 +152,7 @@ function Header() {
             </div>
           </div>
           <div className="group relative">
-            <NavLink to="/products/video-surveillance" className={linkClass}>
+            <NavLink to="/products" className={linkClass}>
               <span className="inline-flex items-center gap-1">
                 Products
                 <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
@@ -264,7 +264,7 @@ function Header() {
           />
           <MobileNavItem
             title="Products"
-            to="/products/video-surveillance"
+            to="/products"
             links={productLinks}
             isOpen={openSection === 'products'}
             onToggle={() => toggleSection('products')}

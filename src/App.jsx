@@ -29,6 +29,7 @@ import Csr from './pages/Csr'
 import Contact from './pages/Contact'
 import Home from './pages/Home'
 import Process from './pages/Process'
+import Products from './pages/Products'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Services from './pages/Services'
 import SingleBlog from './pages/SingleBlog'
@@ -56,6 +57,7 @@ function PublicLayout() {
         <Route path="/csr" element={<Csr />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsConditions />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/products/video-surveillance" element={<SingleProduct />} />
         <Route path="/services/operational-continuity-maintenance" element={<SingleService />} />
       </Routes>
