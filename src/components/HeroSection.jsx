@@ -1,26 +1,48 @@
-import heroImage from '../assets/home-hero.webp';
+import heroImage from '../assets/home/hero-bg.webp'
+import Reveal from './Reveal'
 
 const stats = ['15+ Years Experience', '3000+ Projects Delivered', 'ISO 9001:2015 Certified', 'Pan-India Operations']
 
 function HeroSection() {
   return (
-    <section id="home" className="relative min-h-[680px] overflow-hidden pt-28 text-white">
-      <img src={heroImage} alt="Security systems in operation" className="absolute inset-0 h-full w-full object-cover" />
-      {/* <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/20" /> */}
-      {/* <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent" /> */}
-      <div className="relative mx-auto flex min-h-[590px] max-w-[1440px] items-center px-5 py-20 sm:px-8 lg:px-12">
-        <div className="max-w-6xl">
-          <h1 className=" text-4xl font-bold leading-[1.1] !text-white sm:text-5xl md:text-7xl lg:text-[108px]">Automation Systems and Solutions</h1>
-          <p className="mt-7 max-w-3xl pl-7 text-base font-semibold leading-7 text-white sm:text-[26px]">Integrated Security Solutions for BFSI, IT Parks, Industries, and Critical Infrastructure.</p>
-          <ul className="mt-8 list-disc space-y-2 pl-7 marker:text-white/50 text-base text-white sm:text-[20px]">
-            {stats.map((stat) => <li key={stat}>{stat}</li>)}
+    <section
+      id="home"
+      className="relative flex min-h-170 items-center overflow-hidden pt-40 pb-16 sm:pt-44 lg:pt-48"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(27,26,23,0.7) 68%, rgba(255,255,255,1) 100%), url(${heroImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="relative mx-auto w-full max-w-350 px-5">
+        <Reveal
+          as="h1"
+          className="-ml-1 max-w-260 font-heading text-[32px] font-semibold leading-tight text-white sm:text-[44px] md:text-[64px] xl:text-[80px] xl:leading-none"
+        >
+          Automation Systems and Solutions
+        </Reveal>
+        <Reveal
+          as="p"
+          delay={100}
+          className="mt-6 max-w-190 text-[18px] font-semibold leading-normal text-white sm:text-[26px]"
+        >
+          Integrated Security Solutions for BFSI, IT Parks, Industries, and Critical Infrastructure.
+        </Reveal>
+        <Reveal delay={150}>
+          <ul className="mt-7 list-disc space-y-2 pl-5 text-[16px] text-white marker:text-white/60 sm:text-[18px]">
+            {stats.map((stat) => (
+              <li key={stat}>{stat}</li>
+            ))}
           </ul>
-<a
-  href="#contact"
-  className="mt-9 ml-7 inline-flex items-center rounded-full bg-primary px-7 py-4 text-[18px] font-semibold text-white"
->
-  Consult An Integration Expert
-</a>        </div>
+        </Reveal>
+        <Reveal delay={200}>
+          <a
+            href="/contact-us"
+            className="mt-9 inline-flex items-center rounded-full bg-primary px-8 py-3.5 text-[16px] font-semibold text-white transition hover:bg-secondary sm:text-[18px]"
+          >
+            Consult an Integration Expert
+          </a>
+        </Reveal>
       </div>
     </section>
   )

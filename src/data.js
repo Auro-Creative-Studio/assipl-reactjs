@@ -1,23 +1,70 @@
-import productImage from './assets/products/video-surveillance-1.webp'
-import productImageTwo from './assets/products/video-surveillance-2.webp'
-import productImageThree from './assets/products/video-surveillance-3.webp'
-import productImageFour from './assets/products/video-surveillance-4.webp'
-import productImageFive from './assets/products/video-surveillance-5.webp'
+import videoSurveillanceFront from './assets/home/products/video-surveillance-front.webp'
+import videoSurveillanceRear from './assets/home/products/video-surveillance-rear.webp'
+import accessControlFront from './assets/home/products/access-control-front.webp'
+import accessControlRear from './assets/home/products/access-control-rear.webp'
+import fireDetectionFront from './assets/home/products/fire-detection-front.webp'
+import fireDetectionRear from './assets/home/products/fire-detection-rear.webp'
+import intrusionDetectionFront from './assets/home/products/intrusion-detection-front.webp'
+import intrusionDetectionRear from './assets/home/products/intrusion-detection-rear.webp'
+import gateAutomationFront from './assets/home/products/gate-automation-front.webp'
+import gateAutomationRear from './assets/home/products/gate-automation-rear.webp'
+import gasSuppressionFront from './assets/home/products/gas-suppression-front.webp'
+import gasSuppressionRear from './assets/home/products/gas-suppression-rear.webp'
+import logoSbi from './assets/home/testimonial-avatar-39.webp'
+import logoSattva from './assets/home/testimonial-avatar-40.webp'
+import logoAxisBank from './assets/home/testimonial-avatar-41.webp'
+import logoHdfcBank from './assets/home/testimonial-avatar-42.webp'
 
 export const products = [
-  { title: 'Video Surveillance and Smart Cameras', description: 'AI-powered cameras for intelligent surveillance, automated threat detection, and secure access monitoring.', image: productImage },
-  { title: 'Access Control Systems', description: 'Smart access control for secure entry, identity verification, and real-time monitoring.', image: productImageTwo },
-  { title: 'Fire Detection Systems', description: 'Smart fire detection for early alerts, rapid response, and enhanced safety.', image: productImageThree },
-  { title: 'Intrusion Detection Systems', description: 'Advanced multi-tiered networks providing instant perimeter and core boundary breach alerts.', image: productImageFour },
-  { title: 'Gate Automation Systems', description: 'Heavy-duty physical security solutions managing high-volume pedestrian and vehicular logistics.', image: productImageFive },
-  { title: 'Gas Suppression Systems', description: 'Clean-agent gas suppression systems engineered to protect data centres and server rooms.', image: productImage },
+  {
+    title: 'Video Surveillance and Smart Cameras',
+    description: 'AI-powered cameras for intelligent surveillance, automated threat detection, and secure access monitoring.',
+    frontImage: videoSurveillanceFront,
+    rearImage: videoSurveillanceRear,
+    href: '/products/video-surveillance',
+  },
+  {
+    title: 'Access Control Systems',
+    description: 'Smart access control for secure entry, identity verification, and real-time monitoring.',
+    frontImage: accessControlFront,
+    rearImage: accessControlRear,
+    href: '/access-control',
+  },
+  {
+    title: 'Fire Detection Systems',
+    description: 'Smart fire detection for early alerts, rapid response, and enhanced safety.',
+    frontImage: fireDetectionFront,
+    rearImage: fireDetectionRear,
+    href: '/fire-detection-system',
+  },
+  {
+    title: 'Intrusion Detection Systems',
+    description: 'Advanced, multi-tiered networks providing instant perimeter and core boundary breach alerts.',
+    frontImage: intrusionDetectionFront,
+    rearImage: intrusionDetectionRear,
+    href: '/intrusion-detection-systems',
+  },
+  {
+    title: 'Gate Automation Systems',
+    description: 'Heavy-duty physical security solutions managing high-volume pedestrian and vehicular logistics.',
+    frontImage: gateAutomationFront,
+    rearImage: gateAutomationRear,
+    href: '/gate-automation-control-barriers',
+  },
+  {
+    title: 'Gas Suppression Systems',
+    description: 'Clean-agent gas suppression systems engineered to protect data centres and server rooms without damaging critical equipment.',
+    frontImage: gasSuppressionFront,
+    rearImage: gasSuppressionRear,
+    href: '/gas-suppression-system',
+  },
 ]
 
 export const services = [
   { number: '01', title: 'Strategic Design & Management', description: 'Comprehensive site surveys, precise system configuration, and dedicated project management.' },
-  { number: '02', title: 'SITC Execution', description: 'Flawless supply, installation, testing and commissioning executed by trained specialists.' },
-  { number: '03', title: 'Operational Training', description: 'Hands-on training on system operations to ensure your internal team is confident with the infrastructure.' },
-  { number: '04', title: 'Lifecycle Maintenance', description: 'Post-sales maintenance, warranty tracking and annual maintenance services to maximise system uptime.' },
+  { number: '02', title: 'SITC Execution', description: 'Flawless Supply, Installation, Testing, and Commissioning executed by factory-trained specialists.' },
+  { number: '03', title: 'Operational Training', description: 'Hands-on training on system operations to ensure your internal staff is completely fluent with the new infrastructure.' },
+  { number: '04', title: 'Lifecycle Maintenance', description: 'Reliable post-sales maintenance, warranty tracking, and comprehensive Annual Maintenance Services (AMC) to maximize system uptime.' },
 ]
 
 export const testimonials = [
@@ -25,21 +72,25 @@ export const testimonials = [
     quote:
       'The ASSIPL team is highly professional in all dealings. Their cooperation and readiness to provide solutions have been remarkable. Since our association, it has truly been a pleasure working with such a supportive and dedicated team.',
     company: 'SBI',
+    logo: logoSbi,
   },
   {
     quote:
       'I am happy to state that the services provided by Automation Security & Systems to our company has been very satisfactory in all respects. Thank you for the support extended to us, over the years.',
     company: 'SATTVA',
+    logo: logoSattva,
   },
   {
     quote:
       'We have been associated with Anuj for the past 10 years, and working with him and his team has been a pleasure. Their dedication ensures that all systems function flawlessly around the clock.',
     company: 'AXIS BANK',
+    logo: logoAxisBank,
   },
   {
     quote:
       'We are truly pleased with the services offered by your company in all respects. We sincerely thank you for the continued support. Since our association in 2022, your consistent commitment and quality service have been greatly valued.',
     company: 'HDFC BANK',
+    logo: logoHdfcBank,
   },
 ]
 

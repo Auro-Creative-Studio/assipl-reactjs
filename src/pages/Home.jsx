@@ -5,6 +5,7 @@ import NationwideSection from '../components/NationwideSection'
 import PartnersStrip from '../components/PartnersStrip'
 import ProductsSection from '../components/ProductsSection'
 import ServicesSection from '../components/ServicesSection'
+import VideoSection from '../components/VideoSection'
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
       <PartnersStrip />
       <AboutSection />
       <ProductsSection />
+      <VideoSection />
       <ClientsSection />
       <ServicesSection />
       <NationwideSection />

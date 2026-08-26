@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import serviceImage from '../assets/services/service-hero-bg.webp'
+import serviceImage from '../assets/home/services-image.webp'
 import { services } from '../data'
 
 function ServicesSection() {
@@ -7,12 +7,12 @@ function ServicesSection() {
 
   return (
     <section id="services" className="bg-background py-20 sm:py-24 lg:py-32">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-bold leading-tight text-secondary sm:text-5xl">End-to-End Integration Services</h2>
           <p className="mt-5 text-base leading-7 text-text sm:text-lg">
             We do not simply supply security hardware; we deliver absolute operational readiness. By managing the
-            complete project lifecycle internally, ASSIPL ensures that complex, multi-site security architecture
+            complete project lifecycle internally, ASSIPL ensures that complex, multi-site security architectures
             are deployed seamlessly and maintained perfectly.
           </p>
         </div>
@@ -22,7 +22,7 @@ function ServicesSection() {
             <img
               src={serviceImage}
               alt="ASSIPL multi-sensor camera installation"
-              className="aspect-[4/5] w-full object-cover object-[85%_center]"
+              className="aspect-4/5 w-full object-cover object-[85%_center]"
             />
           </div>
 

@@ -29,8 +29,8 @@ const manufacturerLogos = [
 ]
 function PartnersStrip() {
   return (
-    <section className="overflow-hidden px-5 py-[50px] md:pb-[50px] md:pt-0 lg:px-0 lg:py-[80px]">
-      <h2 className="mx-auto max-w-[1100px] text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
+    <section className="overflow-hidden px-5 py-12 md:pb-12 md:pt-0 lg:px-0 lg:py-20">
+      <h2 className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
         Powered by the World&apos;s Leading Manufacturers
       </h2>
       <div className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
@@ -49,8 +49,8 @@ function PartnersStrip() {
         >
           {manufacturerLogos.map((logo) => (
             <SwiperSlide key={logo.alt}>
-              <div className="mx-auto flex h-[90px] w-[150px] items-center justify-center md:w-[175px] lg:w-[215px]">
-                <img src={logo.src} alt={logo.alt} className="max-h-[70px] w-full object-contain" loading="lazy" />
+              <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
+                <img src={logo.src} alt={logo.alt} className="max-h-18 w-full object-contain" loading="lazy" />
               </div>
             </SwiperSlide>
           ))}

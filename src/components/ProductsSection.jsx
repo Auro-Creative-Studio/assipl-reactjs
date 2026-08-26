@@ -1,28 +1,28 @@
 import { products } from '../data'
-import SectionHeading from './SectionHeading'
 
 function ProductsSection() {
   return (
-    <section id="products" className="bg-white py-12 sm:py-12 lg:py-32">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        {/* <SectionHeading
-          eyebrow="Integrated Security Products"
-          title="Purpose-built systems for secure, resilient operations."
-          description="A complete portfolio of electronic security and safety solutions designed for enterprise and critical infrastructure environments."
-        /> */}
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <section id="products" className="bg-white py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {products.map((product) => (
             <a
               key={product.title}
-              href="/products/video-surveillance"
-              className="group relative block aspect-[6/5] overflow-hidden rounded-2xl"
+              href={product.href}
+              className="group relative block aspect-6/5 overflow-hidden rounded-2xl"
             >
               <img
-                src={product.image}
+                src={product.frontImage}
                 alt={product.title}
-                className="absolute inset-0 h-full w-full object-cover transition duration-500 ease-out group-hover:scale-110"
+                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
               />
-              <div className="absolute inset-0 bg-secondary/0 transition-colors duration-300 group-hover:bg-secondary/80" />
+              <img
+                src={product.rearImage}
+                alt=""
+                className="absolute inset-0 h-full w-full scale-110 object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:scale-100 group-hover:opacity-100"
+                aria-hidden="true"
+              />
+              <div className="absolute inset-0 bg-secondary/40 transition-colors duration-300 group-hover:bg-secondary/80" />
               <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
                 <h3 className="text-xl font-bold leading-snug text-white drop-shadow-lg sm:text-2xl">
                   {product.title}

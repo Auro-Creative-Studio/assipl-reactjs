@@ -1,11 +1,11 @@
-import aboutImage from '../assets/about-page/embedded-13.webp'
+import aboutImage from '../assets/home/about-image.webp'
 
 function AboutSection() {
   return (
     <section id="about" className="bg-background py-20 sm:py-24 lg:py-32">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-12">
+      <div className="mx-auto grid max-w-360 gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-12">
         <div className="overflow-hidden rounded-2xl">
-          <img src={aboutImage} alt="ASSIPL ceiling-mounted security camera" className="aspect-[4/3] h-full w-full object-cover" />
+          <img src={aboutImage} alt="ASSIPL ceiling-mounted security camera" className="aspect-4/3 h-full w-full object-cover" />
         </div>
         <div>
           <h2 className="text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[42px]">
