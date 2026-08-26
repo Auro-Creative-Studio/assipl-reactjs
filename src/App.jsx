@@ -51,10 +51,7 @@ function PublicLayout() {
         <Route path="/service" element={<Services />} />
         <Route path="/services" element={<Services />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route
-          path="/blogs/cctv-surveillance-systems-for-commercial-security"
-          element={<SingleBlog />}
-        />
+        <Route path="/blogs/:slug" element={<SingleBlog />} />
         <Route path="/career" element={<Career />} />
         <Route path="/csr" element={<Csr />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

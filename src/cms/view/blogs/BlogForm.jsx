@@ -1,5 +1,16 @@
 import axios from "axios";
-import { ArrowLeft, FileText, Globe, Save } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowUp,
+  FileText,
+  Globe,
+  Image as ImageIcon,
+  Plus,
+  Save,
+  Trash2,
+  Type,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -36,16 +47,25 @@ const toUploadPath = (value = "") => {
   }
 };
 
+const createBlockId = () =>
+  `block-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+
+const createBlock = (type = "text") => ({
+  id: createBlockId(),
+  type,
+  heading: "",
+  body: "",
+  image: "",
+  image_position: "left",
+});
+
 const initialForm = {
   title: "",
+  excerpt: "",
   description: "",
   featured_image: "",
-  main_image: "",
-  blog_image_1: "",
-  blog_image_2: "",
-  description_1: "",
-  description_2: "",
-  description_3: "",
+  hero_image: "",
+  content_blocks: [],
   meta_title: "",
   meta_description: "",
   meta_keywords: "",
@@ -58,44 +78,26 @@ const initialForm = {
   published: true,
 };
 
-const imageFields = [
-  {
-    name: "featured_image",
-    label: "Featured Image",
-    helperText: "Used in blog cards and highlights.",
-  },
-  {
-    name: "main_image",
-    label: "Main Image",
-    helperText: "Primary image shown on the blog detail page.",
-  },
-  {
-    name: "blog_image_1",
-    label: "Blog Image 1",
-    helperText: "Optional image for the first content section.",
-  },
-  {
-    name: "blog_image_2",
-    label: "Blog Image 2",
-    helperText: "Optional image for the second content section.",
-  },
-  {
-    name: "og_image",
-    label: "OG Image",
-    helperText: "Social sharing image.",
-  },
-];
+const normalizeBlocks = (blocks) => {
+  if (!Array.isArray(blocks)) return [];
+
+  return blocks.map((block) => ({
+    id: block.id || createBlockId(),
+    type: block.type === "image_text" ? "image_text" : "text",
+    heading: block.heading || "",
+    body: block.body || "",
+    image: block.image || "",
+    image_position: block.image_position === "right" ? "right" : "left",
+  }));
+};
 
 const normalizeForm = (blog = {}) => ({
   title: blog.title || "",
+  excerpt: blog.excerpt || "",
   description: blog.description || "",
   featured_image: blog.featured_image || "",
-  main_image: blog.main_image || "",
-  blog_image_1: blog.blog_image_1 || "",
-  blog_image_2: blog.blog_image_2 || "",
-  description_1: blog.description_1 || "",
-  description_2: blog.description_2 || "",
-  description_3: blog.description_3 || "",
+  hero_image: blog.hero_image || "",
+  content_blocks: normalizeBlocks(blog.content_blocks),
   meta_title: blog.meta_title || "",
   meta_description: blog.meta_description || "",
   meta_keywords: blog.meta_keywords || "",
@@ -110,14 +112,18 @@ const normalizeForm = (blog = {}) => ({
 
 const buildPayload = (formData) => ({
   title: formData.title.trim(),
+  excerpt: formData.excerpt.trim() || null,
   description: formData.description.trim() || null,
   featured_image: toUploadPath(formData.featured_image) || null,
-  main_image: toUploadPath(formData.main_image) || null,
-  blog_image_1: toUploadPath(formData.blog_image_1) || null,
-  blog_image_2: toUploadPath(formData.blog_image_2) || null,
-  description_1: formData.description_1.trim() || null,
-  description_2: formData.description_2.trim() || null,
-  description_3: formData.description_3.trim() || null,
+  hero_image: toUploadPath(formData.hero_image) || null,
+  content_blocks: formData.content_blocks.map((block) => ({
+    id: block.id,
+    type: block.type,
+    heading: block.heading.trim(),
+    body: block.body,
+    image: block.type === "image_text" ? toUploadPath(block.image) || null : null,
+    image_position: block.image_position,
+  })),
   meta_title: formData.meta_title.trim() || null,
   meta_description: formData.meta_description.trim() || null,
   meta_keywords: formData.meta_keywords.trim() || null,
@@ -137,24 +143,132 @@ const getMediaUrl = (media) => {
   return toUploadPath(media.url || "");
 };
 
-const ImageField = ({ field, value, onChange }) => (
+const ImageField = ({ label, name, value, onChange, helperText }) => (
   <CmsMediaSelect
-    label={field.label}
-    name={field.name}
+    label={label}
+    name={name}
     value={value}
     onChange={(media) =>
       onChange({
         target: {
-          name: field.name,
+          name,
           value: getMediaUrl(media),
         },
       })
     }
     allowedType="image"
     accept="image/*"
-    helperText={field.helperText}
+    helperText={helperText}
   />
 );
+
+function ContentBlockCard({ block, index, total, onChange, onMove, onRemove }) {
+  const handleField = (field) => (event) => {
+    const value =
+      event?.target?.name !== undefined ? event.target.value : event;
+
+    onChange({ ...block, [field]: value });
+  };
+
+  return (
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-950 text-xs font-black text-white">
+            {index + 1}
+          </span>
+          <span className="text-sm font-black text-slate-950">
+            {block.type === "image_text" ? "Image + Text Section" : "Text Section"}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            size="sm"
+            variant="secondary"
+            disabled={index === 0}
+            onClick={() => onMove(-1)}
+            icon={<ArrowUp className="h-3.5 w-3.5" />}
+            aria-label="Move section up"
+          />
+          <Button
+            type="button"
+            size="sm"
+            variant="secondary"
+            disabled={index === total - 1}
+            onClick={() => onMove(1)}
+            icon={<ArrowDown className="h-3.5 w-3.5" />}
+            aria-label="Move section down"
+          />
+          <Button
+            type="button"
+            size="sm"
+            variant="danger"
+            onClick={onRemove}
+            icon={<Trash2 className="h-3.5 w-3.5" />}
+            aria-label="Remove section"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <Select
+          label="Section Type"
+          name={`type-${block.id}`}
+          value={block.type}
+          onChange={(event) =>
+            onChange({
+              ...block,
+              type: event.target.value,
+            })
+          }
+          options={[
+            { label: "Text only", value: "text" },
+            { label: "Image + text", value: "image_text" },
+          ]}
+        />
+
+        <Input
+          label="Section Heading"
+          name={`heading-${block.id}`}
+          value={block.heading}
+          onChange={handleField("heading")}
+          placeholder="e.g. Security Threats Don't Wait"
+        />
+
+        {block.type === "image_text" && (
+          <div className="grid gap-4 md:grid-cols-2">
+            <ImageField
+              label="Section Image"
+              name={`image-${block.id}`}
+              value={block.image}
+              onChange={handleField("image")}
+              helperText="Shown alongside the section text."
+            />
+            <Select
+              label="Image Position"
+              name={`image_position-${block.id}`}
+              value={block.image_position}
+              onChange={handleField("image_position")}
+              options={[
+                { label: "Left", value: "left" },
+                { label: "Right", value: "right" },
+              ]}
+            />
+          </div>
+        )}
+
+        <RichTextEditor
+          label="Section Content"
+          name={`body-${block.id}`}
+          value={block.body}
+          onChange={handleField("body")}
+          placeholder="Write the section content. Use bold and bullet lists as needed."
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function BlogForm({ blogId = null, mode = "create" }) {
   const navigate = useNavigate();
@@ -200,6 +314,42 @@ export default function BlogForm({ blogId = null, mode = "create" }) {
     }));
 
     setErrors((current) => ({ ...current, [name]: "" }));
+  };
+
+  const updateBlock = (blockId, nextBlock) => {
+    setFormData((current) => ({
+      ...current,
+      content_blocks: current.content_blocks.map((block) =>
+        block.id === blockId ? nextBlock : block
+      ),
+    }));
+  };
+
+  const moveBlock = (index, direction) => {
+    setFormData((current) => {
+      const blocks = [...current.content_blocks];
+      const targetIndex = index + direction;
+
+      if (targetIndex < 0 || targetIndex >= blocks.length) return current;
+
+      [blocks[index], blocks[targetIndex]] = [blocks[targetIndex], blocks[index]];
+
+      return { ...current, content_blocks: blocks };
+    });
+  };
+
+  const removeBlock = (blockId) => {
+    setFormData((current) => ({
+      ...current,
+      content_blocks: current.content_blocks.filter((block) => block.id !== blockId),
+    }));
+  };
+
+  const addBlock = (type) => {
+    setFormData((current) => ({
+      ...current,
+      content_blocks: [...current.content_blocks, createBlock(type)],
+    }));
   };
 
   const validate = () => {
@@ -310,145 +460,183 @@ export default function BlogForm({ blogId = null, mode = "create" }) {
 
               {activeTab === "content" ? (
                 <div className="space-y-6 p-5">
-                <Input
-                  label="Title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Enter blog title"
-                  error={errors.title}
-                  required
-                />
+                  <Input
+                    label="Title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="Enter blog title"
+                    error={errors.title}
+                    required
+                  />
 
-                <Textarea
-                  label="Header Description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Brief summary for the blog header."
-                  rows={3}
-                />
+                  <Textarea
+                    label="Card Excerpt"
+                    name="excerpt"
+                    value={formData.excerpt}
+                    onChange={handleChange}
+                    placeholder="Short teaser shown on the blog listing card."
+                    rows={2}
+                  />
 
-                <RichTextEditor
-                  label="Description 1"
-                  name="description_1"
-                  value={formData.description_1}
-                  onChange={handleChange}
-                  placeholder="Opening blog content section."
-                />
+                  <Textarea
+                    label="Header Description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Intro paragraph shown right under the blog title."
+                    rows={3}
+                  />
 
-                <RichTextEditor
-                  label="Description 2"
-                  name="description_2"
-                  value={formData.description_2}
-                  onChange={handleChange}
-                  placeholder="Second blog content section."
-                />
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <ImageField
+                      label="Featured Image"
+                      name="featured_image"
+                      value={formData.featured_image}
+                      onChange={handleChange}
+                      helperText="Used as the thumbnail on the blogs listing page."
+                    />
+                    <ImageField
+                      label="Hero Background Image"
+                      name="hero_image"
+                      value={formData.hero_image}
+                      onChange={handleChange}
+                      helperText="Full-width background behind the blog title."
+                    />
+                  </div>
 
-                <RichTextEditor
-                  label="Description 3"
-                  name="description_3"
-                  value={formData.description_3}
-                  onChange={handleChange}
-                  placeholder="Final blog content section."
-                />
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-sm font-black uppercase tracking-[0.16em] text-slate-500">
+                        Content Sections
+                      </h2>
+                    </div>
 
-                <div className="grid gap-5 md:grid-cols-2">
-                  {imageFields
-                    .filter((field) => field.name !== "og_image")
-                    .map((field) => (
-                      <ImageField
-                        key={field.name}
-                        field={field}
-                        value={formData[field.name]}
-                        onChange={handleChange}
-                      />
-                    ))}
-                </div>
+                    {formData.content_blocks.length === 0 && (
+                      <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-5 py-10 text-center text-sm font-semibold text-slate-400">
+                        No content sections yet. Add a text or image + text section below.
+                      </div>
+                    )}
+
+                    <div className="space-y-4">
+                      {formData.content_blocks.map((block, index) => (
+                        <ContentBlockCard
+                          key={block.id}
+                          block={block}
+                          index={index}
+                          total={formData.content_blocks.length}
+                          onChange={(nextBlock) => updateBlock(block.id, nextBlock)}
+                          onMove={(direction) => moveBlock(index, direction)}
+                          onRemove={() => removeBlock(block.id)}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        icon={<Type className="h-4 w-4" />}
+                        onClick={() => addBlock("text")}
+                      >
+                        Add Text Section
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        icon={<ImageIcon className="h-4 w-4" />}
+                        onClick={() => addBlock("image_text")}
+                      >
+                        Add Image + Text Section
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-6 p-5">
-                <div className="grid gap-5 md:grid-cols-2">
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Input
+                      label="Meta Title"
+                      name="meta_title"
+                      value={formData.meta_title}
+                      onChange={handleChange}
+                      placeholder="Search result title"
+                    />
+                    <Input
+                      label="OG Title"
+                      name="og_title"
+                      value={formData.og_title}
+                      onChange={handleChange}
+                      placeholder="Social sharing title"
+                    />
+                  </div>
+
+                  <Textarea
+                    label="Meta Description"
+                    name="meta_description"
+                    value={formData.meta_description}
+                    onChange={handleChange}
+                    placeholder="Search result description."
+                    rows={4}
+                  />
+
+                  <Textarea
+                    label="Meta Keywords"
+                    name="meta_keywords"
+                    value={formData.meta_keywords}
+                    onChange={handleChange}
+                    placeholder="blog, marketing, branding"
+                    rows={3}
+                  />
+
+                  <Textarea
+                    label="OG Description"
+                    name="og_description"
+                    value={formData.og_description}
+                    onChange={handleChange}
+                    placeholder="Description shown when this blog is shared."
+                    rows={4}
+                  />
+
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Select
+                      label="Robots Index"
+                      name="robots_index"
+                      value={formData.robots_index}
+                      onChange={handleChange}
+                      options={[
+                        { label: "index", value: "index" },
+                        { label: "noindex", value: "noindex" },
+                      ]}
+                    />
+
+                    <Select
+                      label="Robots Follow"
+                      name="robots_follow"
+                      value={formData.robots_follow}
+                      onChange={handleChange}
+                      options={[
+                        { label: "follow", value: "follow" },
+                        { label: "nofollow", value: "nofollow" },
+                      ]}
+                    />
+                  </div>
+
                   <Input
-                    label="Meta Title"
-                    name="meta_title"
-                    value={formData.meta_title}
+                    label="Image Alt Text"
+                    name="image_alt_text"
+                    value={formData.image_alt_text}
                     onChange={handleChange}
-                    placeholder="Search result title"
-                  />
-                  <Input
-                    label="OG Title"
-                    name="og_title"
-                    value={formData.og_title}
-                    onChange={handleChange}
-                    placeholder="Social sharing title"
-                  />
-                </div>
-
-                <Textarea
-                  label="Meta Description"
-                  name="meta_description"
-                  value={formData.meta_description}
-                  onChange={handleChange}
-                  placeholder="Search result description."
-                  rows={4}
-                />
-
-                <Textarea
-                  label="Meta Keywords"
-                  name="meta_keywords"
-                  value={formData.meta_keywords}
-                  onChange={handleChange}
-                  placeholder="blog, marketing, branding"
-                  rows={3}
-                />
-
-                <Textarea
-                  label="OG Description"
-                  name="og_description"
-                  value={formData.og_description}
-                  onChange={handleChange}
-                  placeholder="Description shown when this blog is shared."
-                  rows={4}
-                />
-
-                <div className="grid gap-5 md:grid-cols-2">
-                  <Select
-                    label="Robots Index"
-                    name="robots_index"
-                    value={formData.robots_index}
-                    onChange={handleChange}
-                    options={[
-                      { label: "index", value: "index" },
-                      { label: "noindex", value: "noindex" },
-                    ]}
+                    placeholder="Accessible description for blog images"
                   />
 
-                  <Select
-                    label="Robots Follow"
-                    name="robots_follow"
-                    value={formData.robots_follow}
+                  <ImageField
+                    label="OG Image"
+                    name="og_image"
+                    value={formData.og_image}
                     onChange={handleChange}
-                    options={[
-                      { label: "follow", value: "follow" },
-                      { label: "nofollow", value: "nofollow" },
-                    ]}
+                    helperText="Social sharing image."
                   />
-                </div>
-
-                <Input
-                  label="Image Alt Text"
-                  name="image_alt_text"
-                  value={formData.image_alt_text}
-                  onChange={handleChange}
-                  placeholder="Accessible description for blog images"
-                />
-
-                <ImageField
-                  field={imageFields.find((field) => field.name === "og_image")}
-                  value={formData.og_image}
-                  onChange={handleChange}
-                />
                 </div>
               )}
             </div>

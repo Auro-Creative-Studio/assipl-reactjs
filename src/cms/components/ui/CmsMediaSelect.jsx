@@ -518,7 +518,7 @@ export default function CmsMediaSelect({
           disabled={disabled}
           onClick={() => setIsOpen(true)}
           className={`
-            flex min-h-[120px] flex-col items-center justify-center rounded-xl border border-dashed
+            flex min-h-30 flex-col items-center justify-center rounded-xl border border-dashed
             bg-white px-5 py-6 text-center shadow-sm transition
             ${error ? "border-rose-400" : "border-slate-300 hover:border-slate-500 hover:bg-slate-50"}
             ${disabled ? "cursor-not-allowed bg-slate-50 opacity-60" : "cursor-pointer"}
@@ -559,7 +559,7 @@ export default function CmsMediaSelect({
       >
         <div className="grid gap-5">
           <div className="grid gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <label className="flex min-h-[120px] cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-5 py-6 text-center shadow-sm transition hover:border-slate-500 hover:bg-slate-50">
+            <label className="flex min-h-30 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-5 py-6 text-center shadow-sm transition hover:border-slate-500 hover:bg-slate-50">
               <UploadCloud className="h-8 w-8 text-slate-500" />
               <span className="mt-3 max-w-full truncate text-sm font-black text-slate-950">
                 {uploadFile?.name || "Upload new media"}
@@ -580,7 +580,7 @@ export default function CmsMediaSelect({
             {uploadPreview && (
               <div className="grid gap-3">
                 <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
-                  <div className={isPdfFile(uploadPreview) ? "h-[360px]" : "aspect-video max-h-[360px]"}>
+                  <div className={isPdfFile(uploadPreview) ? "h-90" : "aspect-video max-h-90"}>
                     <MediaPreview
                       media={uploadPreview}
                       enablePdfPreview
@@ -713,7 +713,7 @@ export default function CmsMediaSelect({
                     key={media.url || media.filename}
                     className="inline-flex max-w-full items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-slate-500 ring-1 ring-inset ring-slate-200"
                   >
-                    <span className="max-w-[220px] truncate">{media.filename}</span>
+                    <span className="max-w-55 truncate">{media.filename}</span>
                     <button
                       type="button"
                       onClick={() =>

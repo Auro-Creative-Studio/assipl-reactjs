@@ -1,66 +1,70 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import heroBackground from '../assets/blogs/blogs-hero-bg.webp'
-import cctvImage from '../assets/blogs/cctv-surveillance-systems-for-commercial-security.webp'
-import gateImage from '../assets/blogs/6-ways-automated-gate-barriers-keep-you-safe.webp'
-import fireAlarmImage from '../assets/blogs/best-fire-alarm-system-for-flat-buildings.webp'
-
-const posts = [
-  {
-    image: cctvImage,
-    title: 'CCTV Surveillance Systems for Commercial Security',
-    excerpt: 'CCTV surveillance systems have moved beyond simple recording today, they…',
-    href: '/blogs/cctv-surveillance-systems-for-commercial-security',
-  },
-  {
-    image: gateImage,
-    title: '6 Ways Automated Gate Barriers Keep You Safe',
-    excerpt: 'Discover 6 ways automated gate barriers improve vehicle security, prevent…',
-    href: 'https://automationsystems.co.in/2026/07/30/6-ways-automated-gate-barriers-keep-you-safe/',
-  },
-  {
-    image: fireAlarmImage,
-    title: 'Best Fire Alarm System for Flat Buildings',
-    excerpt: 'Choosing the best fire alarm system for flat buildings is…',
-    href: 'https://automationsystems.co.in/2026/07/29/best-fire-alarm-system-for-flat-buildings/',
-  },
-]
+import { fetchPublishedBlogs, getMediaUrl } from '../lib/blogsApi'
 
 function BlogCard({ post }) {
-  const isInternal = post.href.startsWith('/')
-  const LinkTag = isInternal ? Link : 'a'
-  const linkProps = isInternal
-    ? { to: post.href }
-    : { href: post.href, target: '_blank', rel: 'noreferrer' }
-
   return (
     <article className="group rounded-[10px] bg-white shadow-[9.899px_9.899px_30px_0_rgba(0,0,0,0.1)] transition-all duration-400">
-      <LinkTag {...linkProps} className="block overflow-hidden rounded-[10px] p-5">
+      <Link to={`/blogs/${post.slug}`} className="block overflow-hidden rounded-[10px] p-5">
         <img
           src={post.image}
           alt={post.title}
           className="w-full rounded-[10px] object-cover transition-transform duration-400 ease-out group-hover:rotate-2 group-hover:scale-105"
         />
-      </LinkTag>
+      </Link>
       <div className="px-10 pb-10 pt-0">
         <h2 className="mb-2.5 text-left text-[25px] font-semibold leading-snug text-secondary">
-          <LinkTag {...linkProps} className="transition hover:opacity-80">
+          <Link to={`/blogs/${post.slug}`} className="transition hover:opacity-80">
             {post.title}
-          </LinkTag>
+          </Link>
         </h2>
         <p className="text-left text-[16px] leading-7 text-text">{post.excerpt}</p>
-        <LinkTag
-          {...linkProps}
+        <Link
+          to={`/blogs/${post.slug}`}
           className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-3.75 text-[15px] font-semibold text-white transition-all duration-400 hover:bg-secondary"
         >
           Read More
-        </LinkTag>
+        </Link>
       </div>
     </article>
   )
 }
 
 function Blogs() {
+  const [posts, setPosts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchPublishedBlogs()
+      .then((blogs) => {
+        if (!isMounted) return
+
+        setPosts(
+          blogs.map((blog) => ({
+            slug: blog.slug,
+            title: blog.title,
+            excerpt: blog.excerpt || '',
+            image: getMediaUrl(blog.featured_image),
+          }))
+        )
+      })
+      .catch(() => {
+        if (isMounted) setError('Unable to load blogs right now.')
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <main className="bg-white">
       <section
@@ -85,9 +89,17 @@ function Blogs() {
       </section>
 
       <section className="mx-auto max-w-350 px-5 py-20">
+        {error && (
+          <p className="mb-8 text-center text-base font-semibold text-red-600">{error}</p>
+        )}
+
+        {!isLoading && !error && posts.length === 0 && (
+          <p className="text-center text-lg text-text/70">No blogs published yet.</p>
+        )}
+
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, index) => (
-            <Reveal key={post.title} delay={index * 100}>
+            <Reveal key={post.slug} delay={index * 100}>
               <BlogCard post={post} />
             </Reveal>
           ))}
