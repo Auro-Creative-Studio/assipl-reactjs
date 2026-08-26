@@ -553,21 +553,21 @@ function TermsConditions() {
   return (
     <main className="bg-white">
       <section
-        className="relative flex min-h-[500px] items-center bg-cover bg-center px-5 pt-[112px]"
-        style={{ backgroundImage: `linear-gradient(rgba(18,28,69,.3),rgba(18,28,69,.3)), url(${heroBg})` }}
+        className="relative flex min-h-125 items-center bg-cover bg-center px-5 pt-28"
+        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})` }}
       >
-        <div className="mx-auto w-full max-w-[1200px] pt-[2px]">
-          <a href="/" className="text-[20px] font-semibold capitalize leading-[1.5] text-background transition-colors hover:text-white">
+        <div className="mx-auto w-full max-w-300 pt-0.5">
+          <a href="/" className="text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
             Home
           </a>
-          <h1 className="-ml-1 mt-[10px] text-[36px] font-semibold leading-[1.05] text-white md:text-[44px]">
+          <h1 className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[44px]">
             Terms and Conditions
           </h1>
         </div>
       </section>
 
       <section className="px-5 py-16 md:py-20">
-        <div className="mx-auto max-w-[1200px]">
+        <div className="mx-auto max-w-300">
           <p className="text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</p>
           <p className="mt-4 text-[18px] leading-8 text-text">Welcome to Automations Systems and Solutions (ASSIPL).</p>
           <p className="mt-4 text-[18px] leading-8 text-text">

@@ -1,9 +1,21 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo-light.png'
 import Reveal from './Reveal'
+import { fetchPublishedProducts } from '../lib/productsApi'
+
+const fallbackProducts = [
+  { label: 'Video Surveillance', to: '/products/video-surveillance' },
+  { label: 'Access Control', to: '/products/access-control' },
+  { label: 'Fire Detection System', to: '/products/fire-detection-system' },
+  { label: 'Intrusion Detection System', to: '/products/intrusion-detection-systems' },
+  { label: 'Gate Automation & Control Barriers', to: '/products/gate-automation-control-barriers' },
+  { label: 'Gas Suppression System', to: '/products/gas-suppression-system' },
+]
 
 function Footer() {
   const currentYear = new Date().getFullYear()
+  const [products, setProducts] = useState(fallbackProducts)
   const quickLinks = [
     { label: 'Home', to: '/' },
     { label: 'About Us', to: '/about' },
@@ -13,14 +25,27 @@ function Footer() {
     { label: 'Privacy Policy', to: '/privacy-policy' },
     { label: 'Terms and Conditions', to: '/terms-and-conditions' },
   ]
-  const products = [
-    { label: 'Video Surveillance', to: '/products/video-surveillance' },
-    { label: 'Access Control', to: '/products/access-control' },
-    { label: 'Fire Detection System', to: '/products/fire-detection-system' },
-    { label: 'Intrusion Detection System', to: '/products/intrusion-detection-systems' },
-    { label: 'Gate Automation & Control Barriers', to: '/products/gate-automation-control-barriers' },
-    { label: 'Gas Suppression System', to: '/products/gas-suppression-system' },
-  ]
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchPublishedProducts()
+      .then((items) => {
+        if (!isMounted || items.length === 0) return
+
+        setProducts(
+          items.map((item) => ({
+            label: item.title,
+            to: `/products/${item.slug}`,
+          }))
+        )
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <footer className="mt-auto bg-secondary text-white">

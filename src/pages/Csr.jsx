@@ -47,7 +47,7 @@ const impactItems = [
 function Csr() {
   return (
     <main className="bg-white">
-      <section className="relative flex min-h-[495px] items-center overflow-hidden px-5 pb-8 pt-28 md:pb-12 lg:pt-32">
+      <section className="relative flex min-h-123.75 items-center overflow-hidden px-5 pb-8 pt-28 md:pb-12 lg:pt-32">
   <img
     src={csrHero}
     alt="ASSIPL CSR"
@@ -56,10 +56,10 @@ function Csr() {
 
   <div
     className="absolute inset-0"
-    style={{ background: 'linear-gradient(rgba(18,28,69,.3),rgba(18,28,69,.3))' }}
+    style={{ background: 'linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3))' }}
   />
 
-  <div className="relative z-10 mx-auto w-full max-w-[1190px]">
+  <div className="relative z-10 mx-auto w-full max-w-297.5">
     <a
       href="/"
       className="text-[24px] font-bold text-white transition hover:text-white"
@@ -67,27 +67,27 @@ function Csr() {
       Home
     </a>
 
-    <h1 className="mt-5 text-5xl font-bold leading-none !text-white md:text-[64px]">
+    <h1 className="mt-5 text-5xl font-bold leading-none text-white! md:text-[64px]">
       CSR
     </h1>
   </div>
 </section>
 
-      <section className="px-5 py-20 md:py-[78px]">
-        <div className="mx-auto grid max-w-[1390px] gap-16 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16 lg:gap-16">
-          <div className="relative min-h-[430px] overflow-hidden rounded-[20px] md:min-h-[470px]">
+      <section className="px-5 py-20 md:py-19.5">
+        <div className="mx-auto grid max-w-347.5 gap-16 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16 lg:gap-16">
+          <div className="relative min-h-108 overflow-hidden rounded-[20px] md:min-h-118">
             {heroSlides.map((image, index) => (
               <img
                 key={image}
                 src={image}
                 alt="ASSIPL CSR community initiative"
-                className="absolute inset-0 h-full w-full object-cover opacity-0 [animation:csrHeroFade_15s_ease-in-out_infinite]"
+                className="absolute inset-0 h-full w-full object-cover opacity-0 animate-[csrHeroFade_15s_ease-in-out_infinite]"
                 style={{ animationDelay: `${index * 5}s` }}
               />
             ))}
           </div>
 
-          <div className="flex min-h-[430px] items-center bg-white px-0 py-10 md:min-h-[470px] md:px-0 lg:pr-10">
+          <div className="flex min-h-108 items-center bg-white px-0 py-10 md:min-h-118 md:px-0 lg:pr-10">
             <div>
               <h2 className="text-[34px] font-bold leading-[1.16] text-secondary md:text-[42px]">
                 Securing the Future. Empowering Communities.
@@ -104,7 +104,7 @@ function Csr() {
       </section>
 
       <section className="bg-background px-5 py-16 md:py-20">
-        <div className="mx-auto max-w-[1360px]">
+        <div className="mx-auto max-w-340">
           <Swiper
             modules={[Autoplay, Navigation]}
             navigation
@@ -122,7 +122,7 @@ function Csr() {
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="-mx-[1px] h-[360px] w-[calc(100%+2px)] object-cover md:h-[440px]"
+                    className="-mx-px h-90 w-[calc(100%+2px)] object-cover md:h-110"
                   />
                 </figure>
               </SwiperSlide>
@@ -131,8 +131,8 @@ function Csr() {
         </div>
       </section>
 
-      <section className="px-5 py-14 md:py-[72px]">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="px-5 py-14 md:py-18">
+        <div className="mx-auto max-w-350">
           <h2 className="w-full text-center text-[34px] font-bold leading-[1.15] text-secondary md:text-[45px]">
   Project Sunshine - The Build-Operate-Run (BOR) Methodology
 </h2>

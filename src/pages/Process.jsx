@@ -203,7 +203,7 @@ function Process() {
         <section
           className="relative flex min-h-[500px] items-center bg-cover bg-center px-5 pt-[112px]"
           style={{
-            backgroundImage: `linear-gradient(rgba(18,28,69,.3),rgba(18,28,69,.3)), url(${heroBg})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
           }}
         >
           <div className="mx-auto w-full max-w-[1200px] pt-[2px]">

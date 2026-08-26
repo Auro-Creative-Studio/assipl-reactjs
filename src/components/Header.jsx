@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/logo-dark.png'
 import { fetchPublishedSingleServices } from '../lib/singleServicesApi'
+import { fetchPublishedProducts } from '../lib/productsApi'
 
-const productLinks = [
+const fallbackProductLinks = [
   { title: 'Video Surveillance', href: '/products/video-surveillance' },
   { title: 'Access Control', href: '/products/access-control' },
   { title: 'Fire Detection System', href: '/products/fire-detection-system' },
@@ -96,6 +97,7 @@ function Header() {
   const [openSection, setOpenSection] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [serviceLinks, setServiceLinks] = useState(fallbackServiceLinks)
+  const [productLinks, setProductLinks] = useState(fallbackProductLinks)
 
   useEffect(() => {
     setIsLoaded(true)
@@ -112,6 +114,27 @@ function Header() {
           items.map((item) => ({
             title: item.title,
             href: `/services/${item.slug}`,
+          }))
+        )
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchPublishedProducts()
+      .then((items) => {
+        if (!isMounted || items.length === 0) return
+
+        setProductLinks(
+          items.map((item) => ({
+            title: item.title,
+            href: `/products/${item.slug}`,
           }))
         )
       })

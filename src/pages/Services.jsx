@@ -76,7 +76,7 @@ function Services() {
         <section
           className="relative flex min-h-120 items-center bg-cover bg-center px-5 pt-28"
           style={{
-            backgroundImage: `linear-gradient(rgba(18,28,69,.3),rgba(18,28,69,.3)), url(${heroBg})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
           }}
         >
           <div className="mx-auto w-full max-w-300 pt-0.5">
