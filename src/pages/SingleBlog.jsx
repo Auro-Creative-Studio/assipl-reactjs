@@ -1,3 +1,5 @@
+import { ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import heroBackground from '../assets/blogs/cctv-surveillance-systems-for-commercial-security/hero-bg.jpg'
 import section1Image from '../assets/blogs/cctv-surveillance-systems-for-commercial-security/section-1.webp'
@@ -91,6 +93,10 @@ function SingleBlog() {
             <a href="/" className="transition hover:text-primary">
               Home
             </a>
+            <ChevronRight className="h-4 w-4" aria-hidden="true" />
+            <Link to="/blogs" className="transition hover:text-primary">
+              Blogs
+            </Link>
           </div>
           <Reveal
             as="h1"

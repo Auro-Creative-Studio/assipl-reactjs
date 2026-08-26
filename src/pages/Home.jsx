@@ -1,6 +1,7 @@
 import AboutSection from '../components/AboutSection'
 import ClientsSection from '../components/ClientsSection'
 import HeroSection from '../components/HeroSection'
+import InfrastructureAuditSection from '../components/InfrastructureAuditSection'
 import NationwideSection from '../components/NationwideSection'
 import PartnersStrip from '../components/PartnersStrip'
 import ProductsSection from '../components/ProductsSection'
@@ -18,6 +19,7 @@ function Home() {
       <ClientsSection />
       <ServicesSection />
       <NationwideSection />
+      <InfrastructureAuditSection />
     </main>
   )
 }
