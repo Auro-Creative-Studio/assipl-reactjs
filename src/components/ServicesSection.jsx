@@ -1,7 +1,76 @@
+import { useState } from 'react'
+import serviceImage from '../assets/services/service-hero-bg.webp'
 import { services } from '../data'
-import SectionHeading from './SectionHeading'
 
 function ServicesSection() {
-  return <section id="services" className="bg-secondary py-20 sm:py-24 lg:py-32"><div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12"><div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20"><div><SectionHeading light eyebrow="End-to-End Integration Services" title="We deliver operational readiness, not just hardware." description="By managing the complete project lifecycle internally, ASSIPL ensures that complex security architectures are deployed seamlessly and maintained reliably." /><a href="#contact" className="mt-8 inline-flex items-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-secondary">Explore Our Services <span className="ml-2">↗</span></a></div><div className="grid gap-4">{services.map((service) => <article key={service.number} className="grid gap-5 rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:bg-white/10 sm:grid-cols-[70px_1fr] sm:p-7"><div className="text-sm font-semibold text-blue-300">{service.number}</div><div><h3 className="text-xl font-semibold !text-white sm:text-2xl">{service.title}</h3><p className="mt-3 text-sm leading-7 text-white/60">{service.description}</p></div></article>)}</div></div></div></section>
+  const [openNumber, setOpenNumber] = useState('02')
+
+  return (
+    <section id="services" className="bg-background py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-4xl font-bold leading-tight text-secondary sm:text-5xl">End-to-End Integration Services</h2>
+          <p className="mt-5 text-base leading-7 text-text sm:text-lg">
+            We do not simply supply security hardware; we deliver absolute operational readiness. By managing the
+            complete project lifecycle internally, ASSIPL ensures that complex, multi-site security architecture
+            are deployed seamlessly and maintained perfectly.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+          <div className="overflow-hidden rounded-2xl">
+            <img
+              src={serviceImage}
+              alt="ASSIPL multi-sensor camera installation"
+              className="aspect-[4/5] w-full object-cover object-[85%_center]"
+            />
+          </div>
+
+          <div>
+            <div className="grid gap-3">
+              {services.map((service) => {
+                const isOpen = openNumber === service.number
+
+                return (
+                  <div key={service.number}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenNumber(isOpen ? null : service.number)}
+                      aria-expanded={isOpen}
+                      className={`flex w-full items-center justify-between gap-4 rounded-xl border bg-white px-6 py-5 text-left transition ${
+                        isOpen ? 'border-primary/40' : 'border-black/10'
+                      }`}
+                    >
+                      <span className="text-base font-semibold text-secondary sm:text-lg">{service.title}</span>
+                      <span className="text-xl font-light leading-none text-primary" aria-hidden="true">
+                        {isOpen ? '−' : '+'}
+                      </span>
+                    </button>
+                    <div
+                      className={`grid overflow-hidden rounded-xl border transition-all duration-300 ${
+                        isOpen ? 'mt-3 grid-rows-[1fr] border-primary/40 opacity-100' : 'grid-rows-[0fr] border-transparent opacity-0'
+                      }`}
+                    >
+                      <div className="min-h-0">
+                        <p className="p-5 text-sm leading-7 text-text sm:text-base">{service.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            <a
+              href="/service"
+              className="mt-8 inline-flex items-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-secondary"
+            >
+              Explore Our Services
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }
+
 export default ServicesSection

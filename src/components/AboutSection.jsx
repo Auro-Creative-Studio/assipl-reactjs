@@ -1,7 +1,33 @@
-import aboutImage from '../assets/products/video-surveillance-bg-2.webp'
-import SectionHeading from './SectionHeading'
+import aboutImage from '../assets/about-page/embedded-13.webp'
 
 function AboutSection() {
-  return <section id="about" className="bg-background py-20 sm:py-24 lg:py-32"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-12"><div className="relative"><div className="overflow-hidden rounded-[32px] bg-white shadow-[0_25px_80px_rgba(18,28,69,0.10)]"><img src={aboutImage} alt="ASSIPL security monitoring" className="aspect-[4/5] h-full w-full object-cover" /></div><div className="absolute -bottom-6 -right-3 hidden max-w-[230px] rounded-3xl bg-secondary p-6 text-white shadow-xl sm:block"><p className="font-heading text-4xl font-bold">15+</p><p className="mt-1 text-sm leading-6 text-white/65">Years of system integration experience</p></div></div><div><SectionHeading eyebrow="Precision Engineering. Nationwide Support." title="Built for complex, multi-site security infrastructure." /><p className="mt-7 text-base leading-8 text-text sm:text-lg">Automation Systems and Solutions (India) Pvt. Ltd. specializes in low voltage system integration delivering robust electronic security and safety solutions.</p><p className="mt-5 text-base leading-8 text-text sm:text-lg">We excel in complex, multi-site rollouts and critical infrastructure for India&apos;s most demanding sectors.</p><p className="mt-5 text-base leading-8 text-text sm:text-lg">Our scalable architecture ensures your infrastructure is protected today while remaining ready for future technologies including AI analytics and smart building integration.</p><a href="/about" className="mt-8 inline-flex items-center rounded-full border border-secondary/15 bg-white px-6 py-3.5 text-sm font-semibold text-secondary shadow-sm transition hover:border-primary hover:text-primary">Know More <span className="ml-2">↗</span></a></div></div></section>
+  return (
+    <section id="about" className="bg-background py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-12">
+        <div className="overflow-hidden rounded-2xl">
+          <img src={aboutImage} alt="ASSIPL ceiling-mounted security camera" className="aspect-[4/3] h-full w-full object-cover" />
+        </div>
+        <div>
+          <h2 className="text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[42px]">
+            Precision Engineering. Nationwide Support.
+          </h2>
+          <p className="mt-6 text-base leading-8 text-text sm:text-lg">
+            Automation Systems and Solutions (India) Pvt. Ltd. (ASSIPL) specializes in low voltage system
+            integration delivering robust electronic security &amp; safety solutions. We excel in complex,
+            multi-site rollouts and critical infrastructure for India&apos;s most demanding sectors. Our scalable
+            architecture ensures your infrastructure is protected today and primed for future integrations,
+            including AI Analytics and Smart Building integration.
+          </p>
+          <a
+            href="/about"
+            className="mt-8 inline-flex items-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-secondary"
+          >
+            Know More
+          </a>
+        </div>
+      </div>
+    </section>
+  )
 }
+
 export default AboutSection

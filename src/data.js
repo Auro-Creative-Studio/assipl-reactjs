@@ -21,10 +21,41 @@ export const services = [
 ]
 
 export const testimonials = [
-  { quote: 'The ASSIPL team is highly professional in all dealings. Their cooperation and readiness to provide solutions have been remarkable.', company: 'Enterprise Client' },
-  { quote: 'The services provided by Automation Systems and Solutions have been very satisfactory in all respects.', company: 'Corporate Client' },
-  { quote: 'We have been associated with the team for many years and their dedication ensures that all systems function reliably.', company: 'Long-term Client' },
-  { quote: 'Their consistent commitment and quality service have been greatly valued across our infrastructure operations.', company: 'Infrastructure Client' },
+  {
+    quote:
+      'The ASSIPL team is highly professional in all dealings. Their cooperation and readiness to provide solutions have been remarkable. Since our association, it has truly been a pleasure working with such a supportive and dedicated team.',
+    company: 'SBI',
+  },
+  {
+    quote:
+      'I am happy to state that the services provided by Automation Security & Systems to our company has been very satisfactory in all respects. Thank you for the support extended to us, over the years.',
+    company: 'SATTVA',
+  },
+  {
+    quote:
+      'We have been associated with Anuj for the past 10 years, and working with him and his team has been a pleasure. Their dedication ensures that all systems function flawlessly around the clock.',
+    company: 'AXIS BANK',
+  },
+  {
+    quote:
+      'We are truly pleased with the services offered by your company in all respects. We sincerely thank you for the continued support. Since our association in 2022, your consistent commitment and quality service have been greatly valued.',
+    company: 'HDFC BANK',
+  },
 ]
 
-export const locations = ['Punjab', 'Haryana', 'Delhi', 'Rajasthan', 'Uttar Pradesh', 'Madhya Pradesh', 'Pune', 'Mumbai', 'Goa', 'Kerala', 'Tamil Nadu', 'Andhra Pradesh', 'Hyderabad', 'Karnataka']
+export const locations = [
+  { name: 'Punjab', lon: 76.8, lat: 30.7 },
+  { name: 'Haryana', lon: 76.5, lat: 29 },
+  { name: 'Delhi', lon: 77.2, lat: 28.6 },
+  { name: 'Rajasthan', lon: 75.8, lat: 26.9 },
+  { name: 'Uttar Pradesh', lon: 80.9, lat: 26.8 },
+  { name: 'Madhya Pradesh', lon: 77.4, lat: 23.3 },
+  { name: 'Pune', lon: 73.9, lat: 18.5 },
+  { name: 'Mumbai', lon: 72.9, lat: 19.1 },
+  { name: 'Goa', lon: 74, lat: 15.3 },
+  { name: 'Kerala', lon: 76.3, lat: 10 },
+  { name: 'Tamil Nadu', lon: 80.3, lat: 13.1 },
+  { name: 'Andhra Pradesh', lon: 80.6, lat: 16.5 },
+  { name: 'Hyderabad', lon: 78.5, lat: 17.4 },
+  { name: 'Karnataka', lon: 77.6, lat: 12.97, hq: true },
+]
