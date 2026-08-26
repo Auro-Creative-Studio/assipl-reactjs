@@ -14,16 +14,16 @@ function AuditField({ as = 'input', className = '', ...props }) {
 
 function InfrastructureAuditSection() {
   return (
-    <section id="audit-form" className="bg-white px-5 py-20 sm:py-20">
+    <section id="audit-form" className="bg-white px-4 py-12 sm:px-5 sm:py-16 lg:py-20">
       <div
-        className="relative mx-auto max-w-360 overflow-hidden rounded-[28px] bg-cover bg-center px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20"
+        className="relative mx-auto max-w-360 overflow-hidden rounded-[20px] bg-cover bg-center px-5 py-10 sm:rounded-[28px] sm:px-8 sm:py-14 lg:px-16 lg:py-20"
         style={{
           backgroundImage: `linear-gradient(rgba(18,28,69,.55),rgba(18,28,69,.55)), url(${auditBackground})`,
         }}
       >
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
           <Reveal className="max-w-lg">
-            <h2 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
+            <h2 className="text-[32px] font-bold leading-[1.15] text-white sm:text-4xl lg:text-5xl">
               Initiate an Infrastructure Audit
             </h2>
             <p className="mt-6 text-base leading-7 text-white/85 sm:text-lg">
@@ -37,7 +37,7 @@ function InfrastructureAuditSection() {
             as="form"
             delay={150}
             onSubmit={(event) => event.preventDefault()}
-            className="w-full max-w-sm justify-self-end rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+            className="mx-auto w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl sm:p-7 lg:mx-0 lg:justify-self-center lg:p-8"
           >
             <div className="space-y-4">
               <AuditField type="text" placeholder="Name" aria-label="Name" required />
