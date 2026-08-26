@@ -256,8 +256,8 @@ export default function EnquiryForm() {
           <DetailRow label="Email" value={viewEnquiry?.email} />
           <DetailRow label="Phone" value={viewEnquiry?.mobile_number} />
           <DetailRow label="Service" value={viewEnquiry?.service_needed} />
-          <DetailRow label="Budget" value={formatBudget(viewEnquiry?.budget_rs)} />
-          <DetailRow label="Brief" value={viewEnquiry?.company_brief} />
+          {/* <DetailRow label="Budget" value={formatBudget(viewEnquiry?.budget_rs)} />
+          <DetailRow label="Brief" value={viewEnquiry?.company_brief} /> */}
           <DetailRow label="Submitted Date" value={formatDateTime(viewEnquiry?.created_at)} />
           {/* <DetailRow label="Updated" value={formatDateTime(viewEnquiry?.updated_at)} /> */}
         </dl>
