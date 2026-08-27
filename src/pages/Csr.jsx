@@ -47,35 +47,34 @@ const impactItems = [
 function Csr() {
   return (
     <main className="bg-white">
-      <section className="relative flex min-h-123.75 items-center overflow-hidden px-5 pb-8 pt-28 md:pb-12 lg:pt-32">
-  <img
-    src={csrHero}
-    alt="ASSIPL CSR"
-    className="absolute inset-0 h-full w-full object-cover object-top"
-  />
+      <section className="relative flex min-h-100 items-start overflow-hidden bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52">
+        <img
+          src={csrHero}
+          alt="ASSIPL CSR"
+          className="absolute inset-0 h-full w-full object-cover object-top"
+        />
 
-  <div
-    className="absolute inset-0"
-    style={{ background: 'linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3))' }}
-  />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3))' }}
+        />
 
-  <div className="relative z-10 mx-auto w-full max-w-297.5">
-    <a
-      href="/"
-      className="text-[24px] font-bold text-white transition hover:text-white"
-    >
-      Home
-    </a>
+        <div className="relative z-10 mx-auto w-full max-w-350">
+          <div className="mb-4 flex items-center gap-3 text-base font-medium text-white md:text-xl">
+            <a href="/" className="transition hover:text-primary">
+              Home
+            </a>
+          </div>
 
-    <h1 className="mt-5 text-5xl font-bold leading-none text-white! md:text-[64px]">
-      CSR
-    </h1>
-  </div>
-</section>
+          <h1 className="-ml-1 font-heading text-[32px] font-semibold leading-tight text-white sm:text-[40px] md:text-[52px] xl:text-[70px] xl:leading-none">
+            CSR
+          </h1>
+        </div>
+      </section>
 
-      <section className="px-5 py-20 md:py-19.5">
-        <div className="mx-auto grid max-w-347.5 gap-16 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16 lg:gap-16">
-          <div className="relative min-h-108 overflow-hidden rounded-[20px] md:min-h-118">
+      <section className="px-5 py-14 md:py-19.5">
+        <div className="mx-auto grid max-w-347.5 gap-8 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16 lg:gap-16">
+          <div className="relative order-2 min-h-108 overflow-hidden rounded-[20px] md:order-1 md:min-h-118">
             {heroSlides.map((image, index) => (
               <img
                 key={image}
@@ -87,12 +86,12 @@ function Csr() {
             ))}
           </div>
 
-          <div className="flex min-h-108 items-center bg-white px-0 py-10 md:min-h-118 md:px-0 lg:pr-10">
+          <div className="order-1 flex bg-white px-0 py-0 md:order-2 md:min-h-118 md:items-center md:px-0 md:py-10 lg:pr-10">
             <div>
               <h2 className="text-[34px] font-bold leading-[1.16] text-secondary md:text-[42px]">
                 Securing the Future. Empowering Communities.
               </h2>
-              <p className="mt-6 text-[17px] leading-8 text-text">
+              <p className="mt-6 text-justify text-[16px] leading-8 text-text md:text-left md:text-[18px]">
                 At ASSIPL, our core mission is to protect enterprise infrastructure, but our deepest
                 responsibility is to uplift the communities in which we operate. We believe that true
                 corporate success is measured not just by technological deployment, but by the
@@ -136,7 +135,7 @@ function Csr() {
           <h2 className="w-full text-center text-[34px] font-bold leading-[1.15] text-secondary md:text-[45px]">
   Project Sunshine - The Build-Operate-Run (BOR) Methodology
 </h2>
-          <div className="mt-6 w-full text-[20px] leading-[1.75] text-text">
+          <div className="mt-6 w-full text-justify text-[16px] leading-[1.75] text-text md:text-left md:text-[18px]">
             <p>
               True social responsibility means creating systems that eventually sustain themselves
               without corporate dependency. To achieve this, ASSIPL applied our enterprise execution
@@ -149,7 +148,7 @@ function Csr() {
             </p>
           </div>
 
-          <ul className="mt-4 w-full list-disc space-y-0 pl-5 text-[20px] leading-[1.75] text-text">
+          <ul className="mt-4 w-full list-disc space-y-0 pl-5 text-justify text-[16px] leading-[1.75] text-text md:text-left md:text-[18px]">
             {impactItems.map((item) => (
               <li key={item.title}>
                 <strong className="font-bold text-text">{item.title}</strong> {item.text}
