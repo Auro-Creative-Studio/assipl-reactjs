@@ -56,7 +56,7 @@ function Home() {
       <AboutSection data={homeData} />
       <ProductsSection />
       <VideoSection data={homeData} />
-      <ClientsSection data={homeData} />
+      <ClientsSection />
       <ServicesSection data={homeData} />
       <NationwideSection data={homeData} />
       <InfrastructureAuditSection data={homeData} />
