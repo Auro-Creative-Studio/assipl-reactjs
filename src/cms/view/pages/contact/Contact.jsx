@@ -11,8 +11,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn } from "react-icons/fa";
 import { Button, CmsToast, Input, Textarea } from "../../../components/ui/uiExports";
 import { getAuthHeaders } from "../../../utils/auth";
 import {
@@ -199,35 +198,14 @@ export default function ContactPage() {
     () =>
       [
         {
-          key: "facebook_link",
-          label: "Facebook",
-          href: formData.facebook_link,
-          icon: FaFacebookF,
-          className: "text-[#1877F2]",
-        },
-        {
           key: "linkedin_link",
           label: "LinkedIn",
           href: formData.linkedin_link,
           icon: FaLinkedinIn,
           className: "text-[#0A66C2]",
         },
-        {
-          key: "instagram_link",
-          label: "Instagram",
-          href: formData.instagram_link,
-          icon: FaInstagram,
-          className: "text-[#E1306C]",
-        },
-        {
-          key: "twitter_link",
-          label: "X",
-          href: formData.twitter_link,
-          icon: FaXTwitter,
-          className: "text-slate-950",
-        },
       ].filter((link) => String(link.href || "").trim()),
-    [formData.facebook_link, formData.linkedin_link, formData.instagram_link, formData.twitter_link]
+    [formData.linkedin_link]
   );
 
   const handleChange = (event) => {

@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import heroBg from '../assets/contact-page/embedded-0.webp'
+import { fetchContactPage } from '../lib/contactApi'
+import { FaLinkedinIn } from 'react-icons/fa'
 
 const API_ROOT = (
   import.meta.env.VITE_API_BASE_URL ||
@@ -45,50 +47,61 @@ function MapIcon() {
   )
 }
 
-const contactItems = [
-  {
-    icon: PhoneIcon,
-    title: 'Contact Number',
-    body: (
-      <>
-        <a href="tel:08041692300" className="text-[#667085] transition hover:text-primary">
-          080 – 41692300
-        </a>{' '}
-        /{' '}
-        <a href="tel:08043751024" className="text-[#667085] transition hover:text-primary">
-          080 – 43751024
+const defaultPhoneNumbers = ['080 – 41692300', '080 – 43751024']
+const defaultEmail = 'assipl@automationsystems.co.in'
+const defaultAddress =
+  'Automation Systems and Solutions (India) Pvt. Ltd.\nHouse No: 2497, GF, 17th Main,\nHAL 2nd Stage, Indiranagar, Bangalore – 560008.'
+const defaultAddressMapHref = 'https://www.google.com/maps?cid=12008617173707726367'
+const defaultLinkedinLink = 'https://www.linkedin.com/company/automation-systems-solutions-pvt-ltd/'
+
+const toTelHref = (value) => `tel:${value.replace(/[^\d+]/g, '')}`
+const toMailHref = (value) => `mailto:${value.trim()}`
+
+function buildContactItems(contactData) {
+  const phoneNumbers = contactData?.phoneno
+    ? contactData.phoneno.split('/').map((part) => part.trim()).filter(Boolean)
+    : defaultPhoneNumbers
+  const email = contactData?.email || defaultEmail
+  const addressLines = (contactData?.address || defaultAddress).split('\n').filter(Boolean)
+
+  return [
+    {
+      icon: PhoneIcon,
+      title: 'Contact Number',
+      body: phoneNumbers.map((phone, index) => (
+        <span key={phone}>
+          {index > 0 && ' / '}
+          <a href={toTelHref(phone)} className="text-[#667085] transition hover:text-primary">
+            {phone}
+          </a>
+        </span>
+      )),
+    },
+    {
+      icon: MailIcon,
+      title: 'Email',
+      body: (
+        <a href={toMailHref(email)} className="text-[#667085] transition hover:text-primary">
+          {email}
         </a>
-      </>
-    ),
-  },
-  {
-    icon: MailIcon,
-    title: 'Email',
-    body: (
-      <a href="mailto:assipl@automationsystems.co.in" className="text-[#667085] transition hover:text-primary">
-        assipl@automationsystems.co.in
-      </a>
-    ),
-  },
-  {
-    icon: MapIcon,
-    title: 'Office Address',
-    body: (
-      <a
-        href="https://www.google.com/maps?cid=12008617173707726367"
-        className="text-[#667085] transition hover:text-primary"
-      >
-        <strong className="font-semibold text-[#667085]">
-          Automation Systems and Solutions (India) Pvt. Ltd.
-        </strong>
-        <br />
-        House No: 2497, GF, 17th Main,
-        <br />
-        HAL 2nd Stage, Indiranagar, Bangalore – 560008.
-      </a>
-    ),
-  },
-]
+      ),
+    },
+    {
+      icon: MapIcon,
+      title: 'Office Address',
+      body: (
+        <a href={contactData?.map_link || defaultAddressMapHref} className="text-[#667085] transition hover:text-primary">
+          {addressLines.map((line, index) => (
+            <span key={line}>
+              {index > 0 && <br />}
+              {line}
+            </span>
+          ))}
+        </a>
+      ),
+    },
+  ]
+}
 
 function ContactField({ as = 'input', className = '', ...props }) {
   const Component = as
@@ -106,6 +119,30 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
+  const [contactData, setContactData] = useState(null)
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchContactPage()
+      .then((data) => {
+        if (isMounted) setContactData(data)
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const contactItems = buildContactItems(contactData)
+  const connectHeading = contactData?.contact_title || "Let's Connect"
+  const connectDescription =
+    contactData?.contact_description ||
+    'Contact us for reliable security solutions, maintenance support, and assistance.'
+  const displaySocialLinks = [
+    { key: 'linkedin', href: contactData?.linkedin_link || defaultLinkedinLink, Icon: FaLinkedinIn, label: 'LinkedIn' },
+  ]
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -167,10 +204,10 @@ function Contact() {
           <div className="mx-auto grid max-w-[1400px] gap-5 md:gap-12 lg:grid-cols-[640px_640px] lg:justify-between lg:gap-[120px]">
             <div>
               <h2 className="text-left text-[30px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
-                Let&apos;s Connect
+                {connectHeading}
               </h2>
               <p className="mt-[6px] max-w-[640px] text-[15px] font-normal leading-[1.45] text-text md:text-[16px] md:leading-[1.5]">
-                Contact us for reliable security solutions, maintenance support, and assistance.
+                {connectDescription}
               </p>
               <div className="my-[10px] h-px w-full bg-accent md:my-[18px]" />
 
@@ -197,21 +234,19 @@ function Contact() {
                 })}
               </div>
 
-              <div className="mt-[8px] pl-[66px] md:mt-[15px] md:pl-[109px]">
-                <a
-                  href="https://www.linkedin.com/company/automation-systems-solutions-pvt-ltd/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#0077b5] text-white transition hover:bg-secondary md:h-[50px] md:w-[50px]"
-                  aria-label="LinkedIn"
-                >
-                  <svg viewBox="0 0 448 512" className="h-[22px] w-[22px]" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"
-                    />
-                  </svg>
-                </a>
+              <div className="mt-[8px] flex gap-3 pl-[66px] md:mt-[15px] md:pl-[109px]">
+                {displaySocialLinks.map(({ key, href, Icon, label }) => (
+                  <a
+                    key={key}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#0077b5] text-white transition hover:bg-secondary md:h-[50px] md:w-[50px]"
+                    aria-label={label}
+                  >
+                    <Icon className="h-[20px] w-[20px]" aria-hidden="true" />
+                  </a>
+                ))}
               </div>
             </div>
 

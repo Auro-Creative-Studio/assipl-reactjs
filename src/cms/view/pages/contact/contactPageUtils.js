@@ -37,6 +37,15 @@ const CONTACT_PAGE_FIELD_CONFIG = [
     colSpan: 2,
   },
   {
+    name: "map_link",
+    label: "Map Link",
+    type: "url",
+    placeholder: "https://www.google.com/maps?cid=12008617173707726367",
+    nullable: true,
+    section: "content",
+    colSpan: 2,
+  },
+  {
     name: "email",
     label: "Email",
     type: "email",
@@ -53,34 +62,10 @@ const CONTACT_PAGE_FIELD_CONFIG = [
     section: "content",
   },
   {
-    name: "facebook_link",
-    label: "Facebook Link",
-    type: "url",
-    placeholder: "https://facebook.com/assipl",
-    nullable: true,
-    section: "social",
-  },
-  {
     name: "linkedin_link",
     label: "LinkedIn Link",
     type: "url",
     placeholder: "https://linkedin.com/company/assipl",
-    nullable: true,
-    section: "social",
-  },
-  {
-    name: "instagram_link",
-    label: "Instagram Link",
-    type: "url",
-    placeholder: "https://instagram.com/_assipl_",
-    nullable: true,
-    section: "social",
-  },
-  {
-    name: "twitter_link",
-    label: "X / Twitter Link",
-    type: "url",
-    placeholder: "https://x.com/assipl",
     nullable: true,
     section: "social",
   },
@@ -247,7 +232,7 @@ export const validateContactPage = (formData = {}) => {
     errors.phoneno = "Enter a valid phone number.";
   }
 
-  CONTACT_PAGE_FIELD_CONFIG.filter((field) => field.section === "social").forEach((field) => {
+  CONTACT_PAGE_FIELD_CONFIG.filter((field) => field.type === "url").forEach((field) => {
     const value = normalizeString(formData[field.name]).trim();
     if (value && !isValidHttpUrl(value)) {
       errors[field.name] = "Enter a valid URL starting with http:// or https://.";

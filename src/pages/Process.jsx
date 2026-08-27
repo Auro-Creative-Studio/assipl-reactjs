@@ -10,8 +10,9 @@ import executionIcon from '../assets/process-page/execution-icon.png'
 import executionPhoto from '../assets/process-page/execution-photo.webp'
 import handoverIcon from '../assets/process-page/handover-icon.png'
 import handoverPhoto from '../assets/process-page/handover-photo.webp'
+import { fetchProcess, getMediaUrl } from '../lib/processApi'
 
-const processSteps = [
+const defaultProcessSteps = [
   {
     icon: blueprintIcon,
     image: blueprintPhoto,
@@ -99,8 +100,8 @@ function ProcessStep({ step, index, isActive, markerRef }) {
         {step.title}
       </h2>
       <ul className="mt-4 list-disc space-y-[6px] pl-5">
-        {step.points.map((point) => (
-          <li key={point.label} className="text-[16px] font-normal leading-[1.6] text-text md:text-[17px]">
+        {step.points.map((point, pointIndex) => (
+          <li key={`${point.label}-${pointIndex}`} className="text-[16px] font-normal leading-[1.6] text-text md:text-[17px]">
             <span className="font-semibold text-secondary">{point.label}</span> {point.text}
           </li>
         ))}
@@ -150,6 +151,50 @@ function Process() {
   const [activeStep, setActiveStep] = useState(0)
   const [lineMetrics, setLineMetrics] = useState({ top: 30, height: 0, progress: 0 })
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
+  const [processData, setProcessData] = useState(null)
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchProcess()
+      .then((data) => {
+        if (isMounted) setProcessData(data)
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const heroBackgroundImage = processData?.hero_background_image
+    ? getMediaUrl(processData.hero_background_image)
+    : heroBg
+  const heroTitle = processData?.hero_title || 'Process'
+  const introHeading = processData?.intro_heading || 'Engineered for Absolute Accountability'
+  const introDescription =
+    processData?.intro_description ||
+    `Executing multi-site security rollouts requires more than advanced hardware; it
+    demands an unbreakable operational framework. From initial site audit to final
+    handover, our structured deployment journey eliminates bottlenecks, ensures complete
+    transparency, and guarantees your critical infrastructure is delivered on time, every
+    time.`
+  const processSteps = processData?.steps?.length
+    ? processData.steps.map((step, index) => ({
+        icon: step.icon ? getMediaUrl(step.icon) : defaultProcessSteps[index % defaultProcessSteps.length].icon,
+        image: step.image ? getMediaUrl(step.image) : defaultProcessSteps[index % defaultProcessSteps.length].image,
+        title: step.title || '',
+        points: step.points?.length ? step.points : [],
+      }))
+    : defaultProcessSteps
+  const ctaBackgroundImage = processData?.cta_background_image
+    ? getMediaUrl(processData.cta_background_image)
+    : ctaBg
+  const ctaHeading = processData?.cta_heading || 'Experience Seamless Project Execution'
+  const ctaDescription =
+    processData?.cta_description ||
+    'Connect with our integration experts to discuss how our disciplined deployment process can secure your next enterprise rollout.'
+  const ctaButtonLabel = processData?.cta_button_label || 'Consult Our Engineering Team'
 
   useEffect(() => {
     const updateTimeline = () => {
@@ -197,7 +242,7 @@ function Process() {
       window.removeEventListener('scroll', updateTimeline)
       window.removeEventListener('resize', updateTimeline)
     }
-  }, [])
+  }, [processSteps.length])
 
   return (
     <div className="bg-white font-body">
@@ -205,7 +250,7 @@ function Process() {
         <section
           className="relative flex min-h-100 items-start bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBackgroundImage})`,
           }}
         >
           <div className="mx-auto w-full max-w-[1200px] pt-[2px]">
@@ -216,7 +261,7 @@ function Process() {
               className="-ml-1 mt-[10px] text-[45px] font-semibold leading-[1.05] md:text-[70px]"
               style={{ color: 'var(--color-white)' }}
             >
-              Process
+              {heroTitle}
             </h1>
           </div>
         </section>
@@ -224,14 +269,10 @@ function Process() {
         <section className="px-5 py-[80px]">
           <div className="mx-auto max-w-[1200px] text-center">
             <h1 className="mx-auto max-w-[980px] text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
-              Engineered for Absolute Accountability
+              {introHeading}
             </h1>
             <p className="mx-auto mt-[20px] max-w-[1180px] text-justify text-[18px] font-normal leading-[1.5] text-text md:text-center">
-              Executing multi-site security rollouts requires more than advanced hardware; it
-              demands an unbreakable operational framework. From initial site audit to final
-              handover, our structured deployment journey eliminates bottlenecks, ensures complete
-              transparency, and guarantees your critical infrastructure is delivered on time, every
-              time.
+              {introDescription}
             </p>
           </div>
 
@@ -247,7 +288,7 @@ function Process() {
             </div>
             {processSteps.map((step, index) => (
               <ProcessStep
-                key={step.title}
+                key={`${step.title}-${index}`}
                 step={step}
                 index={index}
                 isActive={index <= activeStep}
@@ -263,7 +304,7 @@ function Process() {
           <div
             className="min-h-[415px] bg-cover bg-center px-5 py-[80px] md:px-0"
             style={{
-              backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBg})`,
+              backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBackgroundImage})`,
             }}
           >
             <div className="mx-auto flex min-h-[255px] max-w-[1680px] flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
@@ -272,14 +313,13 @@ function Process() {
                   className="text-[32px] font-semibold leading-[1.125] md:text-[45px]"
                   style={{ color: 'var(--color-white)' }}
                 >
-                  Experience Seamless Project Execution
+                  {ctaHeading}
                 </h2>
                 <p
                   className="mt-[20px] max-w-[720px] text-[16px] font-normal leading-[1.67]"
                   style={{ color: 'var(--color-white)' }}
                 >
-                  Connect with our integration experts to discuss how our disciplined deployment
-                  process can secure your next enterprise rollout.
+                  {ctaDescription}
                 </p>
               </div>
               <button
@@ -287,7 +327,7 @@ function Process() {
                 onClick={() => setIsEnquiryOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-[40px] py-[14px] text-[18px] font-medium capitalize leading-[1.5] text-[var(--color-white)] transition hover:bg-secondary hover:text-[var(--color-white)] md:mr-[20px]"
               >
-                Consult Our Engineering Team
+                {ctaButtonLabel}
               </button>
             </div>
           </div>

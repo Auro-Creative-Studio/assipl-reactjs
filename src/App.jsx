@@ -27,11 +27,10 @@ import NewsletterSubscribers from './cms/view/NewsletterSubscribers'
 import CmsAboutPage from './cms/view/pages/about/About'
 import CmsContactPage from './cms/view/pages/contact/Contact'
 import CmsCsrPage from './cms/view/pages/csr/Csr'
+import CmsHomePage from './cms/view/pages/home/Home'
+import CmsProcessPage from './cms/view/pages/process/Process'
 import CmsServicesPage from './cms/view/pages/services/Services'
 import Profile from './cms/view/Profile'
-import SeoCreate from './cms/view/seo/Create'
-import SeoEdit from './cms/view/seo/Edit'
-import SeoList from './cms/view/seo/List'
 import UserCreate from './cms/view/users/Create'
 import UserEdit from './cms/view/users/Edit'
 import UserList from './cms/view/users/List'
@@ -90,6 +89,8 @@ function App() {
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
 
+          <Route path="pages/home" element={<CmsHomePage />} />
+          <Route path="pages/process" element={<CmsProcessPage />} />
           <Route path="pages/contact" element={<CmsContactPage />} />
           <Route path="pages/csr" element={<CmsCsrPage />} />
           <Route path="pages/about" element={<CmsAboutPage />} />
@@ -97,9 +98,6 @@ function App() {
           <Route path="enquiries" element={<EnquiryForm />} />
           <Route path="contacts" element={<ContactForm />} />
           <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />
-          <Route path="seo" element={<SeoList />} />
-          <Route path="seo/create" element={<SeoCreate />} />
-          <Route path="seo/edit/:id" element={<SeoEdit />} />
           <Route path="blogs" element={<BlogList />} />
           <Route path="blogs/create" element={<BlogCreate />} />
           <Route path="blogs/edit/:id" element={<BlogEdit />} />

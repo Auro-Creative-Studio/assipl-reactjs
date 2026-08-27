@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/logo-light.png'
 import Reveal from './Reveal'
 import { fetchPublishedProducts } from '../lib/productsApi'
+import { fetchContactPage } from '../lib/contactApi'
+import { FaLinkedinIn } from 'react-icons/fa'
+
+const defaultPhoneNumbers = ['080 – 41692300', '080 – 43751024']
+const defaultEmail = 'assipl@automationsystems.co.in'
+const defaultAddressText = 'House No: 2497, GF, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore – 560008.'
+const defaultAddressMapHref = 'https://maps.app.goo.gl/APLDUrrqLS96XhFi9'
+const defaultLinkedinLink = 'https://www.linkedin.com/company/automation-systems-solutions-pvt-ltd/'
+
+const toTelHref = (value) => `tel:${value.replace(/[^\d+]/g, '')}`
+const toMailHref = (value) => `mailto:${value.trim()}`
 
 const fallbackProducts = [
   { label: 'Video Surveillance', to: '/products/video-surveillance' },
@@ -16,6 +27,7 @@ const fallbackProducts = [
 function Footer() {
   const currentYear = new Date().getFullYear()
   const [products, setProducts] = useState(fallbackProducts)
+  const [contactData, setContactData] = useState(null)
   const quickLinks = [
     { label: 'Home', to: '/' },
     { label: 'About Us', to: '/about' },
@@ -47,6 +59,37 @@ function Footer() {
     }
   }, [])
 
+  useEffect(() => {
+    let isMounted = true
+
+    fetchContactPage()
+      .then((data) => {
+        if (isMounted) setContactData(data)
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const phoneNumbers = contactData?.phoneno
+    ? contactData.phoneno.split('/').map((part) => part.trim()).filter(Boolean)
+    : defaultPhoneNumbers
+  const email = contactData?.email || defaultEmail
+  const addressText = contactData?.address
+    ? contactData.address.replace(/\n+/g, ' ').trim()
+    : defaultAddressText
+  const displaySocialLinks = [
+    {
+      key: 'linkedin',
+      href: contactData?.linkedin_link || defaultLinkedinLink,
+      Icon: FaLinkedinIn,
+      label: 'ASSIPL on LinkedIn',
+    },
+  ]
+  const addressMapHref = contactData?.map_link || defaultAddressMapHref
+
   return (
     <footer className="mt-auto bg-secondary text-white">
       <div className="mx-auto grid max-w-7xl gap-18 px-5 pt-15 pb-12 md:grid-cols-[1.2fr_1fr_1fr_1.25fr]">
@@ -56,17 +99,20 @@ function Footer() {
             ASSIPL operates at the intersection of advanced technology and rigorous field
             engineering.
           </p>
-          <a
-            href="https://www.linkedin.com/company/automation-systems-solutions-pvt-ltd/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="ASSIPL on LinkedIn"
-            className="mt-2.5 flex h-9 w-9 items-center justify-center rounded-full border border-white text-white transition hover:border-primary hover:bg-primary"
-          >
-            <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3.846 0.427c-2.125 0-3.846 1.723-3.846 3.844 0 2.123 1.72 3.846 3.846 3.846 2.12 0 3.843-1.723 3.843-3.846 0-2.121-1.723-3.844-3.843-3.844zM0.529 11.034h6.632v21.338h-6.632v-21.338zM24.045 10.504c-3.226 0-5.389 1.769-6.275 3.446h-0.089v-2.916h-6.361v21.338h6.626v-10.556c0-2.783 0.53-5.478 3.98-5.478 3.401 0 3.446 3.183 3.446 5.657v10.377h6.627v-11.704c0-5.745-1.24-10.164-7.955-10.164z" />
-            </svg>
-          </a>
+          <div className="mt-2.5 flex gap-2">
+            {displaySocialLinks.map(({ key, href, Icon, label }) => (
+              <a
+                key={key}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white text-white transition hover:border-primary hover:bg-primary"
+              >
+                <Icon className="h-3.5 w-3.5" />
+              </a>
+            ))}
+          </div>
         </Reveal>
         <Reveal delay={100}>
           <h3 className="mb-5 text-2xl leading-[1.6] font-medium tracking-[0.015em] text-white">Quick Links</h3>
@@ -108,24 +154,25 @@ function Footer() {
           <h3 className="mb-5 text-2xl leading-[1.6] font-medium tracking-[0.015em] text-white">Contact Us</h3>
           <div className="max-w-87.5 space-y-4 text-lg leading-[1.67] text-white/75">
             <a
-              href="https://maps.app.goo.gl/APLDUrrqLS96XhFi9"
+              href={addressMapHref}
               target="_blank"
               rel="noreferrer"
               className="block transition hover:text-white"
             >
-              House No: 2497, GF, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore – 560008.
+              {addressText}
             </a>
             <p>
-              <a href="tel:08041692300" className="hover:text-white">
-                080 – 41692300
-              </a>{' '}
-              /{' '}
-              <a href="tel:08043751024" className="hover:text-white">
-                080 – 43751024
-              </a>
+              {phoneNumbers.map((phone, index) => (
+                <span key={phone}>
+                  {index > 0 && ' / '}
+                  <a href={toTelHref(phone)} className="hover:text-white">
+                    {phone}
+                  </a>
+                </span>
+              ))}
             </p>
-            <a href="mailto:assipl@automationsystems.co.in" className="block hover:text-white">
-              assipl@automationsystems.co.in
+            <a href={toMailHref(email)} className="block hover:text-white">
+              {email}
             </a>
           </div>
         </Reveal>

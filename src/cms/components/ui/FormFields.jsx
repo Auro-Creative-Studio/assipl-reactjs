@@ -132,7 +132,7 @@ export const Textarea = ({
         onChange={onChange}
         disabled={disabled}
         rows={rows}
-        className={`${fieldBaseClasses} ${getFieldStateClasses(error)} min-h-[112px] resize-y leading-relaxed`}
+        className={`${fieldBaseClasses} ${getFieldStateClasses(error)} min-h-28 resize-y leading-relaxed`}
       />
       <ErrorText error={error} />
     </div>
@@ -192,7 +192,7 @@ export const FileUpload = ({
       <label
         htmlFor={name}
         className={`
-          flex min-h-[150px] cursor-pointer flex-col items-center justify-center rounded-xl
+          flex min-h-38 cursor-pointer flex-col items-center justify-center rounded-xl
           border border-dashed bg-white px-5 py-6 text-center shadow-sm transition duration-200
           ${error ? "border-rose-400" : "border-slate-300 hover:border-slate-500 hover:bg-slate-50"}
           ${disabled ? "cursor-not-allowed bg-slate-50 opacity-60" : ""}

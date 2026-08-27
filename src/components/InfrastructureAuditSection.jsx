@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import Reveal from './Reveal'
 import auditBackground from '../assets/services/audit-cta-bg.webp'
+import { getMediaUrl } from '../lib/homeApi'
 
 const API_ROOT = (
   import.meta.env.VITE_API_BASE_URL ||
@@ -24,7 +25,15 @@ function AuditField({ as = 'input', className = '', ...props }) {
   )
 }
 
-function InfrastructureAuditSection() {
+function InfrastructureAuditSection({ data }) {
+  const heading = data?.audit_heading || 'Initiate an Infrastructure Audit'
+  const description =
+    data?.audit_description ||
+    `Your enterprise operates on a national scale, and so do we. With our central operations and regional
+    hubs clearly established across India, ASSIPL guarantees rapid field response times, unified
+    engineering standards, and seamless multi-site rollouts nationwide.`
+  const backgroundImage = data?.audit_background_image ? getMediaUrl(data.audit_background_image) : auditBackground
+
   const [formData, setFormData] = useState(initialForm)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -59,18 +68,16 @@ function InfrastructureAuditSection() {
       <div
         className="relative mx-auto min-h-[708px] max-w-[1400px] overflow-hidden rounded-[24px] bg-cover bg-center px-5 py-10 sm:px-8 sm:py-12 lg:px-[112px] lg:py-[50px]"
         style={{
-          backgroundImage: `linear-gradient(rgba(18,28,69,.25),rgba(18,28,69,.25)), url(${auditBackground})`,
+          backgroundImage: `linear-gradient(rgba(18,28,69,.25),rgba(18,28,69,.25)), url(${backgroundImage})`,
         }}
       >
         <div className="grid min-h-[608px] gap-8 lg:grid-cols-[1fr_491px] lg:items-start lg:gap-[50px]">
           <Reveal className="max-w-[650px] lg:pt-[38px]">
             <h2 className="max-w-[400px] text-[38px] font-semibold leading-[1.22] text-white sm:text-[44px]">
-              Initiate an Infrastructure Audit
+              {heading}
             </h2>
             <p className="mt-6 max-w-[650px] text-justify text-[16px] font-normal leading-[1.5] text-[#f5f5f5] md:text-left sm:text-[18px]">
-              Your enterprise operates on a national scale, and so do we. With our central operations and regional
-              hubs clearly established across India, ASSIPL guarantees rapid field response times, unified
-              engineering standards, and seamless multi-site rollouts nationwide.
+              {description}
             </p>
           </Reveal>
 
