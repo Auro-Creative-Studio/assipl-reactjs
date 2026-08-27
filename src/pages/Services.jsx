@@ -79,7 +79,7 @@ function Services() {
     <div className="bg-white font-body">
       <main>
         <section
-          className="relative flex min-h-120 items-center bg-cover bg-center px-5 pt-28"
+          className="relative flex min-h-100 items-start bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52"
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
           }}
@@ -102,7 +102,7 @@ function Services() {
             <h2 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
               End-to-End Enterprise Integration Services
             </h2>
-            <p className="mx-auto mt-5 max-w-295 text-[18px] font-normal leading-normal text-text">
+            <p className="mx-auto mt-5 max-w-295 text-justify text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px]">
               We deliver complete operational readiness. We operate within a disciplined,
               sequential execution framework that bridges the gap between raw blueprints and active
               field deployment. From the first structural audit to ongoing preventative maintenance,
@@ -130,7 +130,7 @@ function Services() {
                       <h3 className="text-[22px] font-semibold leading-[1.45] text-secondary">
                         {item.title}
                       </h3>
-                      <p className="mt-2 max-w-155 text-[18px] font-normal leading-normal text-text">{item.text}</p>
+                      <p className="mt-2 max-w-155 text-justify text-[16px] font-normal leading-normal text-text md:text-left md:text-[18px]">{item.text}</p>
                       {index === 1 && (
                         <Link
                           to="/strategic-planning-design"
@@ -153,7 +153,7 @@ function Services() {
               <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                 Core Project Execution (SITC)
               </h2>
-              <p className="mx-auto mt-6 max-w-280 text-[18px] font-normal leading-normal text-text">
+              <p className="mx-auto mt-6 max-w-280 text-justify text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px]">
                 At the core of our deployment methodology is our comprehensive execution capability.
                 We take absolute accountability for the complete Supply, Installation, Testing &
                 commissioning of your security architecture.
@@ -174,7 +174,7 @@ function Services() {
                   <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-[16px] font-normal leading-[1.67] text-text">{item.text}</p>
+                  <p className="mt-3 text-justify text-[16px] font-normal leading-[1.67] text-text md:text-left">{item.text}</p>
                 </article>
               ))}
             </div>
@@ -213,7 +213,7 @@ function Services() {
                   <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-[16px] font-normal leading-[1.67] text-text">{item.text}</p>
+                  <p className="mt-3 text-justify text-[16px] font-normal leading-[1.67] text-text md:text-left">{item.text}</p>
                 </article>
               ))}
             </div>
@@ -236,7 +236,7 @@ function Services() {
                   Ready to Standardize Your Enterprise Infrastructure?
                 </h2>
                 <p
-                  className="mt-5 max-w-180 text-[16px] font-normal leading-[1.67]"
+                  className="mt-5 max-w-180 text-justify text-[16px] font-normal leading-[1.67] md:text-left"
                   style={{ color: 'var(--color-white)' }}
                 >
                   Connect with our systems integration experts to discuss multi-site rollouts, vault

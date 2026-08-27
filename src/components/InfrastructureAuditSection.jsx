@@ -67,7 +67,7 @@ function InfrastructureAuditSection() {
             <h2 className="max-w-[400px] text-[38px] font-semibold leading-[1.22] text-white sm:text-[44px]">
               Initiate an Infrastructure Audit
             </h2>
-            <p className="mt-6 max-w-[650px] text-[16px] font-normal leading-[1.5] text-[#f5f5f5] sm:text-[18px]">
+            <p className="mt-6 max-w-[650px] text-justify text-[16px] font-normal leading-[1.5] text-[#f5f5f5] md:text-left sm:text-[18px]">
               Your enterprise operates on a national scale, and so do we. With our central operations and regional
               hubs clearly established across India, ASSIPL guarantees rapid field response times, unified
               engineering standards, and seamless multi-site rollouts nationwide.

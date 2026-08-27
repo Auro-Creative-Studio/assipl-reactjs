@@ -142,7 +142,7 @@ function Contact() {
     <div className="bg-white font-body">
       <main>
         <section
-          className="relative flex min-h-[350px] items-center bg-cover bg-center px-5 pt-[90px] md:min-h-[450px] md:pt-[112px] lg:min-h-[500px]"
+          className="relative flex min-h-100 items-start bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52"
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
           }}

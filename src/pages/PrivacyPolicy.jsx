@@ -287,7 +287,7 @@ function PrivacyPolicy() {
   return (
     <main className="bg-white">
       <section
-        className="relative flex min-h-125 items-center bg-cover bg-center px-5 pt-28"
+        className="relative flex min-h-100 items-start bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52"
         style={{ backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})` }}
       >
         <div className="mx-auto w-full max-w-300 pt-0.5">

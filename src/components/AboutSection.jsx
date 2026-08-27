@@ -12,7 +12,7 @@ function AboutSection() {
           <h2 className="text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[42px]">
             Precision Engineering. Nationwide Support.
           </h2>
-          <p className="mt-6 text-base leading-8 text-text sm:text-lg">
+          <p className="mt-6 text-justify text-base leading-8 text-text md:text-left sm:text-lg">
             Automation Systems and Solutions (India) Pvt. Ltd. (ASSIPL) specializes in low voltage system
             integration delivering robust electronic security &amp; safety solutions. We excel in complex,
             multi-site rollouts and critical infrastructure for India&apos;s most demanding sectors. Our scalable

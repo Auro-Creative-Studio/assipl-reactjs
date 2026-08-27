@@ -11,7 +11,7 @@ function NationwideSection() {
             <h2 className="max-w-[760px] text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[54px]">
               Nationwide Scale. Localized Response.
             </h2>
-            <p className="mt-[26px] max-w-[880px] text-base leading-[1.55] text-[#63708a] sm:text-[18px]">
+            <p className="mt-[26px] max-w-[880px] text-justify text-base leading-[1.55] text-[#63708a] md:text-left sm:text-[18px]">
               Your enterprise operates on a national scale, and so do we. With our central operations and regional
               hubs clearly established across India, ASSIPL guarantees rapid field response times, unified
               engineering standards, and seamless multi-site rollouts nationwide.

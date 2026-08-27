@@ -85,7 +85,7 @@ function CapabilityCard({ item, index, total }) {
       }`}
     >
       <h3 className="text-[24px] font-semibold leading-tight text-secondary">{item.title}</h3>
-      <RichText html={item.body} className="mt-5 text-[16px] leading-7 text-text md:text-[18px] [&_ul]:mt-0" />
+      <RichText html={item.body} className="mt-5 text-justify text-[16px] leading-7 text-text md:text-left md:text-[18px] [&_ul]:mt-0" />
     </article>
   )
 }
@@ -205,7 +205,7 @@ function SingleProduct() {
           )}
 
           {product.description && (
-            <Reveal as="p" className="text-[16px] leading-8 text-text md:text-[18px]">
+            <Reveal as="p" className="text-justify text-[16px] leading-8 text-text md:text-left md:text-[18px]">
               {product.description}
             </Reveal>
           )}
