@@ -11,6 +11,7 @@ import mainImageFallback from '../assets/services/occm-main.webp'
 import modelImageFallbackA from '../assets/services/occm-amc-comprehensive.webp'
 import modelImageFallbackB from '../assets/services/occm-amc-non-comprehensive.webp'
 import { fetchPublishedSingleServices, fetchSingleServiceBySlug, getMediaUrl } from '../lib/singleServicesApi'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const modelImageFallbacks = [modelImageFallbackA, modelImageFallbackB]
 
@@ -154,6 +155,19 @@ function SingleService({ routeSlug = null }) {
       isMounted = false
     }
   }, [slug])
+
+  useSeoMeta({
+    title: service?.meta_title || (service?.title ? `${service.title} | ASSIPL` : undefined),
+    description:
+      service?.meta_description ||
+      (service?.overview_description ? service.overview_description.replace(/<[^>]*>/g, ' ').trim().slice(0, 200) : undefined),
+    keywords: service?.meta_keywords,
+    ogTitle: service?.og_title,
+    ogDescription: service?.og_description,
+    ogImage: service?.og_image || service?.featured_image || service?.banner_image,
+    robotsIndex: service?.robots_index,
+    robotsFollow: service?.robots_follow,
+  })
 
   if (isLoading) {
     return (

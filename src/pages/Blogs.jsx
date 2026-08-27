@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import heroBackground from '../assets/blogs/blogs-hero-bg.webp'
 import { fetchPublishedBlogs, getMediaUrl } from '../lib/blogsApi'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 function BlogCard({ post }) {
   return (
@@ -36,6 +37,11 @@ function Blogs() {
   const [posts, setPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+
+  useSeoMeta({
+    title: 'Blogs | ASSIPL',
+    description: 'Insights and updates from ASSIPL on security systems, integration, and infrastructure.',
+  })
 
   useEffect(() => {
     let isMounted = true

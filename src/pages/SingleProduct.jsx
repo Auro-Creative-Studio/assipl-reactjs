@@ -6,6 +6,7 @@ import Reveal from '../components/Reveal'
 import RichText from '../components/RichText'
 import contactBackground from '../assets/products/video-surveillance-bg-3.webp'
 import { fetchProductBySlug, fetchPublishedProducts, getMediaUrl } from '../lib/productsApi'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 function ProductSidebar({ productLinks, currentSlug, onEnquiryClick, className = '' }) {
   return (
@@ -122,6 +123,27 @@ function SingleProduct() {
       isMounted = false
     }
   }, [slug])
+
+  useSeoMeta({
+    title: product?.meta_title || (product?.title ? `${product.title} | ASSIPL` : undefined),
+    description: product?.meta_description || product?.excerpt,
+    keywords: product?.meta_keywords,
+    ogTitle: product?.og_title,
+    ogDescription: product?.og_description,
+    ogImage: product?.og_image || product?.main_image || product?.front_image,
+    robotsIndex: product?.robots_index,
+    robotsFollow: product?.robots_follow,
+    structuredData: product
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.title,
+          description: product.excerpt || undefined,
+          image: getMediaUrl(product.front_image || product.main_image) || undefined,
+          brand: { '@type': 'Brand', name: 'ASSIPL' },
+        }
+      : undefined,
+  })
 
   if (isLoading) {
     return (

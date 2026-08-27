@@ -1,5 +1,6 @@
 import heroBg from '../assets/terms.webp'
 import LegalSection from '../components/LegalSection'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const contactDetails = [
   'Company Name: Automations Systems and Solutions (ASSIPL)',
@@ -550,6 +551,11 @@ const sections = [
 ]
 
 function TermsConditions() {
+  useSeoMeta({
+    title: 'Terms and Conditions | ASSIPL',
+    description: 'Read the terms and conditions governing the use of the ASSIPL website and services.',
+  })
+
   return (
     <main className="bg-white">
       <section

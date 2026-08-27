@@ -1,5 +1,6 @@
 import heroBg from '../assets/privacy-policy-hero.webp'
 import LegalSection from '../components/LegalSection'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const sections = [
   {
@@ -284,6 +285,11 @@ const sections = [
 ]
 
 function PrivacyPolicy() {
+  useSeoMeta({
+    title: 'Privacy Policy | ASSIPL',
+    description: 'Read the ASSIPL privacy policy to understand how we collect, use, and protect your information.',
+  })
+
   return (
     <main className="bg-white">
       <section

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import heroBg from '../assets/contact-page/embedded-0.webp'
 import { fetchContactPage } from '../lib/contactApi'
 import { FaLinkedinIn } from 'react-icons/fa'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const API_ROOT = (
   import.meta.env.VITE_API_BASE_URL ||
@@ -143,6 +144,11 @@ function Contact() {
   const displaySocialLinks = [
     { key: 'linkedin', href: contactData?.linkedin_link || defaultLinkedinLink, Icon: FaLinkedinIn, label: 'LinkedIn' },
   ]
+
+  useSeoMeta({
+    title: contactData?.contact_title ? `${contactData.contact_title} | ASSIPL` : 'Contact | ASSIPL',
+    description: contactData?.contact_description || connectDescription,
+  })
 
   const handleChange = (event) => {
     const { name, value } = event.target

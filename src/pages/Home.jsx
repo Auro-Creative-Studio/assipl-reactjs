@@ -9,6 +9,7 @@ import ProductsSection from '../components/ProductsSection'
 import ServicesSection from '../components/ServicesSection'
 import VideoSection from '../components/VideoSection'
 import { fetchHome } from '../lib/homeApi'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 function Home() {
   const [homeData, setHomeData] = useState(null)
@@ -26,6 +27,27 @@ function Home() {
       isMounted = false
     }
   }, [])
+
+  useSeoMeta({
+    title: homeData?.meta_title || 'Automation Systems and Solutions | ASSIPL',
+    description:
+      homeData?.meta_description ||
+      'Integrated Security Solutions for BFSI, IT Parks, Industries, and Critical Infrastructure.',
+    keywords: homeData?.meta_keywords,
+    ogTitle: homeData?.og_title,
+    ogDescription: homeData?.og_description,
+    ogImage: homeData?.og_image,
+    robotsIndex: homeData?.robots_index,
+    robotsFollow: homeData?.robots_follow,
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Automation Systems and Solutions (India) Pvt. Ltd.',
+      alternateName: 'ASSIPL',
+      url: window.location.origin,
+      logo: `${window.location.origin}/favicon.webp`,
+    },
+  })
 
   return (
     <main>

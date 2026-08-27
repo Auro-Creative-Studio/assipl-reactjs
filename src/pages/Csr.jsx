@@ -5,6 +5,7 @@ import { Autoplay, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 import bodhgayaRation from '../assets/csr/bodhgaya-provides-ration.jpg'
 import drawingChildrens from '../assets/csr/drawing-childrens.jpg'
@@ -113,6 +114,19 @@ function Csr() {
       isMounted = false
     }
   }, [])
+
+  useSeoMeta({
+    title: csr?.meta_title || 'CSR | ASSIPL',
+    description:
+      csr?.meta_description ||
+      'Corporate social responsibility initiatives by Automation Systems and Solutions (India) Pvt. Ltd.',
+    keywords: csr?.meta_keywords,
+    ogTitle: csr?.og_title,
+    ogDescription: csr?.og_description,
+    ogImage: csr?.og_image,
+    robotsIndex: csr?.robots_index,
+    robotsFollow: csr?.robots_follow,
+  })
 
   if (isLoading) {
     return (

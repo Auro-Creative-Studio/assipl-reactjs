@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import RichText from '../components/RichText'
 import { fetchBlogBySlug, getMediaUrl } from '../lib/blogsApi'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 function ImageSection({ image, title, body, reverse = false }) {
   return (
@@ -67,6 +68,34 @@ function SingleBlog() {
       isMounted = false
     }
   }, [slug])
+
+  useSeoMeta({
+    title: blog?.meta_title || (blog?.title ? `${blog.title} | ASSIPL` : undefined),
+    description: blog?.meta_description || blog?.excerpt,
+    keywords: blog?.meta_keywords,
+    ogTitle: blog?.og_title,
+    ogDescription: blog?.og_description,
+    ogImage: blog?.og_image || blog?.featured_image,
+    robotsIndex: blog?.robots_index,
+    robotsFollow: blog?.robots_follow,
+    structuredData: blog
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: blog.title,
+          description: blog.excerpt || undefined,
+          image: getMediaUrl(blog.hero_image || blog.featured_image) || undefined,
+          datePublished: blog.created_at,
+          dateModified: blog.updated_at,
+          mainEntityOfPage: window.location.href,
+          publisher: {
+            '@type': 'Organization',
+            name: 'ASSIPL',
+            logo: { '@type': 'ImageObject', url: `${window.location.origin}/favicon.webp` },
+          },
+        }
+      : undefined,
+  })
 
   if (isLoading) {
     return (

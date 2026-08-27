@@ -11,6 +11,7 @@ import executionPhoto from '../assets/process-page/execution-photo.webp'
 import handoverIcon from '../assets/process-page/handover-icon.png'
 import handoverPhoto from '../assets/process-page/handover-photo.webp'
 import { fetchProcess, getMediaUrl } from '../lib/processApi'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const defaultProcessSteps = [
   {
@@ -195,6 +196,19 @@ function Process() {
     processData?.cta_description ||
     'Connect with our integration experts to discuss how our disciplined deployment process can secure your next enterprise rollout.'
   const ctaButtonLabel = processData?.cta_button_label || 'Consult Our Engineering Team'
+
+  useSeoMeta({
+    title: processData?.meta_title || 'Process | ASSIPL',
+    description:
+      processData?.meta_description ||
+      'Our structured deployment process for enterprise security rollouts, from strategic blueprinting to handover.',
+    keywords: processData?.meta_keywords,
+    ogTitle: processData?.og_title,
+    ogDescription: processData?.og_description,
+    ogImage: processData?.og_image,
+    robotsIndex: processData?.robots_index,
+    robotsFollow: processData?.robots_follow,
+  })
 
   useEffect(() => {
     const updateTimeline = () => {

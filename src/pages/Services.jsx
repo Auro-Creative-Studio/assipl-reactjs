@@ -14,6 +14,7 @@ import commissioningIcon from '../assets/services/discount.png'
 import trainingImg from '../assets/services/training.webp'
 import serviceImg from '../assets/services/service.webp'
 import maintenanceImg from '../assets/services/maintenance.webp'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const FALLBACK_SERVICES_PAGE = {
   banner_image: heroBg,
@@ -161,6 +162,19 @@ function Services() {
       isMounted = false
     }
   }, [])
+
+  useSeoMeta({
+    title: page?.meta_title || 'Services | ASSIPL',
+    description:
+      page?.meta_description ||
+      'End-to-end enterprise integration services from ASSIPL, from strategic planning to lifecycle maintenance.',
+    keywords: page?.meta_keywords,
+    ogTitle: page?.og_title,
+    ogDescription: page?.og_description,
+    ogImage: page?.og_image,
+    robotsIndex: page?.robots_index,
+    robotsFollow: page?.robots_follow,
+  })
 
   if (isLoading) {
     return (

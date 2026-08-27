@@ -2,8 +2,14 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import ProductsSection from '../components/ProductsSection'
 import heroBackground from '../assets/products/products-hero-bg.webp'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 function Products() {
+  useSeoMeta({
+    title: 'Products | ASSIPL',
+    description: 'Explore ASSIPL’s range of electronic security and safety products, from surveillance to fire detection.',
+  })
+
   return (
     <main className="bg-white">
       <section

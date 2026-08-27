@@ -1,4 +1,11 @@
+import { useSeoMeta } from '../hooks/useSeoMeta'
+
 function Career() {
+  useSeoMeta({
+    title: 'Careers | ASSIPL',
+    description: 'Join the ASSIPL team. Open positions and application details will be listed here soon.',
+  })
+
   return (
     <main className="mx-auto max-w-6xl px-5 py-10">
       <section className="max-w-3xl">

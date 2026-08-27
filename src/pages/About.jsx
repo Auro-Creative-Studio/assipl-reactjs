@@ -28,6 +28,7 @@ import statTeam from '../assets/about-page/embedded-24.png'
 import statIndia from '../assets/about-page/embedded-25.png'
 import statService from '../assets/about-page/embedded-26.png'
 import careerImage from '../assets/about-page/embedded-29.webp'
+import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const FALLBACK_ABOUT = {
   banner_image: heroBg,
@@ -190,6 +191,19 @@ function About() {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 0)
   }, [location.hash])
+
+  useSeoMeta({
+    title: about?.meta_title || 'About Us | ASSIPL',
+    description:
+      about?.meta_description ||
+      "India's trusted security infrastructure partner, delivering integrated electronic security and safety solutions since 2009.",
+    keywords: about?.meta_keywords,
+    ogTitle: about?.og_title,
+    ogDescription: about?.og_description,
+    ogImage: about?.og_image,
+    robotsIndex: about?.robots_index,
+    robotsFollow: about?.robots_follow,
+  })
 
   if (isLoading) {
     return (
