@@ -100,7 +100,7 @@ function ClientsSection() {
             {sliderClientLogos.map((item) => (
               <SwiperSlide key={item.name}>
                 <div className="mx-auto flex h-[98px] w-full items-center justify-center">
-                  <img src={item.logo} alt={item.name} className="max-h-[86px] w-full object-contain" loading="lazy" />
+                  <img src={item.logo} alt={item.name} className="max-h-[66px] w-full object-contain" loading="lazy" />
                 </div>
               </SwiperSlide>
             ))}
