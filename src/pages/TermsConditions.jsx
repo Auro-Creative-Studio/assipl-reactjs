@@ -560,7 +560,7 @@ function TermsConditions() {
           <a href="/" className="text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
             Home
           </a>
-          <h1 className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[44px]">
+          <h1 className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[70px]">
             Terms and Conditions
           </h1>
         </div>
