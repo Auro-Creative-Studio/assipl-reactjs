@@ -35,8 +35,10 @@ const navItems = [
     basePath: "/admin/pages",
     icon: Files,
     children: [
+      { label: "About", href: "/admin/pages/about" },
       { label: "Contact", href: "/admin/pages/contact" },
       { label: "CSR", href: "/admin/pages/csr" },
+      { label: "Services Page", href: "/admin/pages/services" },
     ],
   },
   {

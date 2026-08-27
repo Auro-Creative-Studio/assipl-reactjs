@@ -1,4 +1,4 @@
-﻿import axios from "axios";
+import axios from "axios";
 import {
   AtSign,
   Eye,
@@ -13,7 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Button, Input, Textarea } from "../../../components/ui/uiExports";
+import { Button, CmsToast, Input, Textarea } from "../../../components/ui/uiExports";
 import { getAuthHeaders } from "../../../utils/auth";
 import {
   buildContactPagePayload,
@@ -350,11 +350,7 @@ export default function ContactPage() {
         </div>
       )}
 
-      {submitSuccess && (
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">
-          {submitSuccess}
-        </div>
-      )}
+      <CmsToast message={submitSuccess} onClose={() => setSubmitSuccess("")} />
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white py-16 text-slate-500 shadow-sm">

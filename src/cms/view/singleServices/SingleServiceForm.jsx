@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ArrowDown, ArrowLeft, ArrowUp, Plus, Save, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowUp, FileText, Globe, Plus, Save, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -7,6 +7,7 @@ import {
   CmsMediaSelect,
   Input,
   RichTextEditor,
+  Select,
   Textarea,
 } from "../../components/ui/uiExports";
 import { getAuthHeaders } from "../../utils/auth";
@@ -64,6 +65,16 @@ const initialForm = {
   cta_title: "",
   cta_description: "",
   cta_image: "",
+  meta_title: "",
+  meta_description: "",
+  meta_keywords: "",
+  og_title: "",
+  og_description: "",
+  og_image: "",
+  image_alt_text: "",
+  robots_index: "index",
+  robots_follow: "follow",
+  published: true,
   status: true,
   advantages: [],
   models: [],
@@ -129,6 +140,16 @@ const normalizeForm = (service = {}) => ({
   cta_title: service.cta_title || "",
   cta_description: service.cta_description || "",
   cta_image: service.cta_image || "",
+  meta_title: service.meta_title || "",
+  meta_description: service.meta_description || "",
+  meta_keywords: service.meta_keywords || "",
+  og_title: service.og_title || "",
+  og_description: service.og_description || "",
+  og_image: service.og_image || "",
+  image_alt_text: service.image_alt_text || "",
+  robots_index: service.robots_index || "index",
+  robots_follow: service.robots_follow || "follow",
+  published: service.published === undefined ? true : Boolean(service.published),
   status: service.status === undefined ? true : Boolean(service.status),
   advantages: normalizeAdvantages(service.advantages),
   models: normalizeModels(service.models),
@@ -151,6 +172,16 @@ const buildPayload = (formData) => ({
   cta_title: formData.cta_title.trim() || null,
   cta_description: formData.cta_description.trim() || null,
   cta_image: toUploadPath(formData.cta_image) || null,
+  meta_title: formData.meta_title.trim() || null,
+  meta_description: formData.meta_description.trim() || null,
+  meta_keywords: formData.meta_keywords.trim() || null,
+  og_title: formData.og_title.trim() || null,
+  og_description: formData.og_description.trim() || null,
+  og_image: toUploadPath(formData.og_image) || null,
+  image_alt_text: formData.image_alt_text.trim() || null,
+  robots_index: formData.robots_index,
+  robots_follow: formData.robots_follow,
+  published: formData.published,
   status: formData.status,
   advantages: formData.advantages.map((item, index) => ({
     id: item.id,
@@ -366,6 +397,7 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
   const [submitError, setSubmitError] = useState("");
   const [isLoading, setIsLoading] = useState(Boolean(serviceId));
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeTab, setActiveTab] = useState("content");
   const isEdit = mode === "edit";
 
   useEffect(() => {
@@ -515,7 +547,36 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
           <section className="grid gap-6 xl:grid-cols-[1fr_340px]">
-            <div className="space-y-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+              <div className="flex border-b border-slate-200 px-5 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("content")}
+                  className={`flex min-h-11 items-center gap-2 border-b-2 px-4 text-sm font-black transition ${
+                    activeTab === "content"
+                      ? "border-primary text-primary"
+                      : "border-transparent text-slate-500 hover:text-slate-950"
+                  }`}
+                >
+                  <FileText className="h-4 w-4" />
+                  Content
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("metadata")}
+                  className={`flex min-h-11 items-center gap-2 border-b-2 px-4 text-sm font-black transition ${
+                    activeTab === "metadata"
+                      ? "border-primary text-primary"
+                      : "border-transparent text-slate-500 hover:text-slate-950"
+                  }`}
+                >
+                  <Globe className="h-4 w-4" />
+                  Metadata
+                </button>
+              </div>
+
+              {activeTab === "content" ? (
+                <div className="space-y-6 p-5">
               <Input
                 label="Title"
                 name="title"
@@ -741,9 +802,114 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
                 onChange={handleChange}
                 helperText="Background image behind the closing call-to-action."
               />
+
+                </div>
+              ) : (
+                <div className="space-y-6 p-5">
+              <div className="grid gap-5 md:grid-cols-2">
+                <Input
+                  label="Meta Title"
+                  name="meta_title"
+                  value={formData.meta_title}
+                  onChange={handleChange}
+                  placeholder="Service Title | ASSIPL"
+                />
+                <Input
+                  label="OG Title"
+                  name="og_title"
+                  value={formData.og_title}
+                  onChange={handleChange}
+                  placeholder="Social sharing title"
+                />
+              </div>
+
+              <Textarea
+                label="Meta Description"
+                name="meta_description"
+                value={formData.meta_description}
+                onChange={handleChange}
+                placeholder="Short description shown in search results."
+                rows={3}
+              />
+
+              <Textarea
+                label="Meta Keywords"
+                name="meta_keywords"
+                value={formData.meta_keywords}
+                onChange={handleChange}
+                placeholder="service, keyword, keyword"
+                rows={3}
+              />
+
+              <Textarea
+                label="OG Description"
+                name="og_description"
+                value={formData.og_description}
+                onChange={handleChange}
+                placeholder="Description shown when this page is shared."
+                rows={3}
+              />
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <Select
+                  label="Robots Index"
+                  name="robots_index"
+                  value={formData.robots_index}
+                  onChange={handleChange}
+                  options={[
+                    { label: "index", value: "index" },
+                    { label: "noindex", value: "noindex" },
+                  ]}
+                />
+
+                <Select
+                  label="Robots Follow"
+                  name="robots_follow"
+                  value={formData.robots_follow}
+                  onChange={handleChange}
+                  options={[
+                    { label: "follow", value: "follow" },
+                    { label: "nofollow", value: "nofollow" },
+                  ]}
+                />
+              </div>
+
+              <Input
+                label="Image Alt Text"
+                name="image_alt_text"
+                value={formData.image_alt_text}
+                onChange={handleChange}
+                placeholder="Accessible description for the service page images"
+              />
+
+              <ImageField
+                label="OG Image"
+                name="og_image"
+                value={formData.og_image}
+                onChange={handleChange}
+                helperText="Social sharing image."
+              />
+                </div>
+              )}
             </div>
 
             <aside className="space-y-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm xl:sticky xl:top-24 xl:self-start">
+              <label className="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+                <span>
+                  <span className="block text-sm font-black text-slate-950">Active</span>
+                  <span className="mt-1 block text-xs font-semibold text-slate-500">
+                    Marks this record as the active service.
+                  </span>
+                </span>
+                <input
+                  type="checkbox"
+                  name="status"
+                  checked={formData.status}
+                  onChange={handleChange}
+                  className="h-5 w-5 rounded border-slate-300 accent-slate-950"
+                />
+              </label>
+
               <label className="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
                 <span>
                   <span className="block text-sm font-black text-slate-950">Published</span>
@@ -753,8 +919,8 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
                 </span>
                 <input
                   type="checkbox"
-                  name="status"
-                  checked={formData.status}
+                  name="published"
+                  checked={formData.published}
                   onChange={handleChange}
                   className="h-5 w-5 rounded border-slate-300 accent-slate-950"
                 />

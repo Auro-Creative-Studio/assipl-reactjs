@@ -24,7 +24,7 @@ export const fetchPublishedSingleServices = async () => {
   const response = await axios.get(SERVICE_ENDPOINT)
   const items = response.data?.data || []
 
-  return items.filter((item) => item.status !== false)
+  return items.filter((item) => item.status !== false && item.published !== false)
 }
 
 export const fetchSingleServiceBySlug = async (slug) => {

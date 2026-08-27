@@ -24,8 +24,10 @@ import EnquiryForm from './cms/view/EnquiryForm'
 import Login from './cms/view/Login'
 import Media from './cms/view/Media'
 import NewsletterSubscribers from './cms/view/NewsletterSubscribers'
+import CmsAboutPage from './cms/view/pages/about/About'
 import CmsContactPage from './cms/view/pages/contact/Contact'
 import CmsCsrPage from './cms/view/pages/csr/Csr'
+import CmsServicesPage from './cms/view/pages/services/Services'
 import Profile from './cms/view/Profile'
 import SeoCreate from './cms/view/seo/Create'
 import SeoEdit from './cms/view/seo/Edit'
@@ -90,6 +92,8 @@ function App() {
 
           <Route path="pages/contact" element={<CmsContactPage />} />
           <Route path="pages/csr" element={<CmsCsrPage />} />
+          <Route path="pages/about" element={<CmsAboutPage />} />
+          <Route path="pages/services" element={<CmsServicesPage />} />
           <Route path="enquiries" element={<EnquiryForm />} />
           <Route path="contacts" element={<ContactForm />} />
           <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />

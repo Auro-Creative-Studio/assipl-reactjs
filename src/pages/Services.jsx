@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EnquiryPopup from '../components/EnquiryPopup'
 import heroBg from '../assets/services/service-hero-bg.webp'
@@ -14,66 +15,168 @@ import trainingImg from '../assets/services/training.webp'
 import serviceImg from '../assets/services/service.webp'
 import maintenanceImg from '../assets/services/maintenance.webp'
 
-const planItems = [
-  {
-    icon: formIcon,
-    title: 'Site Surveys - System Configuration And Designing',
-    text: 'Every successful deployment begins with a comprehensive initial physical property audit and threat matrix evaluation. Our engineers execute precise system configurations tailored to your specific facility dimensions and strict regulatory compliance requirements.',
-  },
-  {
-    icon: planningIcon,
-    title: 'Planning & Project Management',
-    text: 'We provide dedicated project management to ensure seamless cross-departmental coordination. By implementing rigid milestone scheduling and resource allocation, we mitigate structural delivery risks and maintain strict alignment with corporate client timelines for large scale, nationwide deployments.',
-  },
-]
+const FALLBACK_SERVICES_PAGE = {
+  banner_image: heroBg,
+  services_title: 'End-to-End Enterprise Integration Services',
+  services_description:
+    'We deliver complete operational readiness. We operate within a disciplined, sequential execution framework that bridges the gap between raw blueprints and active field deployment. From the first structural audit to ongoing preventative maintenance, our engineering squads guarantee that your critical infrastructure performs flawlessly.',
 
-const executionItems = [
-  {
-    number: '01',
-    icon: supplyIcon,
-    title: 'Supply (S)',
-    text: 'Procurement of authentic, certified hardware components directly from our global OEM technology partners.',
-  },
-  {
-    number: '02',
-    icon: installationIcon,
-    title: 'Installation (I)',
-    text: 'Precision physical deployment, terminal mounting, and structural wiring executed by factory-trained field engineers.',
-  },
-  {
-    number: '03',
-    icon: testingIcon,
-    title: 'Testing (T)',
-    text: 'Rigorous software calibration, signal diagnostics, and integration optimization to eliminate blind spots.',
-  },
-  {
-    number: '04',
-    icon: commissioningIcon,
-    title: 'Commissioning (C)',
-    text: 'Live power-on validation, system activation, and formal project handover to the client.',
-  },
-]
+  strategic_image: strategicBg,
+  strategic_title: 'Strategic Planning & Design',
+  learn_more_link: '/strategic-planning-design',
+  strategic_items: [
+    {
+      icon: formIcon,
+      heading: 'Site Surveys - System Configuration And Designing',
+      description:
+        'Every successful deployment begins with a comprehensive initial physical property audit and threat matrix evaluation. Our engineers execute precise system configurations tailored to your specific facility dimensions and strict regulatory compliance requirements.',
+      sort_order: 0,
+    },
+    {
+      icon: planningIcon,
+      heading: 'Planning & Project Management',
+      description:
+        'We provide dedicated project management to ensure seamless cross-departmental coordination. By implementing rigid milestone scheduling and resource allocation, we mitigate structural delivery risks and maintain strict alignment with corporate client timelines for large scale, nationwide deployments.',
+      sort_order: 1,
+    },
+  ],
 
-const continuityItems = [
-  {
-    image: trainingImg,
-    title: 'Training on System Operations',
-    text: 'We deliver hands-on technical walkthroughs to ensure your internal security staff is fully fluent with the hardware, software dashboards, and alarm reset protocols.',
-  },
-  {
-    image: serviceImg,
-    title: 'Post-sales Maintenance & Warranties',
-    text: 'ASSIPL manages meticulous hardware warranty tracking, remote diagnostics, and highly responsive field replacement services to minimize system downtime.',
-  },
-  {
-    image: maintenanceImg,
-    title: 'Annual Maintenance Services',
-    text: 'We execute proactive, scheduled preventative maintenance routines designed to maximize system uptime, update firmware, and protect your long-term technological investments.',
-  },
-]
+  core_project_title: 'Core Project Execution (SITC)',
+  core_project_description:
+    'At the core of our deployment methodology is our comprehensive execution capability. We take absolute accountability for the complete Supply, Installation, Testing & commissioning of your security architecture.',
+  know_more_link: '/core-project-execution-sitc',
+  core_projects: [
+    {
+      icon: supplyIcon,
+      heading: 'Supply (S)',
+      description: 'Procurement of authentic, certified hardware components directly from our global OEM technology partners.',
+      sort_order: 0,
+    },
+    {
+      icon: installationIcon,
+      heading: 'Installation (I)',
+      description: 'Precision physical deployment, terminal mounting, and structural wiring executed by factory-trained field engineers.',
+      sort_order: 1,
+    },
+    {
+      icon: testingIcon,
+      heading: 'Testing (T)',
+      description: 'Rigorous software calibration, signal diagnostics, and integration optimization to eliminate blind spots.',
+      sort_order: 2,
+    },
+    {
+      icon: commissioningIcon,
+      heading: 'Commissioning (C)',
+      description: 'Live power-on validation, system activation, and formal project handover to the client.',
+      sort_order: 3,
+    },
+  ],
+
+  maintenance_title: 'Operational Continuity & Maintenance',
+  read_more_link: '/services/operational-continuity-maintenance',
+  maintenance_items: [
+    {
+      image: trainingImg,
+      heading: 'Training on System Operations',
+      description:
+        'We deliver hands-on technical walkthroughs to ensure your internal security staff is fully fluent with the hardware, software dashboards, and alarm reset protocols.',
+      sort_order: 0,
+    },
+    {
+      image: serviceImg,
+      heading: 'Post-sales Maintenance & Warranties',
+      description:
+        'ASSIPL manages meticulous hardware warranty tracking, remote diagnostics, and highly responsive field replacement services to minimize system downtime.',
+      sort_order: 1,
+    },
+    {
+      image: maintenanceImg,
+      heading: 'Annual Maintenance Services',
+      description:
+        'We execute proactive, scheduled preventative maintenance routines designed to maximize system uptime, update firmware, and protect your long-term technological investments.',
+      sort_order: 2,
+    },
+  ],
+}
+
+const API_ROOT = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:5000/api'
+).replace(/\/$/, '')
+
+const BACKEND_ORIGIN = API_ROOT.replace(/\/api$/, '')
+const SERVICES_PAGE_ENDPOINT = `${API_ROOT}/services-page`
+
+const getMediaUrl = (value = '') => {
+  const textValue = String(value || '').trim()
+
+  if (!textValue) return ''
+  if (
+    textValue.startsWith('http') ||
+    textValue.startsWith('blob:') ||
+    textValue.startsWith('data:') ||
+    textValue.startsWith('/')
+  ) {
+    return textValue
+  }
+
+  return `${BACKEND_ORIGIN}/${textValue}`
+}
+
+const sortByOrder = (items) =>
+  (Array.isArray(items) ? items : []).slice().sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
 
 function Services() {
+  const [page, setPage] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchServicesPage = async () => {
+      try {
+        const response = await axios.get(SERVICES_PAGE_ENDPOINT)
+        const data = response.data?.data
+        const record = Array.isArray(data) ? data[0] : data
+
+        if (isMounted) {
+          setPage(record || FALLBACK_SERVICES_PAGE)
+        }
+      } catch {
+        if (isMounted) {
+          setPage(FALLBACK_SERVICES_PAGE)
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    void fetchServicesPage()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-150 items-center justify-center bg-white">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-secondary" />
+      </div>
+    )
+  }
+
+  if (!page) {
+    return null
+  }
+
+  const strategicItems = sortByOrder(page.strategic_items)
+  const coreProjects = sortByOrder(page.core_projects)
+  const maintenanceItems = sortByOrder(page.maintenance_items)
 
   return (
     <div className="bg-white font-body">
@@ -81,7 +184,7 @@ function Services() {
         <section
           className="relative flex min-h-100 items-start bg-cover bg-center px-5 pt-48 sm:px-10 md:min-h-125 md:px-8 md:pt-60 xl:px-60 xl:pt-52"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${getMediaUrl(page.banner_image)})`,
           }}
         >
           <div className="mx-auto w-full max-w-300 pt-0.5">
@@ -97,128 +200,178 @@ function Services() {
           </div>
         </section>
 
-        <section className="px-5 py-20">
-          <div className="mx-auto max-w-300 text-center">
-            <h2 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
-              End-to-End Enterprise Integration Services
-            </h2>
-            <p className="mx-auto mt-5 max-w-295 text-justify text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px]">
-              We deliver complete operational readiness. We operate within a disciplined,
-              sequential execution framework that bridges the gap between raw blueprints and active
-              field deployment. From the first structural audit to ongoing preventative maintenance,
-              our engineering squads guarantee that your critical infrastructure performs
-              flawlessly.
-            </p>
-          </div>
+        {(page.services_title || page.services_description || strategicItems.length > 0) && (
+          <section className="px-5 py-20">
+            {(page.services_title || page.services_description) && (
+              <div className="mx-auto max-w-300 text-center">
+                {page.services_title && (
+                  <h2 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+                    {page.services_title}
+                  </h2>
+                )}
+                {page.services_description && (
+                  <div
+                    className="mx-auto mt-5 max-w-295 text-justify text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px] [&_p]:mt-4 [&_p:first-child]:mt-0"
+                    dangerouslySetInnerHTML={{ __html: page.services_description }}
+                  />
+                )}
+              </div>
+            )}
 
-          <div className="mx-auto mt-15 grid max-w-350 gap-10 lg:grid-cols-[680px_1fr]">
-            <div
-              className="min-h-105 rounded-2xl bg-cover bg-center md:min-h-138"
-              style={{ backgroundImage: `url(${strategicBg})` }}
-            />
-            <div className="flex flex-col justify-center lg:pl-0">
-              <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
-                Strategic Planning & Design
-              </h2>
-              <div className="mt-8 space-y-8">
-                {planItems.map((item, index) => (
-                  <article key={item.title} className="flex gap-6">
-                    <div className="flex h-21 min-w-21 items-center justify-center rounded-full border border-accent">
-                      <img src={item.icon} alt="" className="h-14 w-14 object-contain" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-[22px] font-semibold leading-[1.45] text-secondary">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 max-w-155 text-justify text-[16px] font-normal leading-normal text-text md:text-left md:text-[18px]">{item.text}</p>
-                      {index === 1 && (
-                        <Link
-                          to="/strategic-planning-design"
-                          className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
-                        >
-                          Learn More
-                        </Link>
+            <div className="mx-auto mt-15 grid max-w-350 gap-10 lg:grid-cols-[680px_1fr]">
+              {page.strategic_image && (
+                <div
+                  className="min-h-105 rounded-2xl bg-cover bg-center md:min-h-138"
+                  style={{ backgroundImage: `url(${getMediaUrl(page.strategic_image)})` }}
+                />
+              )}
+              <div className="flex flex-col justify-center lg:pl-0">
+                {page.strategic_title && (
+                  <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+                    {page.strategic_title}
+                  </h2>
+                )}
+                <div className="mt-8 space-y-8">
+                  {strategicItems.map((item, index) => (
+                    <article key={item.id || index} className="flex gap-6">
+                      {item.icon && (
+                        <div className="flex h-21 min-w-21 items-center justify-center rounded-full border border-accent">
+                          <img src={getMediaUrl(item.icon)} alt="" className="h-14 w-14 object-contain" />
+                        </div>
                       )}
+                      <div className="flex-1">
+                        {item.heading && (
+                          <h3 className="text-[22px] font-semibold leading-[1.45] text-secondary">
+                            {item.heading}
+                          </h3>
+                        )}
+                        {item.description && (
+                          <p className="mt-2 max-w-155 text-justify text-[16px] font-normal leading-normal text-text md:text-left md:text-[18px]">
+                            {item.description}
+                          </p>
+                        )}
+                        {index === strategicItems.length - 1 && page.learn_more_link && (
+                          <Link
+                            to={page.learn_more_link}
+                            className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                          >
+                            Learn More
+                          </Link>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {(page.core_project_title || page.core_project_description || coreProjects.length > 0) && (
+          <section className="bg-background px-5 py-20">
+            <div className="mx-auto max-w-350">
+              {(page.core_project_title || page.core_project_description) && (
+                <div className="mx-auto max-w-295 text-center">
+                  {page.core_project_title && (
+                    <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+                      {page.core_project_title}
+                    </h2>
+                  )}
+                  {page.core_project_description && (
+                    <div
+                      className="mx-auto mt-6 max-w-280 text-justify text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px] [&_p]:mt-4 [&_p:first-child]:mt-0"
+                      dangerouslySetInnerHTML={{ __html: page.core_project_description }}
+                    />
+                  )}
+                </div>
+              )}
+              <div className="mt-15 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {coreProjects.map((item, index) => (
+                  <article
+                    key={item.id || index}
+                    className="rounded-xl border border-accent bg-background px-8 py-8"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      {item.icon && (
+                        <div className="flex h-22.5 w-22.5 items-center justify-center rounded-full border border-accent bg-background">
+                          <img src={getMediaUrl(item.icon)} alt="" className="h-11 w-11 object-contain" />
+                        </div>
+                      )}
+                      <span className="text-[58px] font-semibold leading-none text-accent">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                     </div>
+                    {item.heading && (
+                      <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
+                        {item.heading}
+                      </h3>
+                    )}
+                    {item.description && (
+                      <p className="mt-3 text-justify text-[16px] font-normal leading-[1.67] text-text md:text-left">
+                        {item.description}
+                      </p>
+                    )}
+                  </article>
+                ))}
+              </div>
+              {page.know_more_link && (
+                <div className="mt-12 text-center">
+                  <Link
+                    to={page.know_more_link}
+                    className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                  >
+                    Know More
+                  </Link>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {(page.maintenance_title || maintenanceItems.length > 0) && (
+          <section className="bg-white px-5 py-20">
+            <div className="mx-auto max-w-350">
+              <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+                {page.maintenance_title && (
+                  <h2 className="max-w-230 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+                    {page.maintenance_title}
+                  </h2>
+                )}
+                {page.read_more_link && (
+                  <a
+                    href={page.read_more_link}
+                    className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                  >
+                    Read More
+                  </a>
+                )}
+              </div>
+              <div className="mt-12 grid gap-6 md:grid-cols-3">
+                {maintenanceItems.map((item, index) => (
+                  <article key={item.id || index} className="rounded-[18px] border border-accent bg-white p-5">
+                    {item.image && (
+                      <img
+                        src={getMediaUrl(item.image)}
+                        alt=""
+                        className="h-68 w-full rounded-[14px] object-cover"
+                      />
+                    )}
+                    {item.heading && (
+                      <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
+                        {item.heading}
+                      </h3>
+                    )}
+                    {item.description && (
+                      <p className="mt-3 text-justify text-[16px] font-normal leading-[1.67] text-text md:text-left">
+                        {item.description}
+                      </p>
+                    )}
                   </article>
                 ))}
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="bg-background px-5 py-20">
-          <div className="mx-auto max-w-350">
-            <div className="mx-auto max-w-295 text-center">
-              <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
-                Core Project Execution (SITC)
-              </h2>
-              <p className="mx-auto mt-6 max-w-280 text-justify text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px]">
-                At the core of our deployment methodology is our comprehensive execution capability.
-                We take absolute accountability for the complete Supply, Installation, Testing &
-                commissioning of your security architecture.
-              </p>
-            </div>
-            <div className="mt-15 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {executionItems.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-xl border border-accent bg-background px-8 py-8"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-22.5 w-22.5 items-center justify-center rounded-full border border-accent bg-background">
-                      <img src={item.icon} alt="" className="h-11 w-11 object-contain" />
-                    </div>
-                    <span className="text-[58px] font-semibold leading-none text-accent">{item.number}</span>
-                  </div>
-                  <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-justify text-[16px] font-normal leading-[1.67] text-text md:text-left">{item.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="mt-12 text-center">
-              <Link
-                to="/core-project-execution-sitc"
-                className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
-              >
-                Know More
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-white px-5 py-20">
-          <div className="mx-auto max-w-350">
-            <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-              <h2 className="max-w-230 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
-                Operational Continuity & Maintenance
-              </h2>
-              <a
-                href="/services/operational-continuity-maintenance"
-                className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
-              >
-                Read More
-              </a>
-            </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {continuityItems.map((item) => (
-                <article key={item.title} className="rounded-[18px] border border-accent bg-white p-5">
-                  <img
-                    src={item.image}
-                    alt=""
-                    className="h-68 w-full rounded-[14px] object-cover"
-                  />
-                  <h3 className="mt-8 text-[32px] font-semibold leading-snug text-secondary">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-justify text-[16px] font-normal leading-[1.67] text-text md:text-left">{item.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="pb-0">
           <div

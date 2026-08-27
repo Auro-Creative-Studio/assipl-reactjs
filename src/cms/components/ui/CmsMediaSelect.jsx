@@ -72,6 +72,10 @@ const getMediaPreviewUrl = (url = "") => {
     return textUrl;
   }
 
+  if (textUrl.startsWith("/src/") || textUrl.startsWith("/assets/")) {
+    return textUrl;
+  }
+
   if (textUrl.startsWith("http")) {
     const uploadPath = getUploadPath(textUrl);
 
@@ -390,7 +394,7 @@ export default function CmsMediaSelect({
       return;
     }
 
-    const selectedExtension = getExtension(selectedFile.name).toLowerCase();
+    const selectedExtension = getExtension(selectedFile.name).toLowerCase().replace(/^\./, "");
     if (allowedExtensions.length > 0 && !allowedExtensions.includes(selectedExtension)) {
       setUploadFile(null);
       setUploadPreview(null);
@@ -736,3 +740,4 @@ export default function CmsMediaSelect({
     </div>
   );
 }
+
