@@ -46,10 +46,12 @@ const CONTACT_PAGE_FIELD_CONFIG = [
     colSpan: 2,
   },
   {
-    name: "map_embed_url",
-    label: "Map Embed URL",
-    type: "url",
-    placeholder: "https://www.google.com/maps/embed?pb=...",
+    name: "map_embed_code",
+    label: "Embed a Map",
+    type: "textarea",
+    rows: 4,
+    placeholder:
+      '<iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen loading="lazy"></iframe>',
     nullable: true,
     section: "content",
     colSpan: 2,

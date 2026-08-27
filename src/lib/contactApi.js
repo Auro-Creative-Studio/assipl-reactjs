@@ -17,3 +17,14 @@ export const fetchContactPage = async () => {
     return null
   }
 }
+
+export const extractMapEmbedSrc = (embedCode = '') => {
+  const text = String(embedCode || '').trim()
+
+  if (!text) return ''
+
+  const srcMatch = text.match(/src=["']([^"']+)["']/i)
+  if (srcMatch) return srcMatch[1]
+
+  return /^https?:\/\//i.test(text) ? text : ''
+}
