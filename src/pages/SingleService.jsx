@@ -92,6 +92,21 @@ function AdvantageCard({ item, tone }) {
   )
 }
 
+function FeatureList({ items }) {
+  return (
+    <ul className="mt-6 space-y-4">
+      {items.map((item) => (
+        <li key={item.id} className="flex gap-3 text-[16px] leading-7 text-text">
+          <span className="mt-2.5 h-1.5 w-1.5 flex-none rounded-full bg-text/60" aria-hidden="true" />
+          <p>
+            <span className="font-semibold text-secondary">{item.title}:</span> {item.description}
+          </p>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function ModelCard({ model, fallbackImage }) {
   return (
     <article className="h-full rounded-2xl border border-accent bg-white p-6">
@@ -167,6 +182,7 @@ function SingleService({ routeSlug = null }) {
   const ctaBackground = getMediaUrl(service.cta_image) || ctaFallback
   const advantages = [...(service.advantages || [])].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
   const models = [...(service.models || [])].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+  const features = [...(service.features || [])].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
 
   return (
     <main className="bg-white">
@@ -241,11 +257,17 @@ function SingleService({ routeSlug = null }) {
               )}
 
               <div className="mt-8 grid gap-5 md:grid-cols-2">
-                {advantages.map((item, index) => (
-                  <Reveal key={item.id} delay={(index % 2) * 100}>
-                    <AdvantageCard item={item} tone={index % 2 === 0 ? 'white' : 'muted'} />
-                  </Reveal>
-                ))}
+                {advantages.map((item, index) => {
+                  const row = Math.floor(index / 2)
+                  const col = index % 2
+                  const tone = (row + col) % 2 === 0 ? 'white' : 'muted'
+
+                  return (
+                    <Reveal key={item.id} delay={col * 100}>
+                      <AdvantageCard item={item} tone={tone} />
+                    </Reveal>
+                  )
+                })}
               </div>
             </>
           )}
@@ -273,6 +295,21 @@ function SingleService({ routeSlug = null }) {
                   </Reveal>
                 ))}
               </div>
+            </>
+          )}
+
+          {features.length > 0 && (
+            <>
+              {service.service_features_title && (
+                <Reveal
+                  as="h2"
+                  className="pt-12 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]"
+                >
+                  {service.service_features_title}
+                </Reveal>
+              )}
+
+              <FeatureList items={features} />
             </>
           )}
 

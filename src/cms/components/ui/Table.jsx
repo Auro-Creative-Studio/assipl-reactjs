@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Table = ({
   columns = [],
   data = [],
@@ -5,7 +7,12 @@ const Table = ({
   emptyMessage = "No records found.",
   className = "",
   defaultRowHeight = "py-4",
+  draggable = false,
+  onReorder,
 }) => {
+  const [dragIndex, setDragIndex] = useState(null);
+  const [overIndex, setOverIndex] = useState(null);
+
   const firstColumnIndex = 0;
   const lastColumnIndex = Math.max(columns.length - 1, 0);
   const middleColumnCount = Math.max(columns.length - 2, 1);
@@ -75,7 +82,43 @@ const Table = ({
                 return (
                   <tr
                     key={row.id ?? rowIdx}
-                    className={`border-b border-slate-100 transition-colors duration-150 last:border-b-0 hover:bg-slate-50/80`}
+                    draggable={draggable}
+                    onDragStart={draggable ? () => setDragIndex(rowIdx) : undefined}
+                    onDragOver={
+                      draggable
+                        ? (event) => {
+                            event.preventDefault();
+                            setOverIndex(rowIdx);
+                          }
+                        : undefined
+                    }
+                    onDrop={
+                      draggable
+                        ? (event) => {
+                            event.preventDefault();
+                            if (dragIndex !== null && dragIndex !== rowIdx) {
+                              onReorder?.(dragIndex, rowIdx);
+                            }
+                            setDragIndex(null);
+                            setOverIndex(null);
+                          }
+                        : undefined
+                    }
+                    onDragEnd={
+                      draggable
+                        ? () => {
+                            setDragIndex(null);
+                            setOverIndex(null);
+                          }
+                        : undefined
+                    }
+                    className={`border-b border-slate-100 transition-colors duration-150 last:border-b-0 hover:bg-slate-50/80 ${
+                      draggable ? "cursor-grab active:cursor-grabbing" : ""
+                    } ${dragIndex === rowIdx ? "opacity-40" : ""} ${
+                      overIndex === rowIdx && dragIndex !== null && dragIndex !== rowIdx
+                        ? "bg-primary/5"
+                        : ""
+                    }`}
                   >
                     {columns.map((col, index) => {
                       const customWidth = getColumnWidth(index, col, columnWidths);

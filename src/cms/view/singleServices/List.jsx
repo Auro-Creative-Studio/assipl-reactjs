@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Edit3, Plus, RefreshCw, Search, Trash2 } from "lucide-react";
+import { Edit3, GripVertical, Plus, RefreshCw, Search, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input, Popup, Select, Table } from "../../components/ui/uiExports";
@@ -64,7 +64,11 @@ export default function SingleServiceList() {
         headers: getAuthHeaders(),
       });
 
-      setServices(servicesResponse.data?.data || []);
+      const items = (servicesResponse.data?.data || [])
+        .slice()
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+
+      setServices(items);
     } catch (err) {
       setError(err.response?.data?.message || err.message || "Failed to load services.");
     } finally {
@@ -116,7 +120,41 @@ export default function SingleServiceList() {
     }
   };
 
+  const handleReorder = async (fromIdx, toIdx) => {
+    const draggedItem = filteredServices[fromIdx];
+    const targetItem = filteredServices[toIdx];
+    if (!draggedItem || !targetItem || draggedItem.id === targetItem.id) return;
+
+    const fromFullIdx = services.findIndex((service) => service.id === draggedItem.id);
+    const toFullIdx = services.findIndex((service) => service.id === targetItem.id);
+    if (fromFullIdx === -1 || toFullIdx === -1) return;
+
+    const reordered = services.slice();
+    const [moved] = reordered.splice(fromFullIdx, 1);
+    reordered.splice(toFullIdx, 0, moved);
+    const withOrder = reordered.map((service, index) => ({ ...service, sort_order: index }));
+
+    setServices(withOrder);
+
+    try {
+      await axios.put(
+        `${SERVICE_ENDPOINT}/reorder`,
+        { ids: withOrder.map((service) => service.id) },
+        { headers: getAuthHeaders() }
+      );
+    } catch (err) {
+      setError(err.response?.data?.message || err.message || "Failed to save new order.");
+      fetchServices();
+    }
+  };
+
   const columns = [
+    {
+      key: "order",
+      label: "",
+      width: "48px",
+      render: () => <GripVertical className="h-4 w-4 text-slate-300" aria-hidden="true" />,
+    },
     {
       key: "image",
       label: "Image",
@@ -213,6 +251,7 @@ export default function SingleServiceList() {
           <h1 className="mt-2 text-3xl font-black text-slate-950">Single Services</h1>
           <p className="mt-2 text-sm font-semibold text-slate-500">
             Manage service detail pages, advantages, engagement models, and publishing status.
+            Drag a row by its handle to reorder the Services menu on the site.
           </p>
         </div>
 
@@ -265,6 +304,8 @@ export default function SingleServiceList() {
         data={filteredServices}
         isLoading={isLoading}
         emptyMessage="No services found."
+        draggable
+        onReorder={handleReorder}
       />
 
       <Popup

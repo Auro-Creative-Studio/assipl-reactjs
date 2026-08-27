@@ -46,6 +46,7 @@ const createItemId = () => `item-${Date.now()}-${Math.random().toString(36).slic
 
 const createAdvantage = () => ({ id: createItemId(), title: "", description: "", status: true });
 const createModel = () => ({ id: createItemId(), title: "", image: "", description: "", status: true });
+const createFeature = () => ({ id: createItemId(), title: "", description: "", status: true });
 
 const initialForm = {
   title: "",
@@ -59,12 +60,14 @@ const initialForm = {
   service_advantages_description: "",
   service_models_title: "",
   service_models_description: "",
+  service_features_title: "",
   cta_title: "",
   cta_description: "",
   cta_image: "",
   status: true,
   advantages: [],
   models: [],
+  features: [],
 };
 
 const normalizeAdvantages = (items) => {
@@ -96,6 +99,20 @@ const normalizeModels = (items) => {
     }));
 };
 
+const normalizeFeatures = (items) => {
+  if (!Array.isArray(items)) return [];
+
+  return items
+    .slice()
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .map((item) => ({
+      id: item.id || createItemId(),
+      title: item.title || "",
+      description: item.description || "",
+      status: item.status === undefined ? true : Boolean(item.status),
+    }));
+};
+
 const normalizeForm = (service = {}) => ({
   title: service.title || "",
   banner_title: service.banner_title || "",
@@ -108,12 +125,14 @@ const normalizeForm = (service = {}) => ({
   service_advantages_description: service.service_advantages_description || "",
   service_models_title: service.service_models_title || "",
   service_models_description: service.service_models_description || "",
+  service_features_title: service.service_features_title || "",
   cta_title: service.cta_title || "",
   cta_description: service.cta_description || "",
   cta_image: service.cta_image || "",
   status: service.status === undefined ? true : Boolean(service.status),
   advantages: normalizeAdvantages(service.advantages),
   models: normalizeModels(service.models),
+  features: normalizeFeatures(service.features),
 });
 
 const buildPayload = (formData) => ({
@@ -128,6 +147,7 @@ const buildPayload = (formData) => ({
   service_advantages_description: formData.service_advantages_description.trim() || null,
   service_models_title: formData.service_models_title.trim() || null,
   service_models_description: formData.service_models_description.trim() || null,
+  service_features_title: formData.service_features_title.trim() || null,
   cta_title: formData.cta_title.trim() || null,
   cta_description: formData.cta_description.trim() || null,
   cta_image: toUploadPath(formData.cta_image) || null,
@@ -144,6 +164,13 @@ const buildPayload = (formData) => ({
     title: item.title.trim(),
     image: toUploadPath(item.image) || null,
     description: item.description,
+    sort_order: index,
+    status: item.status,
+  })),
+  features: formData.features.map((item, index) => ({
+    id: item.id,
+    title: item.title.trim(),
+    description: item.description.trim(),
     sort_order: index,
     status: item.status,
   })),
@@ -290,6 +317,41 @@ function ModelCard({ item, index, total, onChange, onMove, onRemove }) {
           value={item.description}
           onChange={(event) => onChange({ ...item, description: event.target.value })}
           placeholder="Describe this engagement model."
+        />
+      </div>
+    </div>
+  );
+}
+
+function FeatureCard({ item, index, total, onChange, onMove, onRemove }) {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+      <RepeaterHeader
+        index={index}
+        total={total}
+        label="Feature"
+        status={item.status}
+        onToggleStatus={(event) => onChange({ ...item, status: event.target.checked })}
+        onMove={onMove}
+        onRemove={onRemove}
+      />
+
+      <div className="space-y-4">
+        <Input
+          label="Feature Title"
+          name={`feature-title-${item.id}`}
+          value={item.title}
+          onChange={(event) => onChange({ ...item, title: event.target.value })}
+          placeholder="e.g. Physical Audits"
+        />
+
+        <Textarea
+          label="Feature Description"
+          name={`feature-description-${item.id}`}
+          value={item.description}
+          onChange={(event) => onChange({ ...item, description: event.target.value })}
+          placeholder="Short one or two line detail for this item."
+          rows={2}
         />
       </div>
     </div>
@@ -612,6 +674,46 @@ export default function SingleServiceForm({ serviceId = null, mode = "create" })
                 onClick={() => addListItem("models", createModel)}
               >
                 Add Engagement Model
+              </Button>
+
+              <h2 className="pt-2 text-sm font-black uppercase tracking-[0.16em] text-slate-500">
+                Features
+              </h2>
+              <Input
+                label="Features Section Title"
+                name="service_features_title"
+                value={formData.service_features_title}
+                onChange={handleChange}
+                placeholder="e.g. What We Do During a Preventative Visit"
+              />
+
+              {formData.features.length === 0 && (
+                <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-5 py-10 text-center text-sm font-semibold text-slate-400">
+                  No features yet. Add one below.
+                </div>
+              )}
+
+              <div className="space-y-4">
+                {formData.features.map((item, index) => (
+                  <FeatureCard
+                    key={item.id}
+                    item={item}
+                    index={index}
+                    total={formData.features.length}
+                    onChange={(nextItem) => updateListItem("features", item.id, nextItem)}
+                    onMove={(direction) => moveListItem("features", index, direction)}
+                    onRemove={() => removeListItem("features", item.id)}
+                  />
+                ))}
+              </div>
+
+              <Button
+                type="button"
+                variant="secondary"
+                icon={<Plus className="h-4 w-4" />}
+                onClick={() => addListItem("features", createFeature)}
+              >
+                Add Feature
               </Button>
 
               <h2 className="pt-2 text-sm font-black uppercase tracking-[0.16em] text-slate-500">

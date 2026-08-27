@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Edit3, Plus, RefreshCw, Search, Trash2 } from "lucide-react";
+import { Edit3, GripVertical, Plus, RefreshCw, Search, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input, Popup, Select, Table } from "../../components/ui/uiExports";
@@ -64,7 +64,11 @@ export default function ProductList() {
         headers: getAuthHeaders(),
       });
 
-      setProducts(productsResponse.data?.data || []);
+      const items = (productsResponse.data?.data || [])
+        .slice()
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+
+      setProducts(items);
     } catch (err) {
       setError(err.response?.data?.message || err.message || "Failed to load products.");
     } finally {
@@ -133,7 +137,41 @@ export default function ProductList() {
     }
   };
 
+  const handleReorder = async (fromIdx, toIdx) => {
+    const draggedItem = filteredProducts[fromIdx];
+    const targetItem = filteredProducts[toIdx];
+    if (!draggedItem || !targetItem || draggedItem.id === targetItem.id) return;
+
+    const fromFullIdx = products.findIndex((product) => product.id === draggedItem.id);
+    const toFullIdx = products.findIndex((product) => product.id === targetItem.id);
+    if (fromFullIdx === -1 || toFullIdx === -1) return;
+
+    const reordered = products.slice();
+    const [moved] = reordered.splice(fromFullIdx, 1);
+    reordered.splice(toFullIdx, 0, moved);
+    const withOrder = reordered.map((product, index) => ({ ...product, sort_order: index }));
+
+    setProducts(withOrder);
+
+    try {
+      await axios.put(
+        `${PRODUCT_ENDPOINT}/reorder`,
+        { ids: withOrder.map((product) => product.id) },
+        { headers: getAuthHeaders() }
+      );
+    } catch (err) {
+      setError(err.response?.data?.message || err.message || "Failed to save new order.");
+      fetchProducts();
+    }
+  };
+
   const columns = [
+    {
+      key: "order",
+      label: "",
+      width: "48px",
+      render: () => <GripVertical className="h-4 w-4 text-slate-300" aria-hidden="true" />,
+    },
     {
       key: "image",
       label: "Image",
@@ -234,6 +272,7 @@ export default function ProductList() {
           <h1 className="mt-2 text-3xl font-black text-slate-950">Products</h1>
           <p className="mt-2 text-sm font-semibold text-slate-500">
             Manage product content, publishing state, and SEO metadata.
+            Drag a row by its handle to reorder the Products menu on the site.
           </p>
         </div>
 
@@ -286,6 +325,8 @@ export default function ProductList() {
         data={tableRows}
         isLoading={isLoading}
         emptyMessage="No products found."
+        draggable
+        onReorder={handleReorder}
       />
 
       <Popup
