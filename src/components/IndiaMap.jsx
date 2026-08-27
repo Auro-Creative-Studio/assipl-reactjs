@@ -1,5 +1,7 @@
-import { Building2, MapPin } from 'lucide-react'
+import { useState } from 'react'
+import { Building2 } from 'lucide-react'
 import indiaMapImage from '../assets/home/india-map.webp'
+import mapPinImage from '../assets/home/map-pin.png'
 
 const LON_MIN = 68
 const LON_MAX = 97.5
@@ -23,29 +25,64 @@ function project({ lon, lat }) {
 }
 
 function IndiaMap({ locations }) {
+  const [activeLocation, setActiveLocation] = useState(null)
+
   return (
-    <div className="relative mx-auto aspect-989/1024 w-full max-w-md">
+    <div
+      className="relative mx-auto aspect-989/1024 w-full max-w-[560px] lg:mx-0 lg:translate-x-8"
+      onClick={() => setActiveLocation(null)}
+    >
       <img
         src={indiaMapImage}
         alt="Map of India"
         className="absolute inset-0 h-full w-full object-contain"
       />
 
-      {locations.map((location) => (
+      {locations.map((location, index) => (
         <div
           key={location.name}
-          className="group absolute -translate-x-1/2 -translate-y-full hover:z-50"
+          className={`group absolute cursor-pointer ${activeLocation === location.name ? 'z-50' : 'hover:z-50'}`}
           style={project(location)}
+          role="button"
+          tabIndex={0}
+          aria-label={location.name}
+          onClick={(event) => {
+            event.stopPropagation()
+            setActiveLocation((current) => (current === location.name ? null : location.name))
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault()
+              setActiveLocation((current) => (current === location.name ? null : location.name))
+            }
+          }}
         >
-          {location.hq ? (
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-white shadow-lg ring-2 ring-white/80">
-              <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
-            </span>
-          ) : (
-            <MapPin className="h-5 w-5 fill-white text-secondary drop-shadow" aria-hidden="true" />
-          )}
+          <div className="imgl-marker-zoom absolute" style={{ transform: 'scale(0.566229, 0.566229)', transformOrigin: '0% 0%' }}>
+            <div className="imgl-marker-offset absolute -translate-x-1/2 -translate-y-1/2">
+              <div
+                className="imgl-marker relative"
+                style={{ width: '45.7758px', height: '54.9596px', transform: 'rotate(0deg)' }}
+              >
+                <div className={`imgl-pin imgl-pin-${index + 1} h-full w-full`} data-id={index + 1}>
+                  <div
+                    className="imgl-pin-data relative z-[2] flex h-full w-full items-center justify-center bg-center bg-no-repeat"
+                    style={{ backgroundImage: location.hq ? undefined : `url(${mapPinImage})` }}
+                  >
+                    {location.hq && (
+                      <Building2
+                        className="h-[32px] w-[32px] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <span
-            className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[11px] font-medium text-secondary opacity-0 shadow-lg transition group-hover:opacity-100"
+            className={`pointer-events-none absolute bottom-[18px] left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-[4px] bg-white px-[52px] py-[10px] text-[15px] font-medium text-[#63708a] shadow-[0_7px_18px_rgba(18,28,69,0.2)] transition group-hover:opacity-100 ${
+              activeLocation === location.name ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             {location.name}
           </span>

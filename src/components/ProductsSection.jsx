@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import { fetchPublishedProducts, getMediaUrl } from '../lib/productsApi'
 
@@ -34,8 +35,8 @@ function ProductsSection() {
       <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {products.map((product, index) => (
-            <Reveal key={product.title} as="a"
-              href={product.href}
+            <Reveal
+              key={product.title}
               delay={(index % 3) * 100}
               className="group relative block aspect-6/5 overflow-hidden rounded-2xl"
             >
@@ -60,9 +61,12 @@ function ProductsSection() {
                     <p className="text-sm leading-6 text-white/85">{product.description}</p>
                   </div>
                 </div>
-                <span className="mt-0 translate-y-2 text-sm font-semibold text-white underline opacity-0 transition-all duration-300 group-hover:mt-4 group-hover:translate-y-0 group-hover:opacity-100">
+                <Link
+                  to={product.href}
+                  className="mt-4 translate-y-0 text-sm font-semibold text-white underline opacity-100 transition-all duration-300 md:mt-0 md:translate-y-2 md:opacity-0 md:group-hover:mt-4 md:group-hover:translate-y-0 md:group-hover:opacity-100"
+                >
                   Read More
-                </span>
+                </Link>
               </div>
             </Reveal>
           ))}

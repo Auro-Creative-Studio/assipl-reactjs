@@ -1,4 +1,4 @@
-import heroBg from '../assets/terms.webp'
+import heroBg from '../assets/privacy-policy-hero.webp'
 import LegalSection from '../components/LegalSection'
 
 const sections = [

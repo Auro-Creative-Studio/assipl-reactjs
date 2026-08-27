@@ -60,7 +60,7 @@ export const clientLogos = [
 
 export const locations = [
   { name: 'Punjab', lon: 75.4, lat: 31.1 },
-  { name: 'Haryana', lon: 76.5, lat: 29 },
+  { name: 'Haryana', lon: 76.15, lat: 29 },
   { name: 'Delhi', lon: 77.2, lat: 28.6 },
   { name: 'Rajasthan', lon: 72.8, lat: 26.9 },
   { name: 'Uttar Pradesh', lon: 80.9, lat: 26.8 },

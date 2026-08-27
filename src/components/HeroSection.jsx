@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import EnquiryPopup from './EnquiryPopup'
 import Reveal from './Reveal'
-import heroImage from '../assets/home/hero-bg.webp'
+import heroImage from '../assets/home/hero-reference.webp'
 
 const stats = ['15+ Years Experience', '3000+ Projects Delivered', 'ISO 9001:2015 Certified', 'Pan-India Operations']
 
@@ -11,29 +11,30 @@ function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-white pt-40 pb-16 sm:pt-44 lg:pt-48"
+      className="relative min-h-screen overflow-hidden bg-white px-5 pt-[156px] pb-[30px] md:pt-[150px] md:pb-[60px] lg:px-0 lg:pt-[189px]"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(27, 26, 23,0.4) 68%, rgba(255,255,255,1) 100%), url(${heroImage})`,
+        backgroundImage: `linear-gradient(180deg, rgba(27, 26, 23, 0.44) 68%, rgba(255, 255, 255, 1) 100%), url(${heroImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      <div className="relative mx-auto w-full max-w-350 px-5">
+      <div className="relative mx-auto w-full max-w-300">
         <Reveal
           as="h1"
-          className="-ml-1 max-w-260 font-heading text-[32px] font-semibold leading-tight text-white sm:text-[44px] md:text-[64px] xl:text-[80px] xl:leading-none"
+          className="max-w-[962px] font-heading text-[48px] font-semibold leading-[1.05] text-white md:max-w-[450px] md:text-[68px] lg:max-w-[1100px] lg:text-[108px]"
         >
-          Automation Systems and Solutions
+          <span className="block">Automation Systems</span>
+          <span className="block">and Solutions</span>
         </Reveal>
         <Reveal
           as="p"
           delay={100}
-          className="mt-6 max-w-190 text-[18px] font-semibold leading-normal text-white sm:text-[26px]"
+          className="mt-[30px] w-full max-w-[705px] text-justify font-heading text-[18px] font-semibold leading-[1.4] text-white md:text-left md:text-[26px] md:leading-[33px]"
         >
           Integrated Security Solutions for BFSI, IT Parks, Industries, and Critical Infrastructure.
         </Reveal>
         <Reveal delay={150}>
-          <ul className="mt-7 list-disc space-y-2 pl-5 text-[16px] text-white marker:text-white/60 sm:text-[18px]">
+          <ul className="mt-[112px] list-disc space-y-0 pl-5 font-body text-[17px] font-normal leading-[1.5] text-white marker:text-white md:text-[18px] lg:text-[20px]">
             {stats.map((stat) => (
               <li key={stat}>{stat}</li>
             ))}
@@ -43,7 +44,7 @@ function HeroSection() {
           <button
             type="button"
             onClick={() => setIsEnquiryOpen(true)}
-            className="mt-9 inline-flex items-center rounded-full bg-primary px-8 py-3.5 text-[16px] font-semibold text-white transition hover:bg-secondary sm:text-[18px]"
+            className="mt-11 inline-flex h-[55px] items-center rounded-full bg-primary px-[39px] font-body text-[16px] font-medium capitalize leading-[1.5] text-white transition hover:bg-secondary md:text-[17px] lg:text-[18px]"
           >
             Consult an Integration Expert
           </button>
