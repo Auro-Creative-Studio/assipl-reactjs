@@ -46,6 +46,15 @@ const CONTACT_PAGE_FIELD_CONFIG = [
     colSpan: 2,
   },
   {
+    name: "map_embed_url",
+    label: "Map Embed URL",
+    type: "url",
+    placeholder: "https://www.google.com/maps/embed?pb=...",
+    nullable: true,
+    section: "content",
+    colSpan: 2,
+  },
+  {
     name: "email",
     label: "Email",
     type: "email",

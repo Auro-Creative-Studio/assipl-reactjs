@@ -52,6 +52,8 @@ const defaultEmail = 'assipl@automationsystems.co.in'
 const defaultAddress =
   'Automation Systems and Solutions (India) Pvt. Ltd.\nHouse No: 2497, GF, 17th Main,\nHAL 2nd Stage, Indiranagar, Bangalore – 560008.'
 const defaultAddressMapHref = 'https://www.google.com/maps?cid=12008617173707726367'
+const defaultMapEmbedUrl =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4784.225432892734!2d77.64327!3d12.9633776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a7d9708b39%3A0xa6a72db1f2811e1f!2sAutomation%20Systems%20%26%20Solutions%20(%20India%20)%20Pvt%20Ltd!5e1!3m2!1sen!2sin!4v1787651431856!5m2!1sen!2sin'
 const defaultLinkedinLink = 'https://www.linkedin.com/company/automation-systems-solutions-pvt-ltd/'
 
 const toTelHref = (value) => `tel:${value.replace(/[^\d+]/g, '')}`
@@ -327,7 +329,7 @@ function Contact() {
             </h2>
             <iframe
               title="ASSIPL office location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4784.225432892734!2d77.64327!3d12.9633776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a7d9708b39%3A0xa6a72db1f2811e1f!2sAutomation%20Systems%20%26%20Solutions%20(%20India%20)%20Pvt%20Ltd!5e1!3m2!1sen!2sin!4v1787651431856!5m2!1sen!2sin"
+              src={contactData?.map_embed_url || defaultMapEmbedUrl}
               className="mt-[30px] h-[450px] w-full border-0"
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
