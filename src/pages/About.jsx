@@ -86,7 +86,7 @@ function About() {
         className="relative flex min-h-88 items-center bg-cover bg-center px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-0 lg:pt-10"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
-        <div className="absolute inset-0 bg-secondary/30" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative mx-auto w-full max-w-300">
           <div className="max-w-190">
             <h1 className="pt-5 text-[40px] font-bold leading-[1.12] text-white md:pt-0 md:text-[50px] lg:text-[65px]">
@@ -171,7 +171,7 @@ function About() {
         </div>
       </section>
 
-      <section className="bg-background px-5 py-12 md:px-5 md:py-12 lg:px-5 lg:py-20">
+      <section className="bg-[#F8FAFC] px-5 py-12 md:px-5 md:py-12 lg:px-5 lg:py-20">
         <div className="mx-auto grid max-w-350 grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {stats.map((stat, index) => (
             <article
@@ -242,7 +242,7 @@ function About() {
       </section>
 
       <section id="career" className="scroll-mt-32 px-5 pt-12 pb-0 md:py-12 lg:px-5 lg:py-22">
-        <div className="mx-auto flex max-w-350 flex-col-reverse gap-8 lg:flex-row lg:items-center lg:gap-16">
+        <div className="mx-auto flex max-w-350 flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
           <div className="w-full overflow-hidden rounded-3xl lg:w-1/2">
             <img
               src={careerImage}
@@ -273,9 +273,9 @@ function About() {
         </div>
       </section>
 
-      <section className="pb-0">
+      <section className="px-5 pt-10 pb-12 md:px-0 md:pt-0 md:pb-0">
         <div
-          className="min-h-104 bg-cover bg-center px-5 py-20 md:px-0"
+          className="min-h-104 overflow-hidden rounded-[24px] bg-cover bg-center px-5 py-16 md:rounded-none md:px-0 md:py-20"
           style={{
             backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBg})`,
           }}

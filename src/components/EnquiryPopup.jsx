@@ -15,7 +15,7 @@ const ENQUIRY_ENDPOINT = `${API_ROOT}/enquiries`
 const initialForm = { name: '', company_name: '', email: '', mobile_number: '', message: '' }
 
 const fieldClass =
-  'w-full rounded-lg border border-white/20 bg-white/8 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none transition focus:border-primary focus:bg-white/12'
+  'w-full rounded-xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-md placeholder:text-white/55 outline-none transition focus:border-primary/70 focus:bg-white/15 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_0_0_3px_rgba(59,130,246,0.18)]'
 
 function EnquiryPopup({ isOpen, onClose }) {
   const [formData, setFormData] = useState(initialForm)
@@ -78,7 +78,10 @@ function EnquiryPopup({ isOpen, onClose }) {
           <X className="h-4 w-4" aria-hidden="true" />
         </button>
 
-        <div className="max-h-[85vh] overflow-y-auto px-6 py-8 sm:px-8">
+        <div
+          className="max-h-[85vh] overflow-y-auto px-6 py-8 sm:px-8 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 [&::-webkit-scrollbar-thumb]:hover:bg-white/45 [&::-webkit-scrollbar-track]:bg-transparent"
+          style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.3) transparent' }}
+        >
           <img src={logo} alt="ASSIPL" className="mx-auto h-14 w-auto object-contain" />
 
           {isSuccess ? (

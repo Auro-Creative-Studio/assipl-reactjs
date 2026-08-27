@@ -71,7 +71,9 @@ function ProductSidebar({ productLinks, currentSlug, onEnquiryClick, className =
 }
 
 function CapabilityCard({ item, index }) {
-  const tone = index % 2 === 0 ? 'white' : 'muted'
+  const row = Math.floor(index / 2)
+  const col = index % 2
+  const tone = (row + col) % 2 === 0 ? 'white' : 'muted'
 
   return (
     <article
@@ -80,7 +82,7 @@ function CapabilityCard({ item, index }) {
       }`}
     >
       <h3 className="text-[24px] font-semibold leading-tight text-secondary">{item.title}</h3>
-      <RichText html={item.body} className="mt-5 text-[16px] leading-7 text-text [&_ul]:mt-0" />
+      <RichText html={item.body} className="mt-5 text-[16px] leading-7 text-text md:text-[18px] [&_ul]:mt-0" />
     </article>
   )
 }
@@ -188,7 +190,7 @@ function SingleProduct() {
           )}
 
           {product.heading && (
-            <Reveal as="h2" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
+            <Reveal as="h2" className="pt-5 text-[30px] font-semibold leading-tight text-secondary md:text-[45px]">
               {product.heading}
             </Reveal>
           )}
@@ -200,7 +202,7 @@ function SingleProduct() {
           )}
 
           {product.description && (
-            <Reveal as="p" className="text-[16px] leading-8 text-text">
+            <Reveal as="p" className="text-[16px] leading-8 text-text md:text-[18px]">
               {product.description}
             </Reveal>
           )}
@@ -222,23 +224,23 @@ function SingleProduct() {
           {useCases.length > 0 && (
             <>
               <div className="mt-8">
-                <Reveal as="h2" className="text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
+                <Reveal as="h2" className="text-[30px] font-semibold leading-tight text-secondary md:text-[45px]">
                   Most commonly used in
                 </Reveal>
               </div>
 
-              <div className="mt-8 grid gap-0 md:grid-cols-4">
+              <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-0">
                 {useCases.map((useCase, index) => (
                   <Reveal
                     as="article"
                     key={useCase.id || useCase.title}
                     delay={index * 100}
-                    className={`px-2 first:pl-0 last:pr-0 ${
-                      index < useCases.length - 1 ? 'border-r border-accent' : ''
-                    } max-md:border-r-0 max-md:border-b max-md:py-4`}
+                    className={`md:px-2 md:first:pl-0 md:last:pr-0 ${
+                      index < useCases.length - 1 ? 'md:border-r md:border-accent' : ''
+                    }`}
                   >
-                    <img src={getMediaUrl(useCase.image)} alt="" className="h-38 w-full object-cover rounded-xl" />
-                    <h3 className="pt-4 text-center text-[18px] font-semibold leading-snug text-secondary">
+                    <img src={getMediaUrl(useCase.image)} alt="" className="h-24 w-full object-cover rounded-xl md:h-38" />
+                    <h3 className="pt-3 text-center text-[15px] font-semibold leading-snug text-secondary md:pt-4 md:text-[18px]">
                       {useCase.title}
                     </h3>
                   </Reveal>

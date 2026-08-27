@@ -155,10 +155,10 @@ function Csr() {
       </section>
 
       {(introImages.length > 0 || csr.intro_title || csr.intro_description) && (
-        <section className="px-5 py-20 md:py-19.5">
-          <div className="mx-auto grid max-w-347.5 gap-16 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16 lg:gap-16">
+        <section className="px-5 py-10 md:py-19.5">
+          <div className="mx-auto grid max-w-347.5 gap-6 overflow-hidden bg-white md:grid-cols-[1fr_1fr] md:gap-16">
             {introImages.length > 0 && (
-              <div className="relative min-h-108 overflow-hidden rounded-[20px] md:min-h-118">
+              <div className="relative order-2 min-h-64 overflow-hidden rounded-[20px] md:order-1 md:min-h-118">
                 {introImages.map((item, index) => (
                   <img
                     key={item.id || item.image}
@@ -171,16 +171,16 @@ function Csr() {
               </div>
             )}
 
-            <div className="flex min-h-108 items-center bg-white px-0 py-10 md:min-h-118 md:px-0 lg:pr-10">
+            <div className="order-1 flex items-center bg-white px-0 py-4 md:order-2 md:min-h-118 md:px-0 md:py-10 lg:pr-10">
               <div>
                 {csr.intro_title && (
-                  <h2 className="text-[34px] font-bold leading-[1.16] text-secondary md:text-[42px]">
+                  <h2 className="text-[30px] font-bold leading-[1.16] text-secondary md:text-[45px]">
                     {csr.intro_title}
                   </h2>
                 )}
                 {csr.intro_description && (
                   <div
-                    className="mt-6 text-[17px] leading-8 text-text [&_p]:mt-4 [&_p:first-child]:mt-0"
+                    className="mt-6 text-justify text-[16px] leading-7 text-text md:text-left md:text-[20px] md:leading-8 [&_p]:mt-4 [&_p:first-child]:mt-0"
                     dangerouslySetInnerHTML={{ __html: csr.intro_description }}
                   />
                 )}
@@ -191,7 +191,7 @@ function Csr() {
       )}
 
       {sliderImages.length > 0 && (
-        <section className="bg-background px-5 py-16 md:py-20">
+        <section className="bg-background px-2 py-8 md:px-5 md:py-20">
           <div className="mx-auto max-w-340">
             <Swiper
               modules={[Autoplay, Navigation]}
@@ -210,7 +210,7 @@ function Csr() {
                     <img
                       src={getMediaUrl(item.image)}
                       alt="ASSIPL CSR gallery"
-                      className="-mx-px h-90 w-[calc(100%+2px)] object-cover md:h-110"
+                      className="-mx-px h-auto w-[calc(100%+2px)] object-contain md:h-110 md:object-cover"
                     />
                   </figure>
                 </SwiperSlide>
@@ -224,13 +224,13 @@ function Csr() {
         <section className="px-5 py-14 md:py-18">
           <div className="mx-auto max-w-350">
             {csr.project_title && (
-              <h2 className="w-full text-center text-[34px] font-bold leading-[1.15] text-secondary md:text-[45px]">
+              <h2 className="w-full text-center text-[30px] font-bold leading-[1.15] text-secondary md:text-[45px]">
                 {csr.project_title}
               </h2>
             )}
             {csr.project_description && (
               <div
-                className="mt-6 w-full text-[20px] leading-[1.75] text-text [&_li]:mt-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5"
+                className="mt-6 w-full text-justify text-[16px] leading-[26px] text-text md:text-left md:text-[20px] md:leading-[30px] [&_li]:mt-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5"
                 dangerouslySetInnerHTML={{ __html: csr.project_description }}
               />
             )}
@@ -246,7 +246,13 @@ function Csr() {
         }
 
         .csr-carousel {
-          padding: 0 34px;
+          padding: 0 24px;
+        }
+
+        @media (min-width: 768px) {
+          .csr-carousel {
+            padding: 0 34px;
+          }
         }
 
         .csr-carousel .swiper-button-prev,

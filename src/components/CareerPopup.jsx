@@ -9,7 +9,7 @@ const MAX_RESUME_SIZE_BYTES = 5 * 1024 * 1024
 const RESUME_SIZE_ERROR = 'Resume size max 5 MB.'
 
 const fieldClass =
-  'w-full rounded-lg border border-white/20 bg-white/8 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none transition focus:border-primary focus:bg-white/12'
+  'w-full rounded-xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-md placeholder:text-white/55 outline-none transition focus:border-primary/70 focus:bg-white/15 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_0_0_3px_rgba(59,130,246,0.18)]'
 
 function CareerPopup({ isOpen, onClose }) {
   const [positions, setPositions] = useState([])
@@ -118,9 +118,12 @@ function CareerPopup({ isOpen, onClose }) {
           <X className="h-4 w-4" aria-hidden="true" />
         </button>
 
-        <div className="max-h-[85vh] overflow-y-auto px-6 py-8 sm:px-8">
+        <div
+          className="max-h-[85vh] overflow-y-auto px-6 py-8 sm:px-8 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 [&::-webkit-scrollbar-thumb]:hover:bg-white/45 [&::-webkit-scrollbar-track]:bg-transparent"
+          style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.3) transparent' }}
+        >
           <img src={logo} alt="ASSIPL" className="mx-auto h-14 w-auto object-contain" />
-          <h2 className="mt-4 text-center text-lg font-bold text-white">Job Application</h2>
+          <h2 className="mt-4 text-center text-[25px] font-bold text-white">Job Application</h2>
 
           {isSuccess ? (
             <div className="mt-10 text-center text-white">
@@ -175,11 +178,11 @@ function CareerPopup({ isOpen, onClose }) {
                 required
                 className={`${fieldClass} ${formData.position_id ? '' : 'text-white/55'}`}
               >
-                <option value="" disabled className="text-secondary">
+                <option value="" disabled className="bg-secondary text-white/60">
                   Select a position
                 </option>
                 {positions.map((position) => (
-                  <option key={position.id} value={position.id} className="text-secondary">
+                  <option key={position.id} value={position.id} className="bg-secondary text-white">
                     {position.position_name}
                   </option>
                 ))}
@@ -189,7 +192,7 @@ function CareerPopup({ isOpen, onClose }) {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Briefly describe your experience and skills"
-                rows={5}
+                rows={9}
                 className={`${fieldClass} resize-y`}
               />
 
@@ -203,7 +206,7 @@ function CareerPopup({ isOpen, onClose }) {
                   accept=".pdf,.doc,.docx"
                   onChange={handleFileChange}
                   required
-                  className="w-full rounded-lg border border-white/20 bg-white/8 px-3 py-2.5 text-sm text-white/80 outline-none transition file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-secondary focus:border-primary"
+                  className="w-full rounded-xl border border-white/25 bg-white/10 px-3 py-2.5 text-sm text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-md outline-none transition file:mr-3 file:rounded-md file:border file:border-white/25 file:bg-white/15 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-white/25 focus:border-primary/70 focus:bg-white/15"
                 />
               </div>
 
