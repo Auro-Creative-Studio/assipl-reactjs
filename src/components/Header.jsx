@@ -135,7 +135,7 @@ function Header() {
 
         setProductLinks(
           items.map((item) => ({
-            title: item.title,
+            title: item.menu_title || item.title,
             href: `/products/${item.slug}`,
           }))
         )

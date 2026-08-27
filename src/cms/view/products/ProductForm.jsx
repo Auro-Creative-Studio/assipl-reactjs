@@ -52,6 +52,7 @@ const createUseCase = () => ({ id: createItemId(), title: "", image: "" });
 
 const initialForm = {
   title: "",
+  menu_title: "",
   excerpt: "",
   heading: "",
   front_image: "",
@@ -96,6 +97,7 @@ const normalizeUseCases = (items) => {
 
 const normalizeForm = (product = {}) => ({
   title: product.title || "",
+  menu_title: product.menu_title || "",
   excerpt: product.excerpt || "",
   heading: product.heading || "",
   front_image: product.front_image || "",
@@ -120,6 +122,7 @@ const normalizeForm = (product = {}) => ({
 
 const buildPayload = (formData) => ({
   title: formData.title.trim(),
+  menu_title: formData.menu_title.trim() || null,
   excerpt: formData.excerpt.trim() || null,
   heading: formData.heading.trim() || null,
   front_image: toUploadPath(formData.front_image) || null,
@@ -476,6 +479,14 @@ export default function ProductForm({ productId = null, mode = "create" }) {
                     placeholder="e.g. Video Surveillance and Smart Cameras"
                     error={errors.title}
                     required
+                  />
+
+                  <Input
+                    label="Menu Title"
+                    name="menu_title"
+                    value={formData.menu_title}
+                    onChange={handleChange}
+                    placeholder="Short label shown in the header Products dropdown. Falls back to Title if empty."
                   />
 
                   <Textarea
