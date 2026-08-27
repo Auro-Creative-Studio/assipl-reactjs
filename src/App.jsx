@@ -25,6 +25,7 @@ import Login from './cms/view/Login'
 import Media from './cms/view/Media'
 import NewsletterSubscribers from './cms/view/NewsletterSubscribers'
 import CmsContactPage from './cms/view/pages/contact/Contact'
+import CmsCsrPage from './cms/view/pages/csr/Csr'
 import Profile from './cms/view/Profile'
 import SeoCreate from './cms/view/seo/Create'
 import SeoEdit from './cms/view/seo/Edit'
@@ -88,6 +89,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
 
           <Route path="pages/contact" element={<CmsContactPage />} />
+          <Route path="pages/csr" element={<CmsCsrPage />} />
           <Route path="enquiries" element={<EnquiryForm />} />
           <Route path="contacts" element={<ContactForm />} />
           <Route path="newsletter-subscribers" element={<NewsletterSubscribers />} />

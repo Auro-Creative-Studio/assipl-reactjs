@@ -2,6 +2,7 @@
   Briefcase,
   ChevronDown,
   Cookie,
+  Files,
   Inbox,
   Image,
   Layers,
@@ -29,6 +30,15 @@ const navItems = [
   { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
   { label: "Products", href: "/admin/products", icon: Layers },
   { label: "Services", href: "/admin/single-services", icon: Wrench },
+  {
+    label: "Pages",
+    basePath: "/admin/pages",
+    icon: Files,
+    children: [
+      { label: "Contact", href: "/admin/pages/contact" },
+      { label: "CSR", href: "/admin/pages/csr" },
+    ],
+  },
   {
     label: "Careers",
     basePath: "/admin/career",
