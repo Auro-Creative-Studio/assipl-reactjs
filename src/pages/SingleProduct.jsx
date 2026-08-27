@@ -70,10 +70,13 @@ function ProductSidebar({ productLinks, currentSlug, onEnquiryClick, className =
   )
 }
 
-function CapabilityCard({ item, index }) {
+function CapabilityCard({ item, index, total }) {
+  const isTrailingSolo = total % 2 === 1 && index === total - 1
   const row = Math.floor(index / 2)
   const col = index % 2
-  const tone = (row + col) % 2 === 0 ? 'white' : 'muted'
+  const tone = isTrailingSolo
+    ? (index % 2 === 0 ? 'white' : 'muted')
+    : (row + col) % 2 === 0 ? 'white' : 'muted'
 
   return (
     <article
@@ -215,7 +218,7 @@ function SingleProduct() {
                   delay={(index % 2) * 100}
                   className={isLastOdd && index === capabilities.length - 1 ? 'md:col-span-2' : ''}
                 >
-                  <CapabilityCard item={item} index={index} />
+                  <CapabilityCard item={item} index={index} total={capabilities.length} />
                 </Reveal>
               ))}
             </div>
@@ -229,22 +232,30 @@ function SingleProduct() {
                 </Reveal>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-0">
-                {useCases.map((useCase, index) => (
-                  <Reveal
-                    as="article"
-                    key={useCase.id || useCase.title}
-                    delay={index * 100}
-                    className={`md:px-2 md:first:pl-0 md:last:pr-0 ${
-                      index < useCases.length - 1 ? 'md:border-r md:border-accent' : ''
-                    }`}
-                  >
-                    <img src={getMediaUrl(useCase.image)} alt="" className="h-24 w-full object-cover rounded-xl md:h-38" />
-                    <h3 className="pt-3 text-center text-[15px] font-semibold leading-snug text-secondary md:pt-4 md:text-[18px]">
-                      {useCase.title}
-                    </h3>
-                  </Reveal>
-                ))}
+              <div className="mt-8 grid grid-cols-2 gap-0 md:grid-cols-4">
+                {useCases.map((useCase, index) => {
+                  const isFirstRow = Math.floor(index / 2) === 0
+                  const isLastRow = Math.floor(index / 2) === Math.floor((useCases.length - 1) / 2)
+                  const hasRightNeighbor = index % 2 === 0 && index + 1 < useCases.length
+
+                  return (
+                    <Reveal
+                      as="article"
+                      key={useCase.id || useCase.title}
+                      delay={index * 100}
+                      className={`max-md:px-3 max-md:odd:pl-0 max-md:even:pr-0 md:px-2 md:first:pl-0 md:last:pr-0 ${
+                        isFirstRow ? '' : 'max-md:pt-4'
+                      } ${isLastRow ? '' : 'max-md:pb-4'} ${
+                        hasRightNeighbor ? 'max-md:border-r max-md:border-accent' : ''
+                      } ${index < useCases.length - 1 ? 'md:border-r md:border-accent' : ''}`}
+                    >
+                      <img src={getMediaUrl(useCase.image)} alt="" className="h-24 w-full object-cover rounded-xl md:h-38" />
+                      <h3 className="pt-3 text-center text-[15px] font-semibold leading-snug text-secondary md:pt-4 md:text-[18px]">
+                        {useCase.title}
+                      </h3>
+                    </Reveal>
+                  )
+                })}
               </div>
             </>
           )}
