@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EnquiryPopup from '../components/EnquiryPopup'
+import Reveal from '../components/Reveal'
 import heroBg from '../assets/services/service-hero-bg.webp'
 import strategicBg from '../assets/services/strategic-bg.webp'
 import ctaBg from '../assets/services/cta-bg.webp'
@@ -205,19 +206,20 @@ function Services() {
             <a href="/" className="font-kumbh text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
               Home
             </a>
-            <h1
+            <Reveal
+              as="h1"
               className="-ml-1 mt-2 text-[45px] font-semibold leading-[1.05] md:text-[70px]"
               style={{ color: 'var(--color-white)' }}
             >
               Services
-            </h1>
+            </Reveal>
           </div>
         </section>
 
         {(page.services_title || page.services_description || strategicItems.length > 0) && (
           <section className="px-5 py-20">
             {(page.services_title || page.services_description) && (
-              <div className="mx-auto max-w-300 text-center">
+              <Reveal className="mx-auto max-w-300 text-center">
                 {page.services_title && (
                   <h2 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                     {page.services_title}
@@ -229,12 +231,12 @@ function Services() {
                     dangerouslySetInnerHTML={{ __html: page.services_description }}
                   />
                 )}
-              </div>
+              </Reveal>
             )}
 
             <div className="mx-auto mt-15 grid max-w-350 gap-10 lg:grid-cols-[680px_1fr]">
               {page.strategic_image && (
-                <div
+                <Reveal
                   className="min-h-105 rounded-2xl bg-cover bg-center md:min-h-138"
                   style={{ backgroundImage: `url(${getMediaUrl(page.strategic_image)})` }}
                 />
@@ -247,7 +249,7 @@ function Services() {
                 )}
                 <div className="mt-8 space-y-8">
                   {strategicItems.map((item, index) => (
-                    <article key={item.id || index} className="flex gap-6">
+                    <Reveal key={item.id || index} as="article" delay={index * 100} className="flex gap-6">
                       {item.icon && (
                         <div className="flex h-21 min-w-21 items-center justify-center rounded-full border border-accent">
                           <img src={getMediaUrl(item.icon)} alt="" className="h-14 w-14 object-contain" />
@@ -273,7 +275,7 @@ function Services() {
                           </Link>
                         )}
                       </div>
-                    </article>
+                    </Reveal>
                   ))}
                 </div>
               </div>
@@ -285,7 +287,7 @@ function Services() {
           <section className="bg-background px-5 py-20">
             <div className="mx-auto max-w-350">
               {(page.core_project_title || page.core_project_description) && (
-                <div className="mx-auto max-w-295 text-center">
+                <Reveal className="mx-auto max-w-295 text-center">
                   {page.core_project_title && (
                     <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                       {page.core_project_title}
@@ -297,12 +299,14 @@ function Services() {
                       dangerouslySetInnerHTML={{ __html: page.core_project_description }}
                     />
                   )}
-                </div>
+                </Reveal>
               )}
               <div className="mt-15 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 {coreProjects.map((item, index) => (
-                  <article
+                  <Reveal
                     key={item.id || index}
+                    as="article"
+                    delay={index * 100}
                     className="rounded-xl border border-accent bg-background px-8 py-8"
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -325,7 +329,7 @@ function Services() {
                         {item.description}
                       </p>
                     )}
-                  </article>
+                  </Reveal>
                 ))}
               </div>
               {page.know_more_link && (
@@ -345,7 +349,7 @@ function Services() {
         {(page.maintenance_title || maintenanceItems.length > 0) && (
           <section className="bg-white px-5 py-20">
             <div className="mx-auto max-w-350">
-              <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+              <Reveal className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
                 {page.maintenance_title && (
                   <h2 className="max-w-230 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                     {page.maintenance_title}
@@ -359,10 +363,15 @@ function Services() {
                     Read More
                   </a>
                 )}
-              </div>
+              </Reveal>
               <div className="mt-12 grid gap-6 md:grid-cols-3">
                 {maintenanceItems.map((item, index) => (
-                  <article key={item.id || index} className="rounded-[18px] border border-accent bg-white p-5">
+                  <Reveal
+                    key={item.id || index}
+                    as="article"
+                    delay={index * 100}
+                    className="rounded-[18px] border border-accent bg-white p-5"
+                  >
                     {item.image && (
                       <img
                         src={getMediaUrl(item.image)}
@@ -380,7 +389,7 @@ function Services() {
                         {item.description}
                       </p>
                     )}
-                  </article>
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -394,7 +403,7 @@ function Services() {
               backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBg})`,
             }}
           >
-            <div className="mx-auto flex min-h-64 max-w-[1680px] flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
+            <Reveal className="mx-auto flex min-h-64 max-w-360 flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
               <div className="max-w-180 text-left">
                 <h2
                   className="text-[32px] font-semibold leading-[1.125] md:text-[45px]"
@@ -417,7 +426,7 @@ function Services() {
               >
                 Contact Our Engineering Team
               </button>
-            </div>
+            </Reveal>
           </div>
         </section>
       </main>

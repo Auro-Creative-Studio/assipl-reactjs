@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import EnquiryPopup from '../components/EnquiryPopup'
+import Reveal from '../components/Reveal'
 import heroBg from '../assets/process-page/process-hero-bg.webp'
 import ctaBg from '../assets/process-page/process-cta-bg.webp'
 import blueprintIcon from '../assets/process-page/blueprint-icon.png'
@@ -87,20 +88,20 @@ function ProcessStep({ step, index, isActive, markerRef }) {
     <div
       className={`relative rounded-[18px] bg-background ${
         mode === 'mobile'
-          ? 'flex min-h-[478px] flex-col justify-center px-[30px] py-[20px]'
-          : 'flex min-h-[365px] flex-col justify-center px-[34px] py-[54px] md:px-[50px]'
+          ? 'flex min-h-119.5 flex-col justify-center px-7.5 py-5'
+          : 'flex min-h-91.25 flex-col justify-center px-8.5 py-13.5 md:px-12.5'
       } ${
         mode === 'mobile'
-          ? 'before:absolute before:left-[-18px] before:top-[16px] before:h-0 before:w-0 before:border-y-[15px] before:border-r-[18px] before:border-y-transparent before:border-r-background'
+          ? 'before:absolute before:-left-4.5 before:top-4 before:h-0 before:w-0 before:border-y-15 before:border-r-18 before:border-y-transparent before:border-r-background'
           : reversed
-            ? 'lg:ml-[18px] lg:before:absolute lg:before:left-[-22px] lg:before:top-[24px] lg:before:h-0 lg:before:w-0 lg:before:border-y-[18px] lg:before:border-r-[22px] lg:before:border-y-transparent lg:before:border-r-background'
-            : 'lg:mr-[18px] lg:after:absolute lg:after:right-[-22px] lg:after:top-[24px] lg:after:h-0 lg:after:w-0 lg:after:border-y-[18px] lg:after:border-l-[22px] lg:after:border-y-transparent lg:after:border-l-background'
+            ? 'lg:ml-4.5 lg:before:absolute lg:before:-left-5.5 lg:before:top-6 lg:before:h-0 lg:before:w-0 lg:before:border-y-18 lg:before:border-r-22 lg:before:border-y-transparent lg:before:border-r-background'
+            : 'lg:mr-4.5 lg:after:absolute lg:after:-right-5.5 lg:after:top-6 lg:after:h-0 lg:after:w-0 lg:after:border-y-18 lg:after:border-l-22 lg:after:border-y-transparent lg:after:border-l-background'
       }`}
     >
-      <h2 className="font-body text-[23px] font-medium leading-[1.25] text-black md:text-[26px]">
+      <h2 className="font-body text-[23px] font-medium leading-tight text-black md:text-[26px]">
         {step.title}
       </h2>
-      <ul className="mt-4 list-disc space-y-[6px] pl-5">
+      <ul className="mt-4 list-disc space-y-1.5 pl-5">
         {step.points.map((point, pointIndex) => (
           <li key={`${point.label}-${pointIndex}`} className="text-[16px] font-normal leading-[1.6] text-text md:text-[17px]">
             <span className="font-semibold text-secondary">{point.label}</span> {point.text}
@@ -114,22 +115,22 @@ function ProcessStep({ step, index, isActive, markerRef }) {
     <img
       src={step.image}
       alt=""
-      className="h-[340px] w-full rounded-[12px] object-cover md:h-[365px]"
+      className="h-85 w-full rounded-xl object-cover md:h-91.25"
     />
   )
 
   return (
-    <article className="relative grid grid-cols-[64px_minmax(0,1fr)] items-start gap-x-4 gap-y-6 lg:grid-cols-[1fr_90px_1fr] lg:gap-6">
+    <Reveal as="article" className="relative grid grid-cols-[64px_minmax(0,1fr)] items-start gap-x-4 gap-y-6 lg:grid-cols-[1fr_90px_1fr] lg:gap-6">
       <div
         ref={markerRef}
         className="relative z-10 col-start-1 row-start-1 flex justify-center lg:col-start-2 lg:row-start-1"
       >
         <div
-          className={`flex h-[60px] w-[60px] items-center justify-center rounded-full transition-colors duration-500 ease-out ${
+          className={`flex h-15 w-15 items-center justify-center rounded-full transition-colors duration-500 ease-out ${
             isActive ? 'bg-secondary' : 'bg-primary'
           }`}
         >
-          <img src={step.icon} alt="" className="h-[40px] w-[40px] object-contain brightness-0 invert" />
+          <img src={step.icon} alt="" className="h-10 w-10 object-contain brightness-0 invert" />
         </div>
       </div>
 
@@ -142,7 +143,7 @@ function ProcessStep({ step, index, isActive, markerRef }) {
       <div className="relative hidden lg:col-start-3 lg:row-start-1 lg:block">
         {reversed ? contentCard() : imagePanel}
       </div>
-    </article>
+    </Reveal>
   )
 }
 
@@ -267,32 +268,33 @@ function Process() {
             backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBackgroundImage})`,
           }}
         >
-          <div className="mx-auto w-full max-w-[1200px] pt-[2px]">
-            <a href="/" className="font-kumbh text-[20px] font-semibold capitalize leading-[1.5] text-background transition-colors hover:text-[var(--color-white)]">
+          <div className="mx-auto w-full max-w-300 pt-0.5">
+            <a href="/" className="text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
               Home
             </a>
-            <h1
-              className="-ml-1 mt-[10px] text-[45px] font-semibold leading-[1.05] md:text-[70px]"
+            <Reveal
+              as="h1"
+              className="-ml-1 mt-2.5 text-[45px] font-semibold leading-[1.05] md:text-[70px]"
               style={{ color: 'var(--color-white)' }}
             >
               {heroTitle}
-            </h1>
+            </Reveal>
           </div>
         </section>
 
-        <section className="px-5 py-[80px]">
-          <div className="mx-auto max-w-[1200px] text-center">
-            <h1 className="mx-auto max-w-[980px] text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
+        <section className="px-5 py-20">
+          <Reveal className="mx-auto max-w-300 text-center">
+            <h1 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
               {introHeading}
             </h1>
-            <p className="mx-auto mt-[20px] max-w-[1180px] text-justify text-[18px] font-normal leading-[1.5] text-text md:text-center">
+            <p className="mx-auto mt-5 max-w-295 text-justify text-[18px] font-normal leading-normal text-text md:text-center">
               {introDescription}
             </p>
-          </div>
+          </Reveal>
 
-          <div ref={timelineRef} className="relative mx-auto mt-[70px] max-w-[1400px] space-y-[12px]">
+          <div ref={timelineRef} className="relative mx-auto mt-18 max-w-350 space-y-3">
             <div
-              className="pointer-events-none absolute left-[30px] w-px bg-[#b8b8b8] lg:left-1/2 lg:-translate-x-1/2"
+              className="pointer-events-none absolute left-7.5 w-px bg-[#b8b8b8] lg:left-1/2 lg:-translate-x-1/2"
               style={{ top: `${lineMetrics.top}px`, height: `${lineMetrics.height}px` }}
             >
               <div
@@ -316,13 +318,13 @@ function Process() {
 
         <section className="pb-0">
           <div
-            className="min-h-[415px] bg-cover bg-center px-5 py-[80px] md:px-0"
+            className="min-h-103.75 bg-cover bg-center px-5 py-20 md:px-0"
             style={{
               backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBackgroundImage})`,
             }}
           >
-            <div className="mx-auto flex min-h-[255px] max-w-[1680px] flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-[720px] text-left">
+            <Reveal className="mx-auto flex min-h-65 max-w-360 flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-180 text-left">
                 <h2
                   className="text-[32px] font-semibold leading-[1.125] md:text-[45px]"
                   style={{ color: 'var(--color-white)' }}
@@ -330,7 +332,7 @@ function Process() {
                   {ctaHeading}
                 </h2>
                 <p
-                  className="mt-[20px] max-w-[720px] text-[16px] font-normal leading-[1.67]"
+                  className="mt-5 max-w-180 text-[16px] font-normal leading-[1.67]"
                   style={{ color: 'var(--color-white)' }}
                 >
                   {ctaDescription}
@@ -339,11 +341,11 @@ function Process() {
               <button
                 type="button"
                 onClick={() => setIsEnquiryOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-[40px] py-[14px] text-[18px] font-medium capitalize leading-[1.5] text-[var(--color-white)] transition hover:bg-secondary hover:text-[var(--color-white)] md:mr-[20px]"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
               >
                 {ctaButtonLabel}
               </button>
-            </div>
+            </Reveal>
           </div>
         </section>
       </main>

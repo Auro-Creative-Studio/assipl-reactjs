@@ -23,7 +23,10 @@ function AboutSection({ data }) {
         </Reveal>
         <Reveal delay={150}>
           <h2 className="text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[42px]">{heading}</h2>
-          <p className="mt-6 text-justify text-base leading-8 text-text md:text-left sm:text-lg">{description}</p>
+          <p
+            className="mt-6 text-justify text-base leading-8 text-text md:text-left sm:text-lg"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
           <a
             href={ctaHref}
             className="mt-8 inline-flex items-center rounded-full bg-primary px-7 py-3.5 text-[18px] font-semibold text-white transition hover:bg-secondary"

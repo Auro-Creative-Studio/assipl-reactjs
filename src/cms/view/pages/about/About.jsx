@@ -528,6 +528,18 @@ export default function CmsAboutPage() {
                     value={formData.securing_image}
                     onChange={handleChange}
                   />
+                  <ImageField
+                    label="Securing Image 2"
+                    name="securing_image_2"
+                    value={formData.securing_image_2}
+                    onChange={handleChange}
+                  />
+                  <ImageField
+                    label="Securing Image 3"
+                    name="securing_image_3"
+                    value={formData.securing_image_3}
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <h2 className="text-sm font-black uppercase tracking-[0.16em] text-slate-500">

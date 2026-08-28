@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import CareerPopup from '../components/CareerPopup'
 import EnquiryPopup from '../components/EnquiryPopup'
+import Reveal from '../components/Reveal'
 import logoAlba from '../assets/about-page/embedded-0.webp'
 import logoAditya from '../assets/about-page/embedded-1.png'
 import logoTexecom from '../assets/about-page/embedded-2.jpg'
@@ -28,6 +29,8 @@ import statTeam from '../assets/about-page/embedded-24.png'
 import statIndia from '../assets/about-page/embedded-25.png'
 import statService from '../assets/about-page/embedded-26.png'
 import careerImage from '../assets/about-page/embedded-29.webp'
+import csrHappyKids from '../assets/csr/happy-kids.webp'
+import csrPankhSchool from '../assets/csr/pankh-evening-school-3.jpg'
 import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const FALLBACK_ABOUT = {
@@ -71,6 +74,8 @@ const FALLBACK_ABOUT = {
   securing_description:
     '<p>At ASSIPL, we believe that true security extends beyond corporate infrastructure; it involves protecting and uplifting the communities in which we operate. Corporate Social Responsibility is deeply rooted in our corporate values. We are committed to making a tangible, positive impact on societal well-being and environmental sustainability.</p>',
   securing_image: csrSupplies,
+  securing_image_2: csrHappyKids,
+  securing_image_3: csrPankhSchool,
 
   future_title: 'Build the Future of Enterprise Security',
   future_description:
@@ -182,7 +187,7 @@ function About() {
   }, [])
 
   useEffect(() => {
-    if (!location.hash) return
+    if (!location.hash || isLoading) return
 
     const section = document.querySelector(location.hash)
     if (!section) return
@@ -190,7 +195,7 @@ function About() {
     window.setTimeout(() => {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 0)
-  }, [location.hash])
+  }, [location.hash, isLoading])
 
   useSeoMeta({
     title: about?.meta_title || 'About Us | ASSIPL',
@@ -228,9 +233,9 @@ function About() {
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative mx-auto w-full max-w-300">
-          <div className="max-w-190">
+          <Reveal className="max-w-190">
             {about.banner_title && (
-              <h1 className="pt-5 text-[40px] font-bold leading-[1.12] text-white md:pt-0 md:text-[50px] lg:text-[65px]">
+              <h1 className="pt-5 text-[30px] font-bold leading-[1.12] text-white md:pt-0 md:text-[50px] lg:text-[65px]">
                 {about.banner_title}
               </h1>
             )}
@@ -239,7 +244,7 @@ function About() {
                 {about.banner_description}
               </p>
             )}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -247,13 +252,13 @@ function About() {
         <section className="px-5 pt-12 pb-0 md:py-12 lg:px-5 lg:py-22">
           <div className="mx-auto flex max-w-350 flex-col-reverse gap-12 lg:flex-row lg:items-center lg:gap-16">
             {about.about_image && (
-              <div
+              <Reveal
                 className="min-h-64 w-full rounded-3xl bg-cover bg-center md:min-h-105 lg:w-1/2 lg:min-h-130"
                 style={{ backgroundImage: `url(${getMediaUrl(about.about_image)})` }}
                 aria-label="ASSIPL digital security infrastructure"
               />
             )}
-            <div className="w-full lg:w-1/2">
+            <Reveal delay={150} className="w-full lg:w-1/2">
               {about.about_title && (
                 <h2 className="text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
                   {about.about_title}
@@ -275,7 +280,7 @@ function About() {
                   Download Brochure
                 </ButtonLink>
               )}
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
@@ -283,9 +288,12 @@ function About() {
       {logos.length > 0 && (
         <section className="overflow-hidden px-5 py-12 md:pb-12 md:pt-0 lg:px-0 lg:py-20">
           {about.manufacture_title && (
-            <h2 className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
+            <Reveal
+              as="h2"
+              className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]"
+            >
               {about.manufacture_title}
-            </h2>
+            </Reveal>
           )}
           <div className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
             <Swiper
@@ -322,8 +330,10 @@ function About() {
         <section className="bg-[#F8FAFC] px-5 py-12 md:px-5 md:py-12 lg:px-5 lg:py-20">
           <div className="mx-auto grid max-w-350 grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => (
-              <article
+              <Reveal
                 key={feature.id || index}
+                as="article"
+                delay={(index % 3) * 100}
                 className={`flex min-h-68 flex-col justify-center rounded-[20px] border border-accent px-8 py-8 md:min-h-68 lg:min-h-68 ${
                   index % 2 === 0 ? 'bg-transparent' : 'bg-white'
                 }`}
@@ -338,7 +348,7 @@ function About() {
                 <h3 className="mt-8 max-w-90 text-[24px] font-semibold leading-snug text-[#061542] md:text-center lg:text-left">
                   {feature.description}
                 </h3>
-              </article>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -347,7 +357,7 @@ function About() {
       {(about.securing_image || about.securing_title || about.securing_description) && (
         <section className="bg-white px-5 py-12 md:py-12 lg:px-5 lg:py-22">
           <div className="mx-auto grid max-w-350 gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
-            <div className="max-w-170">
+            <Reveal className="max-w-170">
               {about.securing_title && (
                 <h2 className="text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
                   {about.securing_title}
@@ -365,34 +375,54 @@ function About() {
               >
                 Discover Our CSR Initiatives
               </Link>
-            </div>
+            </Reveal>
 
             {about.securing_image && (
-              <img
-                src={getMediaUrl(about.securing_image)}
-                alt="ASSIPL CSR initiative"
-                className="h-80 w-full rounded-[18px] object-cover md:h-full"
-                loading="lazy"
-              />
+              <Reveal delay={150} className="grid h-full md:grid-cols-[1.2fr_1fr] gap-4">
+                <img
+                  src={getMediaUrl(about.securing_image)}
+                  alt="ASSIPL CSR initiative"
+                  className="h-80 w-full rounded-[18px] object-cover md:h-full"
+                  loading="lazy"
+                />
+                <div className="grid grid-rows-2 gap-4">
+                  {about.securing_image_2 && (
+                    <img
+                      src={getMediaUrl(about.securing_image_2)}
+                      alt="ASSIPL CSR community initiative"
+                      className="h-full w-full rounded-[18px] object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                  {about.securing_image_3 && (
+                    <img
+                      src={getMediaUrl(about.securing_image_3)}
+                      alt="ASSIPL CSR community initiative"
+                      className="h-full w-full rounded-[18px] object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+              </Reveal>
             )}
           </div>
         </section>
       )}
 
       {(about.future_image || about.future_title || about.future_description) && (
-        <section id="career" className="scroll-mt-32 px-5 pt-12 pb-0 md:py-12 lg:px-5 lg:py-22">
+        <section id="career" className="scroll-mt-32 px-5 pb-0 md:pb-12 lg:px-5 lg:pb-22">
           <div className="mx-auto flex max-w-350 flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
             {about.future_image && (
-              <div className="w-full overflow-hidden rounded-3xl lg:w-1/2">
+              <Reveal className="w-full overflow-hidden rounded-3xl lg:w-1/2">
                 <img
                   src={getMediaUrl(about.future_image)}
                   alt="ASSIPL careers and enterprise security team"
-                  className="h-75 w-full object-cover object-center md:h-100 lg:h-130"
+                  className="h-75 w-full object-cover object-center md:h-100"
                   loading="lazy"
                 />
-              </div>
+              </Reveal>
             )}
-            <div className="w-full lg:w-1/2">
+            <Reveal delay={150} className="w-full lg:w-1/2">
               {about.future_title && (
                 <h2 className="text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
                   {about.future_title}
@@ -411,24 +441,24 @@ function About() {
               >
                 Join Our Team
               </button>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
 
       <section className="px-5 pt-10 pb-12 md:px-0 md:pt-0 md:pb-0">
         <div
-          className="min-h-104 overflow-hidden rounded-[24px] bg-cover bg-center px-5 py-16 md:rounded-none md:px-0 md:py-20"
+          className="min-h-104 overflow-hidden rounded-3xl bg-cover bg-center px-5 py-16 md:rounded-none md:px-0 md:py-20"
           style={{
             backgroundImage: `linear-gradient(rgba(18,28,69,.28),rgba(18,28,69,.28)), url(${ctaBg})`,
           }}
         >
-          <div className="mx-auto flex min-h-64 max-w-360 flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
+          <Reveal className="mx-auto flex min-h-64 max-w-360 flex-col items-start justify-center gap-8 md:flex-row md:items-center md:justify-between">
             <div className="max-w-180 text-left">
-              <h3 className="text-[32px] font-semibold leading-[1.125] md:text-[45px] text-white">
+              <h3 className="text-[32px] font-semibold leading-[1.125] md:text-[45px] text-white text-center md:text-left">
                 Ready to Standardize Your Enterprise Infrastructure?
               </h3>
-              <p className="mt-5 max-w-180 text-justify text-[18px] font-normal leading-[1.67] text-white md:text-left">
+              <p className="mt-5 max-w-180 text-center text-[18px] font-normal leading-tight md:leading-[1.67] text-white md:text-left">
                 Connect with our systems integration experts to discuss multi-site rollouts, vault
                 security, and scalable safety architectures.
               </p>
@@ -440,7 +470,7 @@ function About() {
             >
               Contact Our Engineering Team
             </button>
-          </div>
+          </Reveal>
         </div>
       </section>
 

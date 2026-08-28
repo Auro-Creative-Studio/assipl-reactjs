@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import heroBg from '../assets/contact-page/embedded-0.webp'
+import Reveal from '../components/Reveal'
 import { extractMapEmbedSrc, fetchContactPage } from '../lib/contactApi'
 import { FaLinkedinIn } from 'react-icons/fa'
 import { useSeoMeta } from '../hooks/useSeoMeta'
@@ -200,18 +201,19 @@ function Contact() {
             >
               Home
             </a>
-            <h1
+            <Reveal
+              as="h1"
               className="-ml-1 mt-[10px] text-[45px] font-semibold leading-[1.05] md:text-[70px]"
               style={{ color: 'var(--color-white)' }}
             >
               Contact
-            </h1>
+            </Reveal>
           </div>
         </section>
 
         <section className="bg-white px-5 py-[50px] md:py-[60px] lg:py-[80px]">
           <div className="mx-auto grid max-w-[1400px] gap-5 md:gap-12 lg:grid-cols-[640px_640px] lg:justify-between lg:gap-[120px]">
-            <div>
+            <Reveal>
               <h2 className="text-left text-[30px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
                 {connectHeading}
               </h2>
@@ -257,9 +259,9 @@ function Contact() {
                   </a>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
-            <form className="w-full pt-5 md:pt-[5px]" onSubmit={handleSubmit}>
+            <Reveal as="form" delay={150} className="w-full pt-5 md:pt-[5px]" onSubmit={handleSubmit}>
               <div className="space-y-[10px] md:space-y-5">
                 <ContactField
                   type="text"
@@ -325,16 +327,16 @@ function Contact() {
                   </button>
                 </div>
               </div>
-            </form>
+            </Reveal>
           </div>
         </section>
 
         <section className="bg-background px-5 py-[50px] md:py-[60px] lg:py-[80px]">
           <div className="mx-auto max-w-[1400px]">
-            <h2 className="mx-auto max-w-[760px] text-center text-[32px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
+            <Reveal as="h2" className="mx-auto max-w-[760px] text-center text-[32px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
               Visit Us At Our Secure Headquarters
-            </h2>
-            <iframe
+            </Reveal>
+            <Reveal delay={150} as="iframe"
               title="ASSIPL office location"
               src={mapEmbedSrc}
               className="mt-[30px] h-[450px] w-full border-0"
