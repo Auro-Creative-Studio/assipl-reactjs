@@ -67,6 +67,15 @@ h4 {
   animation: softPulse 1.7s ease-out infinite;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes softPulse {
   0% {
     box-shadow:
