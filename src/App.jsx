@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import CookieConsentBanner from './components/CookieConsentBanner'
 import CmsLayout from './cms/components/layout/CmsLayout'
 import ProtectedCmsRoute from './cms/components/layout/ProtectedCmsRoute'
 import SuperAdminRoute from './cms/components/layout/SuperAdminRoute'
@@ -76,6 +77,7 @@ function PublicLayout() {
         <Route path="/services/:slug" element={<SingleService />} />
       </Routes>
       <Footer />
+      <CookieConsentBanner />
     </div>
   )
 }
@@ -127,4 +129,3 @@ function App() {
 }
 
 export default App
-

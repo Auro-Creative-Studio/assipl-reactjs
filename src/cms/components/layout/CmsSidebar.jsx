@@ -1,62 +1,9 @@
-﻿import {
-  Briefcase,
-  ChevronDown,
-  Cookie,
-  Files,
-  Inbox,
-  Image,
-  Layers,
-  LayoutDashboard,
-  MessageSquareText,
-  Mail,
-  Newspaper,
-  Wrench,
-  X,
-  UserCircle,
-  Users,
-} from "lucide-react";
+﻿import { ChevronDown, X, UserCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { getCmsUser, isCmsSuperAdmin } from "../../utils/auth";
 import logo from "../../../assets/logo.webp";
-
-const navItems = [
-  { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { label: "Enquiries", href: "/admin/enquiries", icon: MessageSquareText },
-  { label: "Contacts", href: "/admin/contacts", icon: Inbox },
-  { label: "Newsletter", href: "/admin/newsletter-subscribers", icon: Mail },
-  { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
-  { label: "Products", href: "/admin/products", icon: Layers },
-  { label: "Services", href: "/admin/single-services", icon: Wrench },
-  {
-    label: "Pages",
-    basePath: "/admin/pages",
-    icon: Files,
-    children: [
-      { label: "Home", href: "/admin/pages/home" },
-      { label: "Process", href: "/admin/pages/process" },
-      { label: "About", href: "/admin/pages/about" },
-      { label: "Contact", href: "/admin/pages/contact" },
-      { label: "CSR", href: "/admin/pages/csr" },
-      { label: "Services Page", href: "/admin/pages/services" },
-    ],
-  },
-  {
-    label: "Careers",
-    basePath: "/admin/career",
-    icon: Briefcase,
-    children: [
-      { label: "Positions", href: "/admin/career-positions" },
-      { label: "Applications", href: "/admin/career-applications" },
-    ],
-  },
-  { label: "Cookie Consents", href: "/admin/cookie-consents", icon: Cookie },
-  { label: "Media", href: "/admin/media", icon: Image },
-  // { label: "Projects", href: "/admin/projects", icon: FolderKanban },
-  // { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-  { label: "Users", href: "/admin/users", icon: Users, superAdminOnly: true },
-  // { label: "Settings", href: "/admin/settings", icon: Settings },
-];
+import { navItems } from "./cmsNavItems";
 
 const getUserDisplayName = (user) => {
   return (
@@ -140,7 +87,7 @@ export default function CmsSidebar({ isOpen = false, onClose }) {
         }`}
       >
         <div className="flex items-center justify-between gap-3 px-2">
-          <div className="flex items-center gap-3">
+          <Link to="/" onClick={onClose} className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl text-white">
               <img
                 src={logo}
@@ -156,7 +103,7 @@ export default function CmsSidebar({ isOpen = false, onClose }) {
                 CMS Panel
               </h1>
             </div>
-          </div>
+          </Link>
           <button
             type="button"
             onClick={onClose}
