@@ -94,7 +94,9 @@ function Footer() {
     <footer className="mt-auto bg-secondary text-white">
       <div className="mx-auto grid max-w-7xl gap-18 px-5 pt-15 pb-12 md:grid-cols-[1.2fr_1fr_1fr_1.25fr]">
         <Reveal>
-          <img src={logo} alt="ASSIPL" className="h-12 w-auto object-contain" />
+          <Link to="/">
+            <img src={logo} alt="ASSIPL" className="h-12 w-auto object-contain" />
+          </Link>
           <p className="mt-5 max-w-xs text-base leading-normal text-white/75">
             ASSIPL operates at the intersection of advanced technology and rigorous field
             engineering.
