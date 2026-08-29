@@ -47,7 +47,7 @@ function Footer() {
 
         setProducts(
           items.map((item) => ({
-            label: item.title,
+            label: item.menu_title || item.title,
             to: `/products/${item.slug}`,
           }))
         )
@@ -97,7 +97,7 @@ function Footer() {
           <Link to="/">
             <img src={logo} alt="ASSIPL" className="h-12 w-auto object-contain" />
           </Link>
-          <p className="mt-5 max-w-xs text-base leading-normal text-white/75">
+          <p className="mt-5 max-w-xs text-base leading-normal text-white">
             ASSIPL operates at the intersection of advanced technology and rigorous field
             engineering.
           </p>
@@ -118,7 +118,7 @@ function Footer() {
         </Reveal>
         <Reveal delay={100}>
           <h3 className="mb-5 text-2xl leading-[1.6] font-medium tracking-[0.015em] text-white">Quick Links</h3>
-          <ul className="space-y-3 text-lg leading-[1.67] text-white/75">
+          <ul className="space-y-3 text-lg leading-[1.67] text-white">
             {quickLinks.map((link) => (
               <li key={link.label}>
                 {link.to ? (
@@ -136,7 +136,7 @@ function Footer() {
         </Reveal>
         <Reveal delay={200}>
           <h3 className="mb-5 text-2xl leading-[1.6] font-medium tracking-[0.015em] text-white">Products</h3>
-          <ul className="space-y-3 text-lg leading-[1.67] text-white/75">
+          <ul className="space-y-3 text-lg leading-[1.67] text-white">
             {products.map((product) => (
               <li key={product.label}>
                 {product.to ? (
@@ -154,7 +154,7 @@ function Footer() {
         </Reveal>
         <Reveal delay={300}>
           <h3 className="mb-5 text-2xl leading-[1.6] font-medium tracking-[0.015em] text-white">Contact Us</h3>
-          <div className="max-w-87.5 space-y-4 text-lg leading-[1.67] text-white/75">
+          <div className="max-w-87.5 space-y-4 text-lg leading-[1.67] text-white">
             <a
               href={addressMapHref}
               target="_blank"
@@ -180,7 +180,7 @@ function Footer() {
         </Reveal>
       </div>
       <div className="border-t border-[#D1D1D1] max-w-6xl mx-auto">
-        <div className="mx-auto max-w-350 px-5 pt-4 pb-6 text-center text-sm text-white/70">
+        <div className="mx-auto max-w-350 px-5 pt-4 pb-6 text-center text-sm text-white">
           Copyright © {currentYear} ASSIPL. All Rights Reserved. Developed by{' '}
           <a
             href="https://aurocreativestudio.com/"
