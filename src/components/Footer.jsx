@@ -179,7 +179,7 @@ function Footer() {
           </div>
         </Reveal>
       </div>
-      <div className="border-t border-[#D1D1D1] max-w-6xl mx-auto">
+      <div className="border-t border-[#D1D1D1] max-w-7xl mx-auto">
         <div className="mx-auto max-w-350 px-5 pt-4 pb-6 text-center text-sm text-white">
           Copyright © {currentYear} ASSIPL. All Rights Reserved. Developed by{' '}
           <a

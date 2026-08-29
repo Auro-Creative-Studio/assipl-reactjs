@@ -1,32 +1,41 @@
-import { Autoplay } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import Reveal from './Reveal'
-import { testimonials as defaultTestimonials, clientLogos as defaultClientLogos } from '../data'
-import { getMediaUrl } from '../lib/homeApi'
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import Reveal from "./Reveal";
+import {
+  testimonials as defaultTestimonials,
+  clientLogos as defaultClientLogos,
+} from "../data";
+import { getMediaUrl } from "../lib/homeApi";
 
 function ClientsSection({ data }) {
-  const heading = data?.clients_heading || 'Major Clients'
+  const heading = data?.clients_heading || "Major Clients";
 
   const testimonials = data?.testimonials?.length
     ? data.testimonials.map((item) => ({
-      quote: item.quote || '',
-      company: item.company || '',
-      logo: getMediaUrl(item.logo),
-    }))
-    : defaultTestimonials
+        quote: item.quote || "",
+        company: item.company || "",
+        logo: getMediaUrl(item.logo),
+      }))
+    : defaultTestimonials;
 
   const clientLogos = data?.client_logos?.length
-    ? data.client_logos.map((item) => ({ name: item.name || '', logo: getMediaUrl(item.logo) }))
-    : defaultClientLogos
+    ? data.client_logos.map((item) => ({
+        name: item.name || "",
+        logo: getMediaUrl(item.logo),
+      }))
+    : defaultClientLogos;
 
-  const sliderClientLogos = clientLogos
-  const testimonialSlides = [...testimonials, ...testimonials]
+  const sliderClientLogos = clientLogos;
+  const testimonialSlides = [...testimonials, ...testimonials];
 
   return (
     <section className="bg-white pt-13 pb-20.5">
       <div className="mx-auto w-full px-5 sm:px-8 lg:px-5">
-        <Reveal as="h2" className="mx-auto w-fit text-4xl font-bold leading-tight text-secondary sm:text-[64px]">
+        <Reveal
+          as="h2"
+          className="mx-auto w-fit text-4xl font-bold leading-tight text-secondary sm:text-[64px]"
+        >
           {heading}
         </Reveal>
 
@@ -71,7 +80,7 @@ function ClientsSection({ data }) {
                   <img
                     src={item.logo}
                     alt={item.company}
-                    className="mt-8 h-12 w-auto max-w-47.5 object-contain object-left"
+                    className="mt-8 h-[66px] w-auto max-w-60 object-contain object-left"
                   />
                 </article>
               </SwiperSlide>
@@ -108,7 +117,12 @@ function ClientsSection({ data }) {
             {sliderClientLogos.map((item) => (
               <SwiperSlide key={item.name}>
                 <div className="mx-auto flex h-24.5 w-full items-center justify-center">
-                  <img src={item.logo} alt={item.name} className="max-h-21.5 w-full object-contain" loading="lazy" />
+                  <img
+                    src={item.logo}
+                    alt={item.name}
+                    className="max-h-21.5 w-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
               </SwiperSlide>
             ))}
@@ -116,7 +130,7 @@ function ClientsSection({ data }) {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default ClientsSection
+export default ClientsSection;
