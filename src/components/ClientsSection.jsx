@@ -41,7 +41,7 @@ function ClientsSection({ data }) {
 
         <div className="mt-9.5">
           <Swiper
-            className="[&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:h-auto"
+            className="testimonial-swiper"
             modules={[Autoplay]}
             loop={true}
             speed={700}
@@ -72,9 +72,9 @@ function ClientsSection({ data }) {
           >
             {testimonialSlides.map((item, index) => (
               <SwiperSlide key={`${item.company}-${index}`}>
-                <article className="flex h-full min-h-94.25 flex-col justify-between rounded-[22px] border border-[#d5ddeb] bg-white px-8 pt-15.5 pb-13.25">
+                <article className="testimonial-card flex min-h-94.25 flex-col justify-between rounded-[22px] border border-[#d5ddeb] bg-white px-8 pt-15.5 pb-13.25">
                   <p className="text-justify text-[16px] leading-normal text-[#63708a] md:text-left sm:text-[20px]">
-                    &quot; {item.quote} &quot;
+                    &quot;{item.quote}&quot;
                   </p>
 
                   <img

@@ -1,6 +1,6 @@
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import EnquiryPopup from './EnquiryPopup'
 import logo from '../assets/logo-dark.png'
 import { fetchPublishedSingleServices } from '../lib/singleServicesApi'
@@ -22,6 +22,7 @@ const fallbackServiceLinks = [
 ]
 
 const aboutLinks = [
+  { title: 'About Us', href: '/about' },
   { title: 'Career', href: '/about#career' },
   { title: 'CSR', href: '/csr' },
 ]
@@ -46,21 +47,31 @@ function DropdownLink({ href, className, activeClassName, children, onClick }) {
   )
 }
 
-function MobileNavItem({ title, to, links, isOpen, onToggle, onLinkClick }) {
+function MobileNavItem({ title, to, links, isOpen, isActive = false, onToggle, onLinkClick }) {
+  const triggerClassName = `flex-1 py-2 text-left text-[16px] font-semibold transition ${
+    isActive ? 'text-primary' : 'text-nav hover:text-primary'
+  }`
+
   return (
     <div className="py-1">
       <div className="flex items-center justify-between">
-        <NavLink
-          to={to}
-          onClick={onLinkClick}
-          className={({ isActive }) =>
-            `flex-1 py-2 text-[16px] font-semibold transition ${
-              isActive ? 'text-primary' : 'text-nav hover:text-primary'
-            }`
-          }
-        >
-          {title}
-        </NavLink>
+        {to ? (
+          <NavLink
+            to={to}
+            onClick={onLinkClick}
+            className={({ isActive }) =>
+              `flex-1 py-2 text-[16px] font-semibold transition ${
+                isActive ? 'text-primary' : 'text-nav hover:text-primary'
+              }`
+            }
+          >
+            {title}
+          </NavLink>
+        ) : (
+          <button type="button" onClick={onToggle} className={triggerClassName}>
+            {title}
+          </button>
+        )}
         <button
           type="button"
           onClick={onToggle}
@@ -94,6 +105,7 @@ function MobileNavItem({ title, to, links, isOpen, onToggle, onLinkClick }) {
 }
 
 function Header() {
+  const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openSection, setOpenSection] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -161,6 +173,8 @@ function Header() {
     setOpenSection(null)
   }
 
+  const aboutMenuActive = ['/about', '/about-us', '/career', '/csr'].includes(location.pathname)
+
   return (
     <header className="absolute left-0 right-0 top-8 z-20 px-5">
       <nav
@@ -180,12 +194,17 @@ function Header() {
             Home
           </NavLink>
           <div className="group relative">
-            <NavLink to="/about" className={linkClass}>
+            <button
+              type="button"
+              className={`px-[15px] py-2 text-[15px] font-semibold capitalize leading-[1.43] transition ${
+                aboutMenuActive ? 'text-primary' : 'text-nav hover:text-primary'
+              }`}
+            >
               <span className="inline-flex items-center gap-1">
-                About Us
+                About ASSIPL
                 <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
               </span>
-            </NavLink>
+            </button>
             <div className="invisible absolute left-0 top-full z-30 min-w-40 rounded-2xl bg-white p-3 opacity-0 shadow-lg transition duration-150 group-hover:visible group-hover:opacity-100">
               {aboutLinks.map((link) => (
                 <DropdownLink
@@ -304,10 +323,10 @@ function Header() {
             Home
           </NavLink>
           <MobileNavItem
-            title="About Us"
-            to="/about"
+            title="About ASSIPL"
             links={aboutLinks}
             isOpen={openSection === 'about'}
+            isActive={aboutMenuActive}
             onToggle={() => toggleSection('about')}
             onLinkClick={closeMobileMenu}
           />

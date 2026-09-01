@@ -76,6 +76,20 @@ h4 {
   display: none;
 }
 
+.testimonial-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.testimonial-swiper .swiper-slide {
+  display: flex;
+  height: auto;
+}
+
+.testimonial-swiper .testimonial-card {
+  width: 100%;
+  height: 100%;
+}
+
 @keyframes softPulse {
   0% {
     box-shadow:
