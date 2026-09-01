@@ -29,7 +29,7 @@ function PhoneIcon() {
 
 function MailIcon() {
   return (
-    <svg viewBox="0 0 32 32" className="h-[27px] w-[27px]" aria-hidden="true">
+    <svg viewBox="0 0 32 32" className="h-6.75 w-6.75" aria-hidden="true">
       <path
         fill="currentColor"
         d="M30.756 11.794l-14.4-10.563c-0.262-0.194-0.588-0.194-0.781 0l-14.563 10.613c-0.238 0.156-0.325 0.381-0.325 0.588v18.625c0 0.394 0.325 0.65 0.65 0.65h29.256c0.387 0 0.65-0.262 0.712-0.587v-18.456c0.006-0.356-0.119-0.575-0.55-0.869zM3.225 30.413l10.544-8.169 1.813 1.331c0.225 0.212 0.519 0.2 0.781 0l1.75-1.281 10.475 8.119h-25.363zM1.988 13.563l10.731 7.906-10.731 8.319v-16.225zM19.156 21.519l10.856-7.963v16.375l-10.856-8.413zM15.969 2.538l13.419 9.863-13.419 9.869-13.394-9.887 13.394-9.844z"
@@ -40,7 +40,7 @@ function MailIcon() {
 
 function MapIcon() {
   return (
-    <svg viewBox="0 0 32 32" className="h-[27px] w-[27px]" aria-hidden="true">
+    <svg viewBox="0 0 32 32" className="h-6.75 w-6.75" aria-hidden="true">
       <path
         fill="currentColor"
         d="M15.988 6.775c-3.694 0-6.694 3.006-6.694 6.694s3 6.7 6.694 6.7 6.694-3.006 6.694-6.694-3-6.7-6.694-6.7zM15.988 18.563c-2.806 0-5.088-2.288-5.088-5.088s2.287-5.088 5.088-5.088 5.088 2.287 5.088 5.088-2.275 5.088-5.088 5.088zM15.988 0.4c-0.15 0-0.306 0-0.456 0.006-6.456 0.225-11.787 5.237-12.406 11.662-0.119 1.244-0.056 2.494 0.169 3.688 0 0 0.019 0.15 0.094 0.431 0.194 0.881 0.494 1.744 0.862 2.538 1.331 3.15 4.244 8 10.569 13.25 0.331 0.275 0.75 0.425 1.188 0.425 0.431 0 0.85-0.15 1.188-0.425 6.319-5.244 9.231-10.1 10.556-13.225 0.381-0.819 0.675-1.681 0.869-2.563 0.038-0.156 0.063-0.287 0.087-0.412 0.156-0.806 0.238-1.631 0.238-2.456-0.025-7.119-5.825-12.919-12.956-12.919zM27.106 15.5c0 0.012-0.019 0.125-0.063 0.325-0.175 0.775-0.431 1.525-0.775 2.269-1.262 2.988-4.037 7.6-10.106 12.637-0.056 0.044-0.119 0.056-0.163 0.056-0.037 0-0.106-0.012-0.162-0.056-6.075-5.037-8.856-9.65-10.125-12.656-0.331-0.719-0.588-1.475-0.769-2.25-0.037-0.169-0.056-0.275-0.063-0.306 0-0.012-0.006-0.025-0.006-0.037-0.2-1.069-0.256-2.169-0.15-3.256 0.544-5.625 5.212-10.019 10.869-10.213 6.425-0.225 11.725 4.938 11.725 11.319 0 0.719-0.075 1.438-0.212 2.169z"
@@ -51,8 +51,9 @@ function MapIcon() {
 
 const defaultPhoneNumbers = ['080 – 41692300', '080 – 43751024']
 const defaultEmail = 'assipl@automationsystems.co.in'
+const defaultCompanyName = 'Automation Systems and Solutions (India) Pvt. Ltd.'
 const defaultAddress =
-  'Automation Systems and Solutions (India) Pvt. Ltd.\nHouse No: 2497, GF, 17th Main,\nHAL 2nd Stage, Indiranagar, Bangalore – 560008.'
+  'House No: 2497, GF, 17th Main,\nHAL 2nd Stage, Indiranagar, Bangalore – 560008.'
 const defaultAddressMapHref = 'https://www.google.com/maps?cid=12008617173707726367'
 const defaultMapEmbedSrc =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4784.225432892734!2d77.64327!3d12.9633776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a7d9708b39%3A0xa6a72db1f2811e1f!2sAutomation%20Systems%20%26%20Solutions%20(%20India%20)%20Pvt%20Ltd!5e1!3m2!1sen!2sin!4v1787651431856!5m2!1sen!2sin'
@@ -66,6 +67,7 @@ function buildContactItems(contactData) {
     ? contactData.phoneno.split('/').map((part) => part.trim()).filter(Boolean)
     : defaultPhoneNumbers
   const email = contactData?.email || defaultEmail
+  const companyName = contactData?.company_name || defaultCompanyName
   const addressLines = (contactData?.address || defaultAddress).split('\n').filter(Boolean)
 
   return [
@@ -94,14 +96,19 @@ function buildContactItems(contactData) {
       icon: MapIcon,
       title: 'Office Address',
       body: (
-        <a href={contactData?.map_link || defaultAddressMapHref} className="text-[#667085] transition hover:text-primary">
-          {addressLines.map((line, index) => (
-            <span key={line}>
-              {index > 0 && <br />}
-              {line}
-            </span>
-          ))}
-        </a>
+        <>
+          {companyName && (
+            <span className="mb-1 block text-[15px] font-semibold text-text md:text-[16px]">{companyName}</span>
+          )}
+          <a href={contactData?.map_link || defaultAddressMapHref} className="text-[#667085] transition hover:text-primary">
+            {addressLines.map((line, index) => (
+              <span key={line}>
+                {index > 0 && <br />}
+                {line}
+              </span>
+            ))}
+          </a>
+        </>
       ),
     },
   ]
@@ -112,7 +119,7 @@ function ContactField({ as = 'input', className = '', ...props }) {
 
   return (
     <Component
-      className={`w-full rounded-[7px] border border-[#d9e1e8] bg-white px-[20px] py-[12px] text-[15px] font-normal leading-[1.5] text-text outline-none transition placeholder:text-text focus:border-primary md:rounded-[8px] md:px-[26px] md:py-[15px] md:text-[16px] ${className}`}
+      className={`w-full rounded-[7px] border border-accent bg-white px-5 py-3 text-[15px] font-normal leading-normal text-text outline-none transition placeholder:text-text focus:border-primary md:rounded-lg md:px-6.5 md:py-3.75 md:text-[16px] ${className}`}
       {...props}
     />
   )
@@ -194,16 +201,16 @@ function Contact() {
             backgroundImage: `linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(${heroBg})`,
           }}
         >
-          <div className="mx-auto w-full max-w-[1200px] pt-[2px]">
+          <div className="mx-auto w-full max-w-300 pt-0.5">
             <a
               href="/"
-              className="font-kumbh text-[20px] font-semibold capitalize leading-[1.5] text-background transition-colors hover:text-white"
+              className="font-kumbh text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white"
             >
               Home
             </a>
             <Reveal
               as="h1"
-              className="-ml-1 mt-[10px] text-[45px] font-semibold leading-[1.05] md:text-[70px]"
+              className="-ml-1 mt-2.5 text-[45px] font-semibold leading-[1.05] md:text-[70px]"
               style={{ color: 'var(--color-white)' }}
             >
               Contact
@@ -211,29 +218,29 @@ function Contact() {
           </div>
         </section>
 
-        <section className="bg-white px-5 py-[50px] md:py-[60px] lg:py-[80px]">
-          <div className="mx-auto grid max-w-[1400px] gap-5 md:gap-12 lg:grid-cols-[640px_640px] lg:justify-between lg:gap-[120px]">
+        <section className="bg-white px-5 py-12.5 md:py-15 lg:py-20">
+          <div className="mx-auto grid max-w-350 gap-5 md:gap-12 lg:grid-cols-[640px_640px] lg:justify-between lg:gap-30">
             <Reveal>
               <h2 className="text-left text-[30px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
                 {connectHeading}
               </h2>
-              <p className="mt-[6px] max-w-[640px] text-[15px] font-normal leading-[1.45] text-text md:text-[16px] md:leading-[1.5]">
+              <p className="mt-1.5 max-w-160 text-[15px] font-normal leading-[1.45] text-text md:text-[16px] md:leading-normal">
                 {connectDescription}
               </p>
-              <div className="my-[10px] h-px w-full bg-accent md:my-[18px]" />
+              <div className="my-2.5 h-px w-full bg-accent md:my-4.5" />
 
-              <div className="space-y-[8px] md:space-y-[28px]">
+              <div className="space-y-2 md:space-y-7">
                 {contactItems.map((item) => {
                   const Icon = item.icon
 
                   return (
-                    <div key={item.title} className="flex items-center gap-5 md:gap-[42px]">
-                      <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border border-black text-black md:h-[55px] md:w-[55px]">
+                    <div key={item.title} className="flex items-center gap-5 md:gap-10.5">
+                      <div className="flex h-11.5 w-11.5 shrink-0 items-center justify-center rounded-full border border-black text-black md:h-13.75 md:w-13.75">
                         <Icon />
                       </div>
                       <div className="min-w-0 max-w-[calc(100%-70px)] md:max-w-[76%]">
                         <h5
-                          className="mb-1 text-[21px] font-semibold leading-[1.25] md:mb-2 md:text-[24px] md:leading-[1.375]"
+                          className="mb-1 text-[21px] font-semibold leading-tight md:mb-2 md:text-[24px] md:leading-snug"
                           style={{ color: 'var(--color-primary)' }}
                         >
                           {item.title}
@@ -245,24 +252,24 @@ function Contact() {
                 })}
               </div>
 
-              <div className="mt-[8px] flex gap-3 pl-[66px] md:mt-[15px] md:pl-[109px]">
+              <div className="mt-2 flex gap-3 pl-16.5 md:mt-3.75 md:pl-27.25">
                 {displaySocialLinks.map(({ key, href, Icon, label }) => (
                   <a
                     key={key}
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#0077b5] text-white transition hover:bg-secondary md:h-[50px] md:w-[50px]"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#0077b5] text-white transition hover:bg-secondary md:h-12.5 md:w-12.5"
                     aria-label={label}
                   >
-                    <Icon className="h-[20px] w-[20px]" aria-hidden="true" />
+                    <Icon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 ))}
               </div>
             </Reveal>
 
-            <Reveal as="form" delay={150} className="w-full pt-5 md:pt-[5px]" onSubmit={handleSubmit}>
-              <div className="space-y-[10px] md:space-y-5">
+            <Reveal as="form" delay={150} className="w-full pt-5 md:pt-1.25" onSubmit={handleSubmit}>
+              <div className="space-y-2.5 md:space-y-5">
                 <ContactField
                   type="text"
                   name="full_name"
@@ -272,7 +279,7 @@ function Contact() {
                   aria-label="Full Name"
                   required
                 />
-                <div className="grid gap-[10px] md:grid-cols-2 md:gap-5">
+                <div className="grid gap-2.5 md:grid-cols-2 md:gap-5">
                   <ContactField
                     type="tel"
                     name="phone"
@@ -307,7 +314,7 @@ function Contact() {
                   rows={10}
                   placeholder="Message"
                   aria-label="Message"
-                  className="min-h-[245px] resize-y md:min-h-[272px]"
+                  className="min-h-61.25 resize-y md:min-h-68"
                 />
 
                 {isSuccess && (
@@ -317,11 +324,11 @@ function Contact() {
                 )}
                 {error && <p className="text-[15px] font-semibold text-red-600">{error}</p>}
 
-                <div className="pt-[13px] md:pt-[25px]">
+                <div className="pt-3.25 md:pt-6.25">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="rounded-full bg-primary px-[31px] py-[14px] text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-full bg-primary px-7.75 py-3.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isSubmitting ? 'Sending…' : 'Submit'}
                   </button>
@@ -331,15 +338,15 @@ function Contact() {
           </div>
         </section>
 
-        <section className="bg-background px-5 py-[50px] md:py-[60px] lg:py-[80px]">
-          <div className="mx-auto max-w-[1400px]">
-            <Reveal as="h2" className="mx-auto max-w-[760px] text-center text-[32px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
+        <section className="bg-background px-5 py-12.5 md:py-15 lg:py-20">
+          <div className="mx-auto max-w-350">
+            <Reveal as="h2" className="mx-auto max-w-190 text-center text-[32px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
               Visit Us At Our Secure Headquarters
             </Reveal>
             <Reveal delay={150} as="iframe"
               title="ASSIPL office location"
               src={mapEmbedSrc}
-              className="mt-[30px] h-[450px] w-full border-0"
+              className="mt-7.5 h-112.5 w-full border-0"
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
