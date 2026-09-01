@@ -72,16 +72,18 @@ function ClientsSection({ data }) {
           >
             {testimonialSlides.map((item, index) => (
               <SwiperSlide key={`${item.company}-${index}`}>
-                <article className="testimonial-card flex min-h-94.25 flex-col justify-between rounded-[22px] border border-[#d5ddeb] bg-white px-8 pt-15.5 pb-13.25">
+                <article className="testimonial-card flex min-h-94.25 flex-col rounded-[22px] border border-[#d5ddeb] bg-white px-8 pt-15.5 pb-13.25">
                   <p className="text-justify text-[16px] leading-normal text-[#63708a] md:text-left sm:text-[20px]">
                     &quot;{item.quote}&quot;
                   </p>
 
-                  <img
-                    src={item.logo}
-                    alt={item.company}
-                    className="mt-8 h-[66px] w-auto max-w-60 object-contain object-left"
-                  />
+                  <div className="mt-auto pt-8">
+                    <img
+                      src={item.logo}
+                      alt={item.company}
+                      className="h-[66px] w-auto max-w-60 object-contain object-left"
+                    />
+                  </div>
                 </article>
               </SwiperSlide>
             ))}
