@@ -6,7 +6,7 @@ const API_ROOT = (
 
 export const SERVICES_PAGE_ENDPOINT = `${API_ROOT}/services-page`;
 
-const BACKEND_ORIGIN = API_ROOT.replace(/\/api$/, "");
+const BACKEND_ORIGIN = (import.meta.env.VITE_MEDIA_BASE_URL || API_ROOT.replace(/\/api$/, "")).replace(/\/$/, "");
 const createItemId = () => `item-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 
 export const toServicesPageUploadPath = (value = "") => {

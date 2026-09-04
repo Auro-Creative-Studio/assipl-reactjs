@@ -23,7 +23,7 @@ const API_ROOT = (
 
 const UPLOAD_ENDPOINT = `${API_ROOT}/uploads`;
 const ACCEPTED_FILE_TYPES = "image/*,video/mp4,video/webm,application/pdf";
-const BACKEND_ORIGIN = API_ROOT.replace(/\/api$/, "");
+const BACKEND_ORIGIN = (import.meta.env.VITE_MEDIA_BASE_URL || API_ROOT.replace(/\/api$/, "")).replace(/\/$/, "");
 
 const typeOptions = [
   { label: "All media", value: "all" },

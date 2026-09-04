@@ -11,7 +11,7 @@ const API_ROOT = (
 ).replace(/\/$/, "");
 
 const APPLICATION_ENDPOINT = `${API_ROOT}/career-forms`;
-const BACKEND_ORIGIN = API_ROOT.replace(/\/api$/, "");
+const BACKEND_ORIGIN = (import.meta.env.VITE_MEDIA_BASE_URL || API_ROOT.replace(/\/api$/, "")).replace(/\/$/, "");
 
 const getMediaUrl = (path) => {
   if (!path) return "";

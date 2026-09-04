@@ -57,7 +57,7 @@ const API_ROOT = (
   'http://localhost:5000/api'
 ).replace(/\/$/, '')
 
-const BACKEND_ORIGIN = API_ROOT.replace(/\/api$/, '')
+const BACKEND_ORIGIN = (import.meta.env.VITE_MEDIA_BASE_URL || API_ROOT.replace(/\/api$/, '')).replace(/\/$/, '')
 const CSR_ENDPOINT = `${API_ROOT}/csr`
 
 const getMediaUrl = (value = '') => {

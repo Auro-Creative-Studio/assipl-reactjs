@@ -17,7 +17,7 @@ const getMediaUrl = (path) => {
   if (!path) return null;
 
   const textPath = String(path);
-  const backendUrl = API_ROOT.replace(/\/api$/, "");
+  const backendUrl = (import.meta.env.VITE_MEDIA_BASE_URL || API_ROOT.replace(/\/api$/, "")).replace(/\/$/, "");
 
   if (textPath.startsWith("http")) {
     try {
