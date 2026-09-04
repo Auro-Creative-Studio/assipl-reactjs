@@ -1,5 +1,6 @@
 import heroBg from '../assets/terms.webp'
 import LegalSection from '../components/LegalSection'
+import Reveal from '../components/Reveal'
 import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const contactDetails = [
@@ -566,24 +567,27 @@ function TermsConditions() {
           <a href="/" className="text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
             Home
           </a>
-          <h1 className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[70px]">
+          <Reveal
+            as="h1"
+            className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[70px]"
+          >
             Terms and Conditions
-          </h1>
+          </Reveal>
         </div>
       </section>
 
       <section className="px-5 py-16 md:py-20">
         <div className="mx-auto max-w-300">
-          <p className="text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</p>
-          <p className="mt-4 text-[18px] leading-8 text-text">Welcome to Automations Systems and Solutions (ASSIPL).</p>
-          <p className="mt-4 text-[18px] leading-8 text-text">
+          <Reveal as="p" className="text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</Reveal>
+          <Reveal as="p" delay={100} className="mt-4 text-[18px] leading-8 text-text">Welcome to Automations Systems and Solutions (ASSIPL).</Reveal>
+          <Reveal as="p" delay={200} className="mt-4 text-[18px] leading-8 text-text">
             These Terms and Conditions govern your access to and use of this website, including any content,
             features, enquiry forms, products, services, solutions, and information made available through it.
-          </p>
-          <p className="mt-4 text-[18px] leading-8 text-text">
+          </Reveal>
+          <Reveal as="p" delay={300} className="mt-4 text-[18px] leading-8 text-text">
             By accessing or using this website, you agree to these Terms and Conditions. If you do not agree with
             these terms, please discontinue using the website.
-          </p>
+          </Reveal>
 
           <div className="mt-8">
             {sections.map((section, index) => (

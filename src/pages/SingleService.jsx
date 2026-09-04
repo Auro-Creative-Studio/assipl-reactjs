@@ -87,7 +87,7 @@ function AdvantageCard({ item, tone }) {
         tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
-      <h3 className="text-[24px] font-semibold leading-tight text-secondary">{item.title}</h3>
+      <h3 className="text-[30px] font-semibold leading-tight text-secondary">{item.title}</h3>
       <p className="mt-5 text-justify text-[16px] leading-7 text-text md:text-left">{item.description}</p>
     </article>
   )
@@ -116,7 +116,7 @@ function ModelCard({ model, fallbackImage }) {
         alt={model.title}
         className="h-56 w-full rounded-xl object-cover"
       />
-      <h2 className="pt-5 text-[26px] font-semibold leading-tight text-secondary">{model.title}</h2>
+      <h2 className="pt-5 text-[30px] font-semibold leading-tight text-secondary">{model.title}</h2>
       <RichText html={model.description} className="mt-4 text-justify text-[16px] leading-7 text-text md:text-left [&_ul]:mt-0" />
     </article>
   )
@@ -248,7 +248,7 @@ function SingleService({ routeSlug = null }) {
           />
 
           {service.overview_title && (
-            <Reveal as="h1" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]">
+            <Reveal as="h1" className="pt-5 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px] mb-4">
               {service.overview_title}
             </Reveal>
           )}
@@ -259,7 +259,7 @@ function SingleService({ routeSlug = null }) {
               {service.service_advantages_title && (
                 <Reveal
                   as="h2"
-                  className="pt-12 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px]"
+                  className="pt-12 text-[46px] font-semibold leading-tight text-secondary max-md:text-[32px] mb-4"
                 >
                   {service.service_advantages_title}
                 </Reveal>

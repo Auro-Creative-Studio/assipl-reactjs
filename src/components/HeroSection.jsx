@@ -43,7 +43,7 @@ function HeroSection({ data }) {
           {subtitle}
         </Reveal>
         <Reveal delay={150}>
-          <ul className="mt-28 list-disc space-y-0 pl-5 font-body text-[17px] font-normal leading-normal text-white marker:text-white md:text-[18px] lg:text-[20px]">
+          <ul className="mt-12 list-disc space-y-0 pl-5 font-body text-[17px] font-normal leading-normal text-white marker:text-white md:text-[18px] lg:text-[20px]">
             {stats.map((stat) => (
               <li key={stat}>{stat}</li>
             ))}

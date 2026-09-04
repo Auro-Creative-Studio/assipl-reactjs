@@ -85,7 +85,7 @@ function CapabilityCard({ item, index, total }) {
         tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
-      <h3 className="text-[24px] font-semibold leading-tight text-secondary">{item.title}</h3>
+      <h3 className="text-[30px] font-semibold leading-tight text-secondary">{item.title}</h3>
       <RichText html={item.body} className="mt-5 text-justify text-[16px] leading-7 text-text md:text-left md:text-[18px] [&_ul]:mt-0" />
     </article>
   )
@@ -110,7 +110,7 @@ function SingleProduct() {
         if (!isMounted) return
 
         setProduct(productData)
-        setProductLinks(allProducts.map((item) => ({ slug: item.slug, title: item.title })))
+        setProductLinks(allProducts.map((item) => ({ slug: item.slug, title: item.menu_title })))
       })
       .catch(() => {
         if (isMounted) setError('This product could not be found.')
@@ -192,7 +192,7 @@ function SingleProduct() {
             as="h1"
             className="-ml-1 font-heading text-[36px] font-semibold leading-none text-white sm:text-[45px] md:text-[56px] xl:text-[70px]"
           >
-            {product.title}
+            {product.menu_title}
           </Reveal>
         </div>
       </section>
@@ -227,7 +227,7 @@ function SingleProduct() {
           )}
 
           {product.description && (
-            <Reveal as="p" className="text-justify text-[16px] leading-8 text-text md:text-left md:text-[18px]">
+            <Reveal as="p" className="text-justify text-[16px] leading-8 text-text md:text-left">
               {product.description}
             </Reveal>
           )}

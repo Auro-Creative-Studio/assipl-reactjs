@@ -5,6 +5,7 @@ import { Autoplay, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import Reveal from '../components/Reveal'
 import { useSeoMeta } from '../hooks/useSeoMeta'
 
 import bodhgayaRation from '../assets/csr/bodhgaya-provides-ration.jpg'
@@ -163,9 +164,9 @@ function Csr() {
             Home
           </a>
 
-          <h1 className="mt-5 text-5xl font-bold leading-none text-white! md:text-[64px]">
+          <Reveal as="h1" className="mt-5 text-5xl font-bold leading-none text-white! md:text-[64px]">
             CSR
-          </h1>
+          </Reveal>
         </div>
       </section>
 
@@ -186,7 +187,10 @@ function Csr() {
               </div>
             )}
 
-            <div className="order-1 flex items-center bg-white px-0 py-4 md:order-2 md:min-h-118 md:px-0 md:py-10 lg:pr-10">
+            <Reveal
+              delay={150}
+              className="order-1 flex items-center bg-white px-0 py-4 md:order-2 md:min-h-118 md:px-0 md:py-10 lg:pr-10"
+            >
               <div>
                 {csr.intro_title && (
                   <h2 className="text-[30px] font-bold leading-[1.16] text-secondary md:text-[45px]">
@@ -200,7 +204,7 @@ function Csr() {
                   />
                 )}
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
@@ -237,7 +241,7 @@ function Csr() {
 
       {(csr.project_title || csr.project_description) && (
         <section className="px-5 py-14 md:py-18">
-          <div className="mx-auto max-w-350">
+          <Reveal className="mx-auto max-w-350">
             {csr.project_title && (
               <h2 className="w-full text-center text-[30px] font-bold leading-[1.15] text-secondary md:text-[45px]">
                 {csr.project_title}
@@ -245,11 +249,11 @@ function Csr() {
             )}
             {csr.project_description && (
               <div
-                className="mt-6 w-full text-justify text-[16px] leading-[26px] text-text md:text-left md:text-[20px] md:leading-[30px] [&_li]:mt-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5"
+                className="mt-6 w-full text-justify text-[16px] leading-6.5 text-text md:text-left md:text-[20px] md:leading-7.5 [&_li]:mt-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5"
                 dangerouslySetInnerHTML={{ __html: csr.project_description }}
               />
             )}
-          </div>
+          </Reveal>
         </section>
       )}
 

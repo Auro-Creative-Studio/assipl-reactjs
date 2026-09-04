@@ -1,5 +1,6 @@
 import heroBg from '../assets/privacy-policy-hero.webp'
 import LegalSection from '../components/LegalSection'
+import Reveal from '../components/Reveal'
 import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const sections = [
@@ -300,23 +301,26 @@ function PrivacyPolicy() {
           <a href="/" className="text-[20px] font-semibold capitalize leading-normal text-background transition-colors hover:text-white">
             Home
           </a>
-          <h1 className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[70px]">
+          <Reveal
+            as="h1"
+            className="-ml-1 mt-2.5 text-[36px] font-semibold leading-[1.05] text-white md:text-[70px]"
+          >
             Privacy Policy
-          </h1>
+          </Reveal>
         </div>
       </section>
 
       <section className="px-5 py-16 md:py-20">
         <div className="mx-auto max-w-300">
-          <p className="text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</p>
-          <p className="mt-4 text-[18px] leading-8 text-text">
+          <Reveal as="p" className="text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</Reveal>
+          <Reveal as="p" delay={100} className="mt-4 text-[18px] leading-8 text-text">
             ASSIPL respects your privacy and is committed to protecting the personal information you share with us
             through this website.
-          </p>
-          <p className="mt-4 text-[18px] leading-8 text-text">
+          </Reveal>
+          <Reveal as="p" delay={200} className="mt-4 text-[18px] leading-8 text-text">
             This Privacy Policy explains how we collect, use, store, and protect your information when you visit
             our website, submit a form, contact us, or use our services.
-          </p>
+          </Reveal>
 
           <div className="mt-8">
             {sections.map((section, index) => (

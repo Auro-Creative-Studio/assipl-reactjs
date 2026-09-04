@@ -27,6 +27,15 @@ const CONTACT_PAGE_FIELD_CONFIG = [
     colSpan: 2,
   },
   {
+    name: "company_name",
+    label: "Company Name",
+    type: "text",
+    placeholder: "Automation Systems and Solutions (India) Pvt. Ltd.",
+    nullable: true,
+    section: "content",
+    colSpan: 2,
+  },
+  {
     name: "address",
     label: "Address",
     type: "textarea",
