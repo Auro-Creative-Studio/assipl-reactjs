@@ -7,6 +7,8 @@ import 'swiper/css'
 import CareerPopup from '../components/CareerPopup'
 import EnquiryPopup from '../components/EnquiryPopup'
 import Reveal from '../components/Reveal'
+import LazyMount from '../components/LazyMount'
+import FadeImg from '../components/FadeImg'
 import logoAlba from '../assets/about-page/embedded-0.webp'
 import logoAditya from '../assets/about-page/embedded-1.png'
 import logoTexecom from '../assets/about-page/embedded-2.jpg'
@@ -227,10 +229,13 @@ function About() {
 
   return (
     <main className="bg-white">
-      <section
-        className="relative flex min-h-88 items-center bg-cover bg-center px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-0 lg:pt-10"
-        style={{ backgroundImage: `url(${getMediaUrl(about.banner_image)})` }}
-      >
+      <section className="relative flex min-h-88 items-center overflow-hidden px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-0 lg:pt-10">
+        <img
+          src={getMediaUrl(about.banner_image)}
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative mx-auto w-full max-w-300">
           <Reveal className="max-w-190">
@@ -252,11 +257,14 @@ function About() {
         <section className="px-5 pt-12 pb-0 md:py-12 lg:px-5 lg:py-22">
           <div className="mx-auto flex max-w-350 flex-col-reverse gap-12 lg:flex-row lg:items-center lg:gap-16">
             {about.about_image && (
-              <Reveal
-                className="min-h-64 w-full rounded-3xl bg-cover bg-center md:min-h-105 lg:w-1/2 lg:min-h-130"
-                style={{ backgroundImage: `url(${getMediaUrl(about.about_image)})` }}
-                aria-label="ASSIPL digital security infrastructure"
-              />
+              <Reveal className="relative min-h-64 w-full overflow-hidden rounded-3xl md:min-h-105 lg:w-1/2 lg:min-h-130">
+                <img
+                  src={getMediaUrl(about.about_image)}
+                  alt="ASSIPL digital security infrastructure"
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </Reveal>
             )}
             <Reveal delay={150} className="w-full lg:w-1/2">
               {about.about_title && (
@@ -295,7 +303,7 @@ function About() {
               {about.manufacture_title}
             </Reveal>
           )}
-          <div className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
+          <LazyMount className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
             <Swiper
               modules={[Autoplay]}
               loop
@@ -312,7 +320,7 @@ function About() {
               {logos.map((logo, index) => (
                 <SwiperSlide key={logo.id || index}>
                   <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
-                    <img
+                    <FadeImg
                       src={getMediaUrl(logo.logo)}
                       alt={logo.alt || 'Manufacturer partner logo'}
                       className="max-h-18 w-full object-contain"
@@ -322,7 +330,7 @@ function About() {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </LazyMount>
         </section>
       )}
 

@@ -2,6 +2,8 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Reveal from "./Reveal";
+import LazyMount from "./LazyMount";
+import FadeImg from "./FadeImg";
 import {
   testimonials as defaultTestimonials,
   clientLogos as defaultClientLogos,
@@ -78,9 +80,10 @@ function ClientsSection({ data }) {
                   </p>
 
                   <div className="mt-auto pt-8">
-                    <img
+                    <FadeImg
                       src={item.logo}
                       alt={item.company}
+                      loading="lazy"
                       className="h-[66px] w-auto max-w-60 object-contain object-left"
                     />
                   </div>
@@ -90,7 +93,7 @@ function ClientsSection({ data }) {
           </Swiper>
         </div>
 
-        <div className="mx-auto mt-22.5 max-w-375 overflow-hidden">
+        <LazyMount className="mx-auto mt-22.5 max-w-375 overflow-hidden">
           <Swiper
             modules={[Autoplay]}
             loop={true}
@@ -119,7 +122,7 @@ function ClientsSection({ data }) {
             {sliderClientLogos.map((item) => (
               <SwiperSlide key={item.name}>
                 <div className="mx-auto flex h-24.5 w-full items-center justify-center">
-                  <img
+                  <FadeImg
                     src={item.logo}
                     alt={item.name}
                     className="max-h-21.5 w-full object-contain"
@@ -129,7 +132,7 @@ function ClientsSection({ data }) {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </LazyMount>
       </div>
     </section>
   );

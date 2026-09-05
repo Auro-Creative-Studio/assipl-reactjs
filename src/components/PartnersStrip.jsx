@@ -1,5 +1,7 @@
 
 import Reveal from './Reveal'
+import LazyMount from './LazyMount'
+import FadeImg from './FadeImg'
 import logoAlba from '../assets/about-page/embedded-0.webp'
 import logoAditya from '../assets/about-page/embedded-1.png'
 import logoTexecom from '../assets/about-page/embedded-2.jpg'
@@ -41,7 +43,7 @@ function PartnersStrip({ data }) {
       <Reveal as="h2" className="mx-auto max-w-275 text-center text-[30px] font-bold leading-[1.18] text-secondary md:text-[35px] lg:text-[45px]">
         {heading}
       </Reveal>
-      <div className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
+      <LazyMount className="mt-8 w-full px-3 md:mt-12 md:px-5 lg:px-8">
         <Swiper
           modules={[Autoplay]}
           loop
@@ -58,12 +60,12 @@ function PartnersStrip({ data }) {
           {manufacturerLogos.map((logo, index) => (
             <SwiperSlide key={`${logo.alt}-${index}`}>
               <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
-                <img src={logo.src} alt={logo.alt} className="max-h-18 w-full object-contain" loading="lazy" />
+                <FadeImg src={logo.src} alt={logo.alt} className="max-h-18 w-full object-contain" loading="lazy" />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </LazyMount>
     </section>
   )
 }
