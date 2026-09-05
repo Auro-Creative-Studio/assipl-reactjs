@@ -9,7 +9,7 @@ const API_ROOT = (
 const BACKEND_ORIGIN = (import.meta.env.VITE_MEDIA_BASE_URL || API_ROOT.replace(/\/api$/, '')).replace(/\/$/, '')
 const POSITIONS_ENDPOINT = `${API_ROOT}/career-positions`
 const APPLICATIONS_ENDPOINT = `${API_ROOT}/career-forms`
-const UPLOAD_ENDPOINT = `${API_ROOT}/uploads`
+const RESUME_UPLOAD_ENDPOINT = `${APPLICATIONS_ENDPOINT}/resume`
 
 export const getMediaUrl = (value = '') => {
   const textValue = String(value || '').trim()
@@ -35,7 +35,7 @@ export const uploadResume = async (file) => {
   const formData = new FormData()
   formData.append('file', file)
 
-  const response = await axios.post(UPLOAD_ENDPOINT, formData)
+  const response = await axios.post(RESUME_UPLOAD_ENDPOINT, formData)
   return response.data?.data?.url || response.data?.data?.path || ''
 }
 
