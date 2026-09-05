@@ -274,7 +274,7 @@ function About() {
               )}
               {about.about_description && (
                 <div
-                  className="mt-5 space-y-5 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-5 [&_p:first-child]:mt-0"
+                  className="mt-5 space-y-0 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-5 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.about_description }}
                 />
               )}

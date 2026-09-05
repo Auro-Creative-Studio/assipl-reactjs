@@ -252,7 +252,7 @@ function Contact() {
                 })}
               </div>
 
-              <div className="mt-2 flex gap-3 pl-16.5 md:mt-3.75 md:pl-27.25">
+              <div className="mt-2 flex gap-3 pl-16.5 md:mt-3.75 md:pl-23">
                 {displaySocialLinks.map(({ key, href, Icon, label }) => (
                   <a
                     key={key}

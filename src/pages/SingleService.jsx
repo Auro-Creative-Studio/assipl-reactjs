@@ -83,7 +83,7 @@ function ServiceSidebar({ links, currentSlug, onEnquiryClick, className = '' }) 
 function AdvantageCard({ item, tone }) {
   return (
     <article
-      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 transition-[background-color,transform] duration-300 hover:scale-[1.02] ${
+      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 transition-[background-color,transform] duration-500 ease-out hover:scale-[1.02] ${
         tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
