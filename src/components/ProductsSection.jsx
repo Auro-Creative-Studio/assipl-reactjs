@@ -58,7 +58,7 @@ function ProductsSection() {
                 </h3>
                 <div className="grid grid-rows-[0fr] transition-all duration-300 group-hover:mt-3 group-hover:grid-rows-[1fr]">
                   <div className="min-h-0 overflow-hidden">
-                    <p className="text-left text-sm leading-6 text-white/85 md:text-center">{product.description}</p>
+                    <p className="text-left text-body text-white/85 md:text-center">{product.description}</p>
                   </div>
                 </div>
                 <Link

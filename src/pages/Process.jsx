@@ -103,7 +103,7 @@ function ProcessStep({ step, index, isActive, markerRef }) {
       </h2>
       <ul className="mt-4 list-disc space-y-1.5 pl-5">
         {step.points.map((point, pointIndex) => (
-          <li key={`${point.label}-${pointIndex}`} className="text-[16px] font-normal leading-[1.6] text-text md:text-[17px]">
+          <li key={`${point.label}-${pointIndex}`} className="text-body font-normal text-text">
             <span className="font-semibold text-secondary">{point.label}</span> {point.text}
           </li>
         ))}
@@ -287,7 +287,7 @@ function Process() {
             <h1 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
               {introHeading}
             </h1>
-            <p className="mx-auto mt-5 max-w-295 text-left text-[18px] font-normal leading-normal text-text md:text-center">
+            <p className="mx-auto mt-5 max-w-295 text-left text-body font-normal text-text md:text-center">
               {introDescription}
             </p>
           </Reveal>
@@ -332,7 +332,7 @@ function Process() {
                   {ctaHeading}
                 </h2>
                 <p
-                  className="mt-5 max-w-180 text-[16px] font-normal leading-[1.67]"
+                  className="mt-5 max-w-180 text-body font-normal"
                   style={{ color: 'var(--color-white)' }}
                 >
                   {ctaDescription}

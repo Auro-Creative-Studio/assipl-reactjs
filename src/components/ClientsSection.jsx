@@ -75,7 +75,7 @@ function ClientsSection({ data }) {
             {testimonialSlides.map((item, index) => (
               <SwiperSlide key={`${item.company}-${index}`}>
                 <article className="testimonial-card flex min-h-94.25 flex-col rounded-[22px] border border-[#d5ddeb] bg-white px-8 pt-15.5 pb-13.25">
-                  <p className="text-left text-[16px] leading-normal text-[#63708a] md:text-left sm:text-[20px]">
+                  <p className="text-left text-body text-[#63708a] md:text-left">
                     &quot;{item.quote}&quot;
                   </p>
 

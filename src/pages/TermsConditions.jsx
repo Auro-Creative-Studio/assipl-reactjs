@@ -5,9 +5,9 @@ import { useSeoMeta } from '../hooks/useSeoMeta'
 
 const contactDetails = [
   'Company Name: Automations Systems and Solutions (ASSIPL)',
-  'Email: info@automationsystems.co.in',
+  'Email: assipl@automationsystems.co.in',
   'Phone: 080 – 41692300 / 080 – 43751024',
-  'Address: #2497, Ground Floor, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore, Karnataka – 560008',
+  'Address: House No: 2497, GF, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore – 560008.',
 ]
 
 const sections = [
@@ -542,9 +542,9 @@ const sections = [
         type: 'ul',
         items: [
           'Automations Systems and Solutions (ASSIPL)',
-          'Email: info@automationsystems.co.in',
+          'Email: assipl@automationsystems.co.in',
           'Phone: 080 – 41692300 / 080 – 43751024',
-          'Address: #2497, Ground Floor, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore, Karnataka – 560008',
+          'Address: House No: 2497, GF, 17th Main, HAL 2nd Stage, Indiranagar, Bangalore – 560008.',
         ],
       },
     ],
@@ -578,13 +578,13 @@ function TermsConditions() {
 
       <section className="px-5 py-16 md:py-20">
         <div className="mx-auto max-w-300">
-          <Reveal as="p" className="text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</Reveal>
-          <Reveal as="p" delay={100} className="mt-4 text-[18px] leading-8 text-text">Welcome to Automations Systems and Solutions (ASSIPL).</Reveal>
-          <Reveal as="p" delay={200} className="mt-4 text-[18px] leading-8 text-text">
+          <Reveal as="p" className="text-[16px] md:text-[18px] font-semibold uppercase tracking-wide">Last Updated: 31-07-2026</Reveal>
+          <Reveal as="p" delay={100} className="mt-4 text-body text-text">Welcome to Automations Systems and Solutions (ASSIPL).</Reveal>
+          <Reveal as="p" delay={200} className="mt-4 text-body text-text">
             These Terms and Conditions govern your access to and use of this website, including any content,
             features, enquiry forms, products, services, solutions, and information made available through it.
           </Reveal>
-          <Reveal as="p" delay={300} className="mt-4 text-[18px] leading-8 text-text">
+          <Reveal as="p" delay={300} className="mt-4 text-body text-text">
             By accessing or using this website, you agree to these Terms and Conditions. If you do not agree with
             these terms, please discontinue using the website.
           </Reveal>

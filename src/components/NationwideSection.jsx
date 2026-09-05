@@ -19,7 +19,7 @@ function NationwideSection({ data }) {
             <h2 className="max-w-[760px] text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[54px]">
               {heading}
             </h2>
-            <p className="mt-[26px] max-w-[880px] text-left text-base leading-[1.55] text-[#63708a] md:text-left sm:text-[18px]">
+            <p className="mt-[26px] max-w-[880px] text-left text-body text-[#63708a] md:text-left">
               {description}
             </p>
           </Reveal>

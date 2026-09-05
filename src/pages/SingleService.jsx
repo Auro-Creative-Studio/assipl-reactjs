@@ -83,12 +83,12 @@ function ServiceSidebar({ links, currentSlug, onEnquiryClick, className = '' }) 
 function AdvantageCard({ item, tone }) {
   return (
     <article
-      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 transition-[background-color,transform] duration-500 ease-out hover:scale-[1.02] ${
+      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 will-change-transform [transition:scale_900ms_cubic-bezier(0.22,1,0.36,1),background-color_500ms_ease] hover:scale-[1.02] ${
         tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
       <h3 className="text-[30px] font-semibold leading-tight text-secondary">{item.title}</h3>
-      <p className="mt-5 text-left text-[16px] leading-7 text-text md:text-left">{item.description}</p>
+      <p className="mt-5 text-left text-body text-text md:text-left">{item.description}</p>
     </article>
   )
 }
@@ -97,7 +97,7 @@ function FeatureList({ items }) {
   return (
     <ul className="mt-6 space-y-4">
       {items.map((item) => (
-        <li key={item.id} className="flex gap-3 text-left text-[16px] leading-7 text-text md:text-left">
+        <li key={item.id} className="flex gap-3 text-left text-body text-text md:text-left">
           <span className="mt-2.5 h-1.5 w-1.5 flex-none rounded-full bg-text/60" aria-hidden="true" />
           <p>
             <span className="font-semibold text-secondary">{item.title}:</span> {item.description}
@@ -117,7 +117,7 @@ function ModelCard({ model, fallbackImage }) {
         className="h-56 w-full rounded-xl object-cover"
       />
       <h2 className="pt-5 text-[30px] font-semibold leading-tight text-secondary">{model.title}</h2>
-      <RichText html={model.description} className="mt-4 text-left text-[16px] leading-7 text-text md:text-left [&_ul]:mt-0" />
+      <RichText html={model.description} className="mt-4 text-left text-body text-text md:text-left [&_ul]:mt-0" />
     </article>
   )
 }
@@ -252,7 +252,7 @@ function SingleService({ routeSlug = null }) {
               {service.overview_title}
             </Reveal>
           )}
-          <RichText html={service.overview_description} className="text-left text-[16px] leading-8 text-text md:text-left [&_ul]:mt-0" />
+          <RichText html={service.overview_description} className="text-left text-body text-text md:text-left [&_ul]:mt-0" />
 
           {advantages.length > 0 && (
             <>
@@ -265,7 +265,7 @@ function SingleService({ routeSlug = null }) {
                 </Reveal>
               )}
               {service.service_advantages_description && (
-                <Reveal as="p" className="text-left text-[16px] leading-8 text-text md:text-left">
+                <Reveal as="p" className="text-left text-body text-text md:text-left">
                   {service.service_advantages_description}
                 </Reveal>
               )}
@@ -297,7 +297,7 @@ function SingleService({ routeSlug = null }) {
                 </Reveal>
               )}
               {service.service_models_description && (
-                <Reveal as="p" className="text-left text-[16px] leading-8 text-text md:text-left">
+                <Reveal as="p" className="text-left text-body text-text md:text-left">
                   {service.service_models_description}
                 </Reveal>
               )}
@@ -341,7 +341,7 @@ function SingleService({ routeSlug = null }) {
                   <h3 className="text-[44px] font-semibold leading-tight text-white">{service.cta_title}</h3>
                 )}
                 {service.cta_description && (
-                  <p className="mt-3 text-left text-[16px] leading-7 text-white/90 md:text-left">{service.cta_description}</p>
+                  <p className="mt-3 text-left text-body text-white/90 md:text-left">{service.cta_description}</p>
                 )}
               </div>
               <button

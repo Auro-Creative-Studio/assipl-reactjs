@@ -97,7 +97,7 @@ function Footer() {
           <Link to="/">
             <img src={logo} alt="ASSIPL" className="h-12 w-auto object-contain" />
           </Link>
-          <p className="mt-5 max-w-xs text-base leading-normal text-white">
+          <p className="mt-5 max-w-xs text-body text-white">
             ASSIPL operates at the intersection of advanced technology and rigorous field
             engineering.
           </p>

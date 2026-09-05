@@ -29,7 +29,7 @@ function ServicesSection({ data }) {
       <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
         <Reveal className="mx-auto max-w-6xl text-center">
           <h2 className="text-4xl font-bold leading-tight text-secondary sm:text-5xl">{heading}</h2>
-          <p className="mt-5 text-left text-base leading-7 text-text md:text-center sm:text-lg">{description}</p>
+          <p className="mt-5 text-left text-body text-text md:text-center">{description}</p>
         </Reveal>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-14">
@@ -73,7 +73,7 @@ function ServicesSection({ data }) {
                         }`}
                     >
                       <div className="min-h-0">
-                        <p className="p-5 text-left text-sm leading-7 text-text md:text-left sm:text-base">{service.description}</p>
+                        <p className="p-5 text-left text-body text-text md:text-left">{service.description}</p>
                       </div>
                     </div>
                   </div>

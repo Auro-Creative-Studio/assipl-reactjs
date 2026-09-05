@@ -224,12 +224,12 @@ function Contact() {
               <h2 className="text-left text-[30px] font-semibold leading-[1.125] text-secondary md:text-[64px]">
                 {connectHeading}
               </h2>
-              <p className="mt-1.5 max-w-160 text-[15px] font-normal leading-[1.45] text-text md:text-[16px] md:leading-normal">
+              <p className="mt-1.5 max-w-160 text-body font-normal text-text">
                 {connectDescription}
               </p>
               <div className="my-2.5 h-px w-full bg-accent md:my-4.5" />
 
-              <div className="space-y-2 md:space-y-7">
+              <div className="space-y-8 md:space-y-7">
                 {contactItems.map((item) => {
                   const Icon = item.icon
 
@@ -245,14 +245,14 @@ function Contact() {
                         >
                           {item.title}
                         </h5>
-                        <p className="text-[14px] font-normal leading-[1.45] text-[#667085] md:text-[16px] md:leading-[1.67]">{item.body}</p>
+                        <p className="text-body font-normal text-[#667085]">{item.body}</p>
                       </div>
                     </div>
                   )
                 })}
               </div>
 
-              <div className="mt-2 flex gap-3 pl-16.5 md:mt-3.75 md:pl-23">
+              <div className="mt-8 flex gap-3 pl-16.5 md:mt-3.75 md:pl-23">
                 {displaySocialLinks.map(({ key, href, Icon, label }) => (
                   <a
                     key={key}

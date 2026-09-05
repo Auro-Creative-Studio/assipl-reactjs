@@ -76,7 +76,7 @@ function InfrastructureAuditSection({ data }) {
             <h2 className="max-w-[400px] text-[38px] font-semibold leading-[1.22] text-white sm:text-[44px]">
               {heading}
             </h2>
-            <p className="mt-6 max-w-[650px] text-left text-[16px] font-normal leading-[1.5] text-[#f5f5f5] md:text-left sm:text-[18px]">
+            <p className="mt-6 max-w-[650px] text-left text-body font-normal text-[#f5f5f5] md:text-left">
               {description}
             </p>
           </Reveal>

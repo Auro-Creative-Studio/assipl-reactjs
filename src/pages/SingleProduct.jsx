@@ -81,12 +81,12 @@ function CapabilityCard({ item, index, total }) {
 
   return (
     <article
-      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 transition-[background-color,transform] duration-500 ease-out hover:scale-[1.02] ${
+      className={`flex h-full flex-col rounded-[10px] border border-accent px-8 py-12 will-change-transform [transition:scale_900ms_cubic-bezier(0.22,1,0.36,1),background-color_500ms_ease] hover:scale-[1.02] ${
         tone === 'white' ? 'bg-white hover:bg-background' : 'bg-background hover:bg-white'
       }`}
     >
       <h3 className="text-[30px] font-semibold leading-tight text-secondary">{item.title}</h3>
-      <RichText html={item.body} className="mt-5 text-left text-[16px] leading-7 text-text md:text-left md:text-[18px] [&_ul]:mt-0" />
+      <RichText html={item.body} className="mt-5 text-left text-body text-text md:text-left [&_ul]:mt-0" />
     </article>
   )
 }
@@ -227,7 +227,7 @@ function SingleProduct() {
           )}
 
           {product.description && (
-            <Reveal as="p" className="text-left text-[16px] leading-8 text-text md:text-left">
+            <Reveal as="p" className="text-left text-body text-text md:text-left">
               {product.description}
             </Reveal>
           )}

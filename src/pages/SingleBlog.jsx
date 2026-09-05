@@ -149,7 +149,7 @@ function SingleBlog() {
       {blog.description && (
         <section className="mx-auto max-w-300 px-5 pt-16 pb-5">
           <Reveal>
-            <p className="text-[18px] leading-[1.6] text-text md:text-[20px]">{blog.description}</p>
+            <p className="text-body text-text">{blog.description}</p>
           </Reveal>
         </section>
       )}

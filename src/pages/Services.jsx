@@ -227,7 +227,7 @@ function Services() {
                 )}
                 {page.services_description && (
                   <div
-                    className="mx-auto mt-5 max-w-295 text-left text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px] [&_p]:mt-4 [&_p:first-child]:mt-0"
+                    className="mx-auto mt-5 max-w-295 text-left text-body font-normal text-text md:text-center [&_p]:mt-4 [&_p:first-child]:mt-0"
                     dangerouslySetInnerHTML={{ __html: page.services_description }}
                   />
                 )}
@@ -262,7 +262,7 @@ function Services() {
                           </h3>
                         )}
                         {item.description && (
-                          <p className="mt-2 max-w-155 text-left text-[16px] font-normal leading-normal text-text md:text-left md:text-[18px]">
+                          <p className="mt-2 max-w-155 text-left text-body font-normal text-text md:text-left">
                             {item.description}
                           </p>
                         )}
@@ -295,7 +295,7 @@ function Services() {
                   )}
                   {page.core_project_description && (
                     <div
-                      className="mx-auto mt-6 max-w-280 text-left text-[16px] font-normal leading-normal text-text md:text-center md:text-[18px] [&_p]:mt-4 [&_p:first-child]:mt-0"
+                      className="mx-auto mt-6 max-w-280 text-left text-body font-normal text-text md:text-center [&_p]:mt-4 [&_p:first-child]:mt-0"
                       dangerouslySetInnerHTML={{ __html: page.core_project_description }}
                     />
                   )}
@@ -325,7 +325,7 @@ function Services() {
                       </h3>
                     )}
                     {item.description && (
-                      <p className="mt-3 text-left text-[16px] font-normal leading-[1.67] text-text md:text-left">
+                      <p className="mt-3 text-left text-body font-normal text-text md:text-left">
                         {item.description}
                       </p>
                     )}
@@ -385,7 +385,7 @@ function Services() {
                       </h3>
                     )}
                     {item.description && (
-                      <p className="mt-3 text-left text-[16px] font-normal leading-[1.67] text-text md:text-left">
+                      <p className="mt-3 text-left text-body font-normal text-text md:text-left">
                         {item.description}
                       </p>
                     )}
@@ -412,7 +412,7 @@ function Services() {
                   Ready to Standardize Your Enterprise Infrastructure?
                 </h2>
                 <p
-                  className="mt-5 max-w-180 text-left text-[16px] font-normal leading-[1.67] md:text-left"
+                  className="mt-5 max-w-180 text-left text-body font-normal md:text-left"
                   style={{ color: 'var(--color-white)' }}
                 >
                   Connect with our systems integration experts to discuss multi-site rollouts, vault

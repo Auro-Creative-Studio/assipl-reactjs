@@ -61,7 +61,7 @@ function LegalSection({ number, title, blocks }) {
       <h2 className="text-[32px] font-bold leading-tight text-secondary md:text-[44px]">
         {number}. {title}
       </h2>
-      <div className="mt-4 space-y-4 text-[16px] leading-7 text-text md:text-[18px]">
+      <div className="mt-4 space-y-4 text-body text-text">
         {blocks.map((block, index) =>
           block.type === 'ul' ? (
             <ul key={index} className="list-disc space-y-2 pl-5">

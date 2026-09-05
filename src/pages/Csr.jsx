@@ -199,7 +199,7 @@ function Csr() {
                 )}
                 {csr.intro_description && (
                   <div
-                    className="mt-6 text-left text-[16px] leading-7 text-text md:text-left md:text-[20px] md:leading-8 [&_p]:mt-4 [&_p:first-child]:mt-0"
+                    className="mt-6 text-left text-body text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
                     dangerouslySetInnerHTML={{ __html: csr.intro_description }}
                   />
                 )}
@@ -249,7 +249,7 @@ function Csr() {
             )}
             {csr.project_description && (
               <div
-                className="mt-6 w-full text-left text-[16px] leading-6.5 text-text md:text-left md:text-[20px] md:leading-7.5 [&_li]:mt-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5"
+                className="mt-6 w-full text-left text-body text-text md:text-left [&_li]:mt-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5"
                 dangerouslySetInnerHTML={{ __html: csr.project_description }}
               />
             )}

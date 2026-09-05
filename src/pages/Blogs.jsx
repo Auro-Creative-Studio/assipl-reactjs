@@ -21,7 +21,7 @@ function BlogCard({ post }) {
             {post.title}
           </Link>
         </h2>
-        <p className="text-left text-[16px] leading-7 text-text">{post.excerpt}</p>
+        <p className="text-left text-body text-text">{post.excerpt}</p>
         <Link
           to={`/blogs/${post.slug}`}
           className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-3.75 text-[15px] font-semibold text-white transition-all duration-400 hover:bg-secondary"

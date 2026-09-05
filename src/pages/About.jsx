@@ -229,7 +229,7 @@ function About() {
 
   return (
     <main className="bg-white">
-      <section className="relative flex min-h-88 items-center overflow-hidden px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-0 lg:pt-10">
+      <section className="relative flex min-h-100 items-center overflow-hidden px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-0 lg:pt-10">
         <img
           src={getMediaUrl(about.banner_image)}
           alt=""
@@ -245,7 +245,7 @@ function About() {
               </h1>
             )}
             {about.banner_description && (
-              <p className="mt-1 max-w-190 text-left text-[18px] font-semibold leading-[1.67] text-white md:mt-4 md:text-left">
+              <p className="mt-1 max-w-190 text-left text-body font-semibold text-white md:mt-4 md:text-left">
                 {about.banner_description}
               </p>
             )}
@@ -274,7 +274,7 @@ function About() {
               )}
               {about.about_description && (
                 <div
-                  className="mt-5 space-y-0 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-5 [&_p:first-child]:mt-0"
+                  className="mt-5 space-y-0 text-left text-body text-text md:text-left [&_p]:mt-5 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.about_description }}
                 />
               )}
@@ -373,7 +373,7 @@ function About() {
               )}
               {about.securing_description && (
                 <div
-                  className="mt-6 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
+                  className="mt-6 text-left text-body text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.securing_description }}
                 />
               )}
@@ -440,7 +440,7 @@ function About() {
               )}
               {about.future_description && (
                 <div
-                  className="mt-5 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
+                  className="mt-5 text-left text-body text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.future_description }}
                 />
               )}
@@ -468,7 +468,7 @@ function About() {
               <h3 className="text-[32px] font-semibold leading-[1.125] md:text-[45px] text-white text-center md:text-left">
                 Ready to Standardize Your Enterprise Infrastructure?
               </h3>
-              <p className="mt-5 max-w-180 text-center text-[18px] font-normal leading-tight md:leading-[1.67] text-white md:text-left">
+              <p className="mt-5 max-w-180 text-center text-body font-normal text-white md:text-left">
                 Connect with our systems integration experts to discuss multi-site rollouts, vault
                 security, and scalable safety architectures.
               </p>
