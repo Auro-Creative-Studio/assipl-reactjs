@@ -17,7 +17,7 @@ export const navItems = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Enquiries", href: "/admin/enquiries", icon: MessageSquareText },
   { label: "Contacts", href: "/admin/contacts", icon: Inbox },
-  { label: "Newsletter", href: "/admin/newsletter-subscribers", icon: Mail },
+  // { label: "Newsletter", href: "/admin/newsletter-subscribers", icon: Mail },
   { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
   { label: "Products", href: "/admin/products", icon: Layers },
   { label: "Services", href: "/admin/single-services", icon: Wrench },
