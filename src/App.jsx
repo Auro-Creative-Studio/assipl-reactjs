@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import CookieConsentBanner from './components/CookieConsentBanner'
+import ScrollToTop from './components/ScrollToTop'
 import CmsLayout from './cms/components/layout/CmsLayout'
 import ProtectedCmsRoute from './cms/components/layout/ProtectedCmsRoute'
 import SuperAdminRoute from './cms/components/layout/SuperAdminRoute'
@@ -41,6 +42,7 @@ import Career from './pages/Career'
 import Csr from './pages/Csr'
 import Contact from './pages/Contact'
 import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 import Process from './pages/Process'
 import Products from './pages/Products'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -75,6 +77,7 @@ function PublicLayout() {
         <Route path="/strategic-planning-design" element={<SingleService routeSlug="strategic-planning-design" />} />
         <Route path="/core-project-execution-sitc" element={<SingleService routeSlug="core-project-execution-sitc" />} />
         <Route path="/services/:slug" element={<SingleService />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       <CookieConsentBanner />
@@ -84,7 +87,9 @@ function PublicLayout() {
 
 function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       <Route path="/admin/login" element={<Login />} />
       <Route element={<ProtectedCmsRoute />}>
         <Route path="/admin" element={<CmsLayout />}>
@@ -124,7 +129,8 @@ function App() {
         </Route>
       </Route>
       <Route path="/*" element={<PublicLayout />} />
-    </Routes>
+      </Routes>
+    </>
   )
 }
 
