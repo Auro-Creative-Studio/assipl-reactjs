@@ -29,7 +29,7 @@ function AboutSection({ data }) {
           />
           <a
             href={ctaHref}
-            className="mt-8 inline-flex items-center rounded-full bg-primary px-7 py-3.5 text-[18px] font-semibold text-white transition hover:bg-secondary"
+            className="mt-8 inline-flex items-center rounded-full bg-primary px-7 py-3.5 text-body font-semibold text-white transition hover:bg-secondary"
           >
             {ctaLabel}
           </a>

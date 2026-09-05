@@ -270,7 +270,7 @@ function Header() {
             type="button"
             onClick={() => setIsEnquiryOpen(true)}
             id="glow"
-            className="hidden rounded-full bg-primary px-8 py-3 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary md:inline-flex"
+            className="hidden rounded-full bg-primary px-8 py-3 text-body font-semibold capitalize text-white transition hover:bg-secondary md:inline-flex"
           >
             Enquire Now
           </button>
@@ -375,7 +375,7 @@ function Header() {
               closeMobileMenu()
               setIsEnquiryOpen(true)
             }}
-            className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-3 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+            className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-3 text-body font-semibold capitalize text-white transition hover:bg-secondary"
           >
             Enquire Now
           </button> */}

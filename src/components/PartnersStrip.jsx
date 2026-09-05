@@ -51,15 +51,15 @@ function PartnersStrip({ data }) {
           slidesPerGroup={1}
           autoplay={{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true }}
           spaceBetween={56}
-          slidesPerView={2}
+          slidesPerView="auto"
           breakpoints={{
-            768: { slidesPerView: 4, spaceBetween: 76 },
-            1024: { slidesPerView: 6, spaceBetween: 120 },
+            768: { spaceBetween: 76 },
+            1024: { spaceBetween: 120 },
           }}
         >
           {manufacturerLogos.map((logo, index) => (
-            <SwiperSlide key={`${logo.alt}-${index}`}>
-              <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
+            <SwiperSlide key={`${logo.alt}-${index}`} className="w-38! md:w-44! lg:w-54!">
+              <div className="mx-auto flex h-22 w-full items-center justify-center">
                 <FadeImg src={logo.src} alt={logo.alt} className="max-h-18 w-full object-contain" loading="lazy" />
               </div>
             </SwiperSlide>

@@ -109,7 +109,7 @@ function SingleBlog() {
     return (
       <main className="flex min-h-150 flex-col items-center justify-center gap-4 bg-white px-5 text-center">
         <p className="text-xl font-semibold text-secondary">{error || 'This blog could not be found.'}</p>
-        <Link to="/blogs" className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:bg-secondary">
+        <Link to="/blogs" className="rounded-full bg-primary px-7 py-3 text-body font-semibold text-white transition hover:bg-secondary">
           Back to Blogs
         </Link>
       </main>

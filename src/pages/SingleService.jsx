@@ -70,7 +70,7 @@ function ServiceSidebar({ links, currentSlug, onEnquiryClick, className = '' }) 
           <button
             type="button"
             onClick={onEnquiryClick}
-            className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
+            className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-body font-semibold text-white transition hover:bg-secondary"
           >
             Enquiry Now
           </button>
@@ -183,7 +183,7 @@ function SingleService({ routeSlug = null }) {
         <p className="text-xl font-semibold text-secondary">{error || 'This service could not be found.'}</p>
         <Link
           to="/services"
-          className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:bg-secondary"
+          className="rounded-full bg-primary px-7 py-3 text-body font-semibold text-white transition hover:bg-secondary"
         >
           Back to Services
         </Link>
@@ -347,7 +347,7 @@ function SingleService({ routeSlug = null }) {
               <button
                 type="button"
                 onClick={() => setIsEnquiryOpen(true)}
-                className="inline-flex flex-none items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-semibold text-white transition hover:bg-secondary"
+                className="inline-flex flex-none items-center gap-2 rounded-full bg-primary px-8 py-3 text-body font-semibold text-white transition hover:bg-secondary"
               >
                 Get in Touch
               </button>

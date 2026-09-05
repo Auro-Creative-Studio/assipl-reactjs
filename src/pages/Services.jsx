@@ -219,7 +219,7 @@ function Services() {
         {(page.services_title || page.services_description || strategicItems.length > 0) && (
           <section className="px-5 py-20">
             {(page.services_title || page.services_description) && (
-              <Reveal className="mx-auto max-w-300 text-center">
+              <Reveal className="mx-auto max-w-300 text-left md:text-center">
                 {page.services_title && (
                   <h2 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                     {page.services_title}
@@ -269,7 +269,7 @@ function Services() {
                         {index === strategicItems.length - 1 && page.learn_more_link && (
                           <Link
                             to={page.learn_more_link}
-                            className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                            className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-2.5 text-body font-semibold capitalize text-white transition hover:bg-secondary"
                           >
                             Learn More
                           </Link>
@@ -287,7 +287,7 @@ function Services() {
           <section className="bg-background px-5 py-20">
             <div className="mx-auto max-w-350">
               {(page.core_project_title || page.core_project_description) && (
-                <Reveal className="mx-auto max-w-295 text-center">
+                <Reveal className="mx-auto max-w-295 text-left md:text-center">
                   {page.core_project_title && (
                     <h2 className="text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                       {page.core_project_title}
@@ -336,7 +336,7 @@ function Services() {
                 <div className="mt-12 text-center">
                   <Link
                     to={page.know_more_link}
-                    className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                    className="inline-flex rounded-full bg-primary px-8 py-2.5 text-body font-semibold capitalize text-white transition hover:bg-secondary"
                   >
                     Know More
                   </Link>
@@ -349,7 +349,7 @@ function Services() {
         {(page.maintenance_title || maintenanceItems.length > 0) && (
           <section className="bg-white px-5 py-20">
             <div className="mx-auto max-w-350">
-              <Reveal className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+              <Reveal className="flex flex-col items-center justify-between gap-6 md:flex-row text-left">
                 {page.maintenance_title && (
                   <h2 className="max-w-230 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                     {page.maintenance_title}
@@ -358,7 +358,7 @@ function Services() {
                 {page.read_more_link && (
                   <a
                     href={page.read_more_link}
-                    className="inline-flex rounded-full bg-primary px-8 py-2.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                    className="inline-flex rounded-full bg-primary px-8 py-2.5 text-body font-semibold capitalize text-white transition hover:bg-secondary"
                   >
                     Read More
                   </a>
@@ -422,7 +422,7 @@ function Services() {
               <button
                 type="button"
                 onClick={() => setIsEnquiryOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-body font-medium capitalize text-white transition hover:bg-secondary hover:text-white md:mr-5"
               >
                 Contact Our Engineering Team
               </button>

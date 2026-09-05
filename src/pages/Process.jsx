@@ -283,7 +283,7 @@ function Process() {
         </section>
 
         <section className="px-5 py-20">
-          <Reveal className="mx-auto max-w-300 text-center">
+          <Reveal className="mx-auto max-w-300 text-left md:text-center">
             <h1 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
               {introHeading}
             </h1>
@@ -341,7 +341,7 @@ function Process() {
               <button
                 type="button"
                 onClick={() => setIsEnquiryOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-3.5 text-body font-medium capitalize text-white transition hover:bg-secondary hover:text-white md:mr-5"
               >
                 {ctaButtonLabel}
               </button>

@@ -24,7 +24,7 @@ function BlogCard({ post }) {
         <p className="text-left text-body text-text">{post.excerpt}</p>
         <Link
           to={`/blogs/${post.slug}`}
-          className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-3.75 text-[15px] font-semibold text-white transition-all duration-400 hover:bg-secondary"
+          className="mt-6 inline-flex rounded-full bg-primary px-7.5 py-3.75 text-body font-semibold text-white transition-all duration-400 hover:bg-secondary"
         >
           Read More
         </Link>

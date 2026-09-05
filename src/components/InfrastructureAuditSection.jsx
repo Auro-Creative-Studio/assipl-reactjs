@@ -144,7 +144,7 @@ function InfrastructureAuditSection({ data }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="mt-[30px] inline-flex h-[44px] items-center rounded-full bg-primary px-[31px] text-[14px] font-semibold text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-[30px] inline-flex h-[44px] items-center rounded-full bg-primary px-[31px] text-body font-semibold text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? 'Sending…' : 'Submit'}
             </button>

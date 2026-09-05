@@ -27,7 +27,7 @@ function ServicesSection({ data }) {
   return (
     <section id="services" className="bg-[#F8FAFC] py-20 sm:py-24 lg:py-24">
       <div className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
-        <Reveal className="mx-auto max-w-6xl text-center">
+        <Reveal className="mx-auto max-w-6xl text-left md:text-center">
           <h2 className="text-4xl font-bold leading-tight text-secondary sm:text-5xl">{heading}</h2>
           <p className="mt-5 text-left text-body text-text md:text-center">{description}</p>
         </Reveal>
@@ -83,7 +83,7 @@ function ServicesSection({ data }) {
 
             <a
               href={ctaHref}
-              className="mt-7 inline-flex w-fit items-center rounded-full bg-primary px-8 py-3 text-[18px] font-semibold text-white"
+              className="mt-7 inline-flex w-fit items-center rounded-full bg-primary px-8 py-3 text-body font-semibold text-white"
             >
               {ctaLabel}
             </a>

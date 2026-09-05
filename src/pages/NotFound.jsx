@@ -55,7 +55,7 @@ function NotFound() {
             <Reveal
               delay={300}
               as="p"
-              className="mt-3 max-w-130 text-[15px] font-normal leading-[1.6] text-text md:text-[16px]"
+              className="mt-3 max-w-130 text-body font-normal text-text"
             >
               The page you&apos;re looking for may have been moved, renamed, or no longer exists.
               Let&apos;s get you back on track.
@@ -64,13 +64,13 @@ function NotFound() {
             <Reveal delay={400} className="mt-8 flex flex-col gap-3.5 sm:flex-row">
               <Link
                 to="/"
-                className="rounded-full bg-primary px-8 py-3.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary"
+                className="rounded-full bg-primary px-8 py-3.5 text-body font-semibold capitalize text-white transition hover:bg-secondary"
               >
                 Back to Home
               </Link>
               <Link
                 to="/contact-us"
-                className="rounded-full border border-secondary px-8 py-3.5 text-[15px] font-semibold capitalize leading-[1.43] text-secondary transition hover:bg-secondary hover:text-white"
+                className="rounded-full border border-secondary px-8 py-3.5 text-body font-semibold capitalize text-secondary transition hover:bg-secondary hover:text-white"
               >
                 Contact Us
               </Link>

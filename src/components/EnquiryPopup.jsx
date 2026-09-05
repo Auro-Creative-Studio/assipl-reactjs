@@ -91,7 +91,7 @@ function EnquiryPopup({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={handleClose}
-                className="mt-8 inline-flex rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:bg-secondary"
+                className="mt-8 inline-flex rounded-full bg-primary px-7 py-3 text-body font-semibold text-white transition hover:bg-secondary"
               >
                 Close
               </button>
@@ -146,7 +146,7 @@ function EnquiryPopup({ isOpen, onClose }) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center rounded-full bg-primary px-7 py-3 text-body font-semibold text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? 'Sending…' : 'Submit'}
               </button>

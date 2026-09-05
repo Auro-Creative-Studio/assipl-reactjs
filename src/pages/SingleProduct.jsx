@@ -61,7 +61,7 @@ function ProductSidebar({ productLinks, currentSlug, onEnquiryClick, className =
           <button
             type="button"
             onClick={onEnquiryClick}
-            className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-sm font-semibold text-white transition hover:bg-secondary"
+            className="mt-6 inline-flex rounded-full bg-primary px-8 py-2 text-body font-semibold text-white transition hover:bg-secondary"
           >
             Enquiry Now
           </button>
@@ -157,7 +157,7 @@ function SingleProduct() {
     return (
       <main className="flex min-h-150 flex-col items-center justify-center gap-4 bg-white px-5 text-center">
         <p className="text-xl font-semibold text-secondary">{error || 'This product could not be found.'}</p>
-        <Link to="/products" className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:bg-secondary">
+        <Link to="/products" className="rounded-full bg-primary px-7 py-3 text-body font-semibold text-white transition hover:bg-secondary">
           Back to Products
         </Link>
       </main>

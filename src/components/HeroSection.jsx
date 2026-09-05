@@ -20,7 +20,7 @@ function HeroSection({ data }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-white px-5 pt-39 pb-7.5 md:pt-37.5 md:pb-15 lg:px-0 lg:pt-47.25"
+      className="relative min-h-screen overflow-hidden bg-white px-5 pt-39 pb-7.5 md:pt-37.5 md:pb-15 lg:px-8 lg:pt-47.25"
       style={{
         backgroundImage: `linear-gradient(180deg, rgba(27, 26, 23, 0.44) 68%, rgba(255, 255, 255, 1) 100%), url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -53,7 +53,7 @@ function HeroSection({ data }) {
           <button
             type="button"
             onClick={() => setIsEnquiryOpen(true)}
-            className="mt-11 inline-flex h-13.75 items-center rounded-full bg-primary px-9.75 font-body text-[16px] font-medium capitalize leading-normal text-white transition hover:bg-secondary md:text-[17px] lg:text-[18px]"
+            className="mt-11 inline-flex h-13.75 items-center rounded-full bg-primary px-9.75 font-body text-body font-medium capitalize text-white transition hover:bg-secondary"
           >
             {ctaLabel}
           </button>

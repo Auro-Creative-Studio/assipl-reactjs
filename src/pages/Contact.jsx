@@ -227,9 +227,9 @@ function Contact() {
               <p className="mt-1.5 max-w-160 text-body font-normal text-text">
                 {connectDescription}
               </p>
-              <div className="my-2.5 h-px w-full bg-accent md:my-4.5" />
+              <div className="my-5 h-px w-full bg-accent md:my-4.5" />
 
-              <div className="space-y-8 md:space-y-7">
+              <div className="space-y-5 md:space-y-7">
                 {contactItems.map((item) => {
                   const Icon = item.icon
 
@@ -252,7 +252,7 @@ function Contact() {
                 })}
               </div>
 
-              <div className="mt-8 flex gap-3 pl-16.5 md:mt-3.75 md:pl-23">
+              <div className="mt-5 flex gap-3 pl-16.5 md:mt-3.75 md:pl-23">
                 {displaySocialLinks.map(({ key, href, Icon, label }) => (
                   <a
                     key={key}
@@ -328,7 +328,7 @@ function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="rounded-full bg-primary px-7.75 py-3.5 text-[15px] font-semibold capitalize leading-[1.43] text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-full bg-primary px-7.75 py-3.5 text-body font-semibold capitalize text-white transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isSubmitting ? 'Sending…' : 'Submit'}
                   </button>

@@ -143,7 +143,7 @@ const hasAboutContent = (record) => {
 function ButtonLink({ children, className = '', ...props }) {
   return (
     <a
-      className={`inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-8 py-2 text-[15px] font-semibold leading-[1.43] text-white transition hover:bg-secondary ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-8 py-2 text-body font-semibold text-white transition hover:bg-secondary ${className}`}
       {...props}
     >
       {children}
@@ -229,7 +229,7 @@ function About() {
 
   return (
     <main className="bg-white">
-      <section className="relative flex min-h-100 items-center overflow-hidden px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-0 lg:pt-10">
+      <section className="relative flex min-h-100 items-center overflow-hidden px-5 pt-15 md:min-h-112 md:px-5 md:pt-15 lg:min-h-125 lg:px-8 lg:pt-10">
         <img
           src={getMediaUrl(about.banner_image)}
           alt=""
@@ -311,15 +311,15 @@ function About() {
               slidesPerGroup={1}
               autoplay={{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true }}
               spaceBetween={56}
-              slidesPerView={2}
+              slidesPerView="auto"
               breakpoints={{
-                768: { slidesPerView: 4, spaceBetween: 76 },
-                1024: { slidesPerView: 6, spaceBetween: 120 },
+                768: { spaceBetween: 76 },
+                1024: { spaceBetween: 120 },
               }}
             >
               {logos.map((logo, index) => (
-                <SwiperSlide key={logo.id || index}>
-                  <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
+                <SwiperSlide key={logo.id || index} className="w-38! md:w-44! lg:w-54!">
+                  <div className="mx-auto flex h-22 w-full items-center justify-center">
                     <FadeImg
                       src={getMediaUrl(logo.logo)}
                       alt={logo.alt || 'Manufacturer partner logo'}
@@ -379,7 +379,7 @@ function About() {
               )}
               <Link
                 to="/csr"
-                className="mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-primary px-10 py-4 text-[17px] font-semibold leading-[1.43] text-white transition hover:bg-secondary"
+                className="mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-primary px-10 py-4 text-body font-semibold text-white transition hover:bg-secondary"
               >
                 Discover Our CSR Initiatives
               </Link>
@@ -447,7 +447,7 @@ function About() {
               <button
                 type="button"
                 onClick={() => setIsCareerOpen(true)}
-                className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-8 py-2 text-[15px] font-semibold leading-[1.43] text-white transition hover:bg-secondary"
+                className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-8 py-2 text-body font-semibold text-white transition hover:bg-secondary"
               >
                 Join Our Team
               </button>
@@ -476,7 +476,7 @@ function About() {
             <button
               type="button"
               onClick={() => setIsEnquiryOpen(true)}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-[18px] font-medium capitalize leading-normal text-white transition hover:bg-secondary hover:text-white md:mr-5"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-body font-medium capitalize text-white transition hover:bg-secondary hover:text-white md:mr-5"
             >
               Contact Our Engineering Team
             </button>
