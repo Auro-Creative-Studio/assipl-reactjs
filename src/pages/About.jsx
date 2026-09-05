@@ -378,30 +378,32 @@ function About() {
             </Reveal>
 
             {about.securing_image && (
-              <Reveal delay={150} className="grid h-full md:grid-cols-[1.2fr_1fr] gap-4">
-                <img
-                  src={getMediaUrl(about.securing_image)}
-                  alt="ASSIPL CSR initiative"
-                  className="h-80 w-full rounded-[18px] object-cover md:h-full"
-                  loading="lazy"
-                />
-                <div className="grid grid-rows-2 gap-4">
-                  {about.securing_image_2 && (
-                    <img
-                      src={getMediaUrl(about.securing_image_2)}
-                      alt="ASSIPL CSR community initiative"
-                      className="h-full w-full rounded-[18px] object-cover"
-                      loading="lazy"
-                    />
-                  )}
-                  {about.securing_image_3 && (
-                    <img
-                      src={getMediaUrl(about.securing_image_3)}
-                      alt="ASSIPL CSR community initiative"
-                      className="h-full w-full rounded-[18px] object-cover"
-                      loading="lazy"
-                    />
-                  )}
+              <Reveal delay={150} className="h-full">
+                <div className="grid h-full gap-4 md:grid-cols-[1.2fr_1fr]">
+                  <img
+                    src={getMediaUrl(about.securing_image)}
+                    alt="ASSIPL CSR initiative"
+                    className="h-80 w-full rounded-[18px] object-cover md:h-full"
+                    loading="lazy"
+                  />
+                  <div className="grid gap-4 md:grid-rows-2">
+                    {about.securing_image_2 && (
+                      <img
+                        src={getMediaUrl(about.securing_image_2)}
+                        alt="ASSIPL CSR community initiative"
+                        className="h-80 w-full rounded-[18px] object-cover md:h-full"
+                        loading="lazy"
+                      />
+                    )}
+                    {about.securing_image_3 && (
+                      <img
+                        src={getMediaUrl(about.securing_image_3)}
+                        alt="ASSIPL CSR community initiative"
+                        className="h-80 w-full rounded-[18px] object-cover md:h-full"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
                 </div>
               </Reveal>
             )}
