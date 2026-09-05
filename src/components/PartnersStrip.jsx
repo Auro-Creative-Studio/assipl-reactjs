@@ -59,7 +59,7 @@ function PartnersStrip({ data }) {
         >
           {manufacturerLogos.map((logo, index) => (
             <SwiperSlide key={`${logo.alt}-${index}`}>
-              <div className="mx-auto flex h-22 w-38 items-center justify-center rounded-lg bg-slate-100 md:w-44 lg:w-54">
+              <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
                 <FadeImg src={logo.src} alt={logo.alt} className="max-h-18 w-full object-contain" loading="lazy" />
               </div>
             </SwiperSlide>

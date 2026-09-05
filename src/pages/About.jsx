@@ -319,7 +319,7 @@ function About() {
             >
               {logos.map((logo, index) => (
                 <SwiperSlide key={logo.id || index}>
-                  <div className="mx-auto flex h-22 w-38 items-center justify-center rounded-lg bg-slate-100 md:w-44 lg:w-54">
+                  <div className="mx-auto flex h-22 w-38 items-center justify-center md:w-44 lg:w-54">
                     <FadeImg
                       src={getMediaUrl(logo.logo)}
                       alt={logo.alt || 'Manufacturer partner logo'}

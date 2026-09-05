@@ -84,7 +84,7 @@ function ClientsSection({ data }) {
                       src={item.logo}
                       alt={item.company}
                       loading="lazy"
-                      className="h-[66px] w-auto max-w-60 rounded bg-slate-100 object-contain object-left"
+                      className="h-[66px] w-auto max-w-60 object-contain object-left"
                     />
                   </div>
                 </article>
@@ -121,7 +121,7 @@ function ClientsSection({ data }) {
           >
             {sliderClientLogos.map((item) => (
               <SwiperSlide key={item.name}>
-                <div className="mx-auto flex h-24.5 w-full items-center justify-center rounded bg-slate-100">
+                <div className="mx-auto flex h-24.5 w-full items-center justify-center">
                   <FadeImg
                     src={item.logo}
                     alt={item.name}
