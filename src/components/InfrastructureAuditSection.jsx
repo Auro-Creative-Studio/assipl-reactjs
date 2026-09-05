@@ -19,7 +19,7 @@ function AuditField({ as = 'input', className = '', ...props }) {
 
   return (
     <Component
-      className={`h-[39px] w-full rounded-[7px] border border-[#737373] bg-white px-4 text-[14px] leading-[1.5] text-[#667085] outline-none transition placeholder:text-[#667085] focus:border-primary ${className}`}
+      className={`h-[39px] w-full rounded-[7px] border border-accent bg-white px-4 text-[14px] leading-[1.5] text-text outline-none transition placeholder:text-text focus:border-primary ${className}`}
       {...props}
     />
   )
