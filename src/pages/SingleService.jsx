@@ -206,7 +206,7 @@ function SingleService({ routeSlug = null }) {
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${heroBackground})`,
         }}
       >
-        <div className="mx-auto w-full max-w-350">
+        <div className="mx-auto w-full max-w-300">
           <div className="mb-4 flex items-center gap-3 text-base font-medium text-white md:text-xl">
             <Link to="/" className="transition hover:text-primary">
               Home

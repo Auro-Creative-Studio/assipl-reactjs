@@ -349,7 +349,7 @@ function Services() {
         {(page.maintenance_title || maintenanceItems.length > 0) && (
           <section className="bg-white px-5 py-20">
             <div className="mx-auto max-w-350">
-              <Reveal className="flex flex-col items-center justify-between gap-6 md:flex-row text-left">
+              <Reveal className="flex flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">
                 {page.maintenance_title && (
                   <h2 className="max-w-230 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
                     {page.maintenance_title}
