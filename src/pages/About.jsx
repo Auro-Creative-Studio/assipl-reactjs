@@ -240,7 +240,7 @@ function About() {
               </h1>
             )}
             {about.banner_description && (
-              <p className="mt-1 max-w-190 text-justify text-[18px] font-semibold leading-[1.67] text-white md:mt-4 md:text-left">
+              <p className="mt-1 max-w-190 text-left text-[18px] font-semibold leading-[1.67] text-white md:mt-4 md:text-left">
                 {about.banner_description}
               </p>
             )}
@@ -266,7 +266,7 @@ function About() {
               )}
               {about.about_description && (
                 <div
-                  className="mt-5 space-y-5 text-justify text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-5 [&_p:first-child]:mt-0"
+                  className="mt-5 space-y-5 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-5 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.about_description }}
                 />
               )}
@@ -365,7 +365,7 @@ function About() {
               )}
               {about.securing_description && (
                 <div
-                  className="mt-6 text-justify text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
+                  className="mt-6 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.securing_description }}
                 />
               )}
@@ -432,7 +432,7 @@ function About() {
               )}
               {about.future_description && (
                 <div
-                  className="mt-5 text-justify text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
+                  className="mt-5 text-left text-[18px] leading-[1.67] text-text md:text-left [&_p]:mt-4 [&_p:first-child]:mt-0"
                   dangerouslySetInnerHTML={{ __html: about.future_description }}
                 />
               )}

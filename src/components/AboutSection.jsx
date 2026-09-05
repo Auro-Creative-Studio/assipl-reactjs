@@ -24,7 +24,7 @@ function AboutSection({ data }) {
         <Reveal delay={150}>
           <h2 className="text-3xl font-bold leading-tight text-secondary sm:text-4xl lg:text-[42px]">{heading}</h2>
           <p
-            className="mt-6 text-justify text-base leading-8 text-text md:text-left sm:text-lg"
+            className="mt-6 text-left text-base leading-8 text-text md:text-left sm:text-lg"
             dangerouslySetInnerHTML={{ __html: description }}
           />
           <a

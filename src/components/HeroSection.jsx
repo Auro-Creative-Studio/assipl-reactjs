@@ -38,7 +38,7 @@ function HeroSection({ data }) {
         <Reveal
           as="p"
           delay={100}
-          className="mt-7.5 w-full max-w-176.25 text-justify font-heading text-[18px] font-semibold leading-[1.4] text-white md:text-left md:text-[26px] md:leading-8.25"
+          className="mt-7.5 w-full max-w-176.25 text-left font-heading text-[18px] font-semibold leading-[1.4] text-white md:text-left md:text-[26px] md:leading-8.25"
         >
           {subtitle}
         </Reveal>

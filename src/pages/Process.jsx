@@ -287,7 +287,7 @@ function Process() {
             <h1 className="mx-auto max-w-245 text-[32px] font-semibold leading-[1.125] text-secondary md:text-[45px]">
               {introHeading}
             </h1>
-            <p className="mx-auto mt-5 max-w-295 text-justify text-[18px] font-normal leading-normal text-text md:text-center">
+            <p className="mx-auto mt-5 max-w-295 text-left text-[18px] font-normal leading-normal text-text md:text-center">
               {introDescription}
             </p>
           </Reveal>
